@@ -20,9 +20,10 @@ class CreatePostsTable extends Migration
             $table->string('thumbnail');
             $table->text('body');
             $table->dateTime('published_at');
+            $table->boolean('visible')->default(true);
             $table->timestamps();
 
-            $table->foreing('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
