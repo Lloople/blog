@@ -7,6 +7,24 @@
  */
 @tailwind preflight;
 
+
+.post {
+    @apply .w-full .mb-4 .min-w-full;
+}
+.post-thumbnail {
+    @apply .h-48 .flex-none .bg-cover .rounded-t .text-center .overflow-hidden;
+}
+
+.post-body {
+    @apply .w-full .bg-grey-lighter .rounded-b .p-4 .flex .flex-col .justify-between .leading-normal;
+}
+.post-title {
+    @apply .text-black .font-bold .text-xl .mb-2;
+}
+
+.post-resume {
+    @apply .text-grey-darker .text-base
+}
 /**
  * Here you would add any of your custom component classes; stuff that you'd
  * want loaded *before* the utilities so that the utilities could still

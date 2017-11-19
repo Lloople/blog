@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->dateTime('published_at');
             $table->boolean('visible')->default(true);
+            $table->boolean('featured')->default(false);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');

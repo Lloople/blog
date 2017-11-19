@@ -28,4 +28,9 @@ class Post extends Model
         return $query->where('visible', true);
     }
 
+    public function scopeFeatured($query)
+    {
+        return $query->where('featured', true);
+    }
+
 }

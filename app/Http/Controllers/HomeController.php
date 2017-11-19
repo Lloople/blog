@@ -11,7 +11,8 @@ class HomeController extends Controller
     public function index()
     {
         $data = [
-            'posts' => Post::published()->visible()->paginate(25)
+            'posts' => Post::published()->visible()->paginate(25),
+            'postsFeatured' => Post::featured()->take(4)->get()
         ];
 
         return view('pages.home', $data);

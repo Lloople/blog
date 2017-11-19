@@ -501,6 +501,54 @@ button,
   cursor: pointer;
 }
 
+.post {
+  width: 100%;
+  margin-bottom: 1rem;
+  min-width: 100%;
+}
+
+.post-thumbnail {
+  height: 12rem;
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  background-size: cover;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.post-body {
+  width: 100%;
+  background-color: #f3f7f9;
+  border-bottom-right-radius: .25rem;
+  border-bottom-left-radius: .25rem;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  line-height: 1.5;
+}
+
+.post-title {
+  color: #222b2f;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-resume {
+  color: #596a73;
+  font-size: 1rem;
+}
 /**
  * Here you would add any of your custom component classes; stuff that you'd
  * want loaded *before* the utilities so that the utilities could still

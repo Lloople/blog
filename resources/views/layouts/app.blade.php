@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     
-    @section('styles')
+    @yield('styles')
 </head>
 <body class="bg-grey-lighter h-screen">
 <div id="app">
@@ -37,6 +37,6 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
-@section('scripts')
+@yield('scripts')
 </body>
 </html>
