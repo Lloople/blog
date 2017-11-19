@@ -15,7 +15,7 @@
     
     @section('styles')
 </head>
-<body class="bg-brand-lightest h-screen">
+<body class="bg-grey-lighter h-screen">
 <div id="app">
     <nav class="bg-white h-12 shadow mb-8">
         <div class="container mx-auto h-full">
