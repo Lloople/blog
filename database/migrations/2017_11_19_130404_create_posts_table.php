@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->integer('category_id')->unsigned();
             $table->string('title');
+            $table->string('slug');
             $table->string('thumbnail');
             $table->text('body');
             $table->dateTime('published_at');
@@ -25,6 +26,8 @@ class CreatePostsTable extends Migration
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');
+
+            $table->index('slug');
         });
     }
 

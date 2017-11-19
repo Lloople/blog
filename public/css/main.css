@@ -549,6 +549,13 @@ button,
   color: #596a73;
   font-size: 1rem;
 }
+
+.post-date {
+  font-size: .875rem;
+  color: #70818a;
+}
+
+
 /**
  * Here you would add any of your custom component classes; stuff that you'd
  * want loaded *before* the utilities so that the utilities could still

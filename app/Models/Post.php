@@ -15,7 +15,7 @@ class Post extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'posts_tags');
     }
 
     public function scopePublished($query)
@@ -31,6 +31,11 @@ class Post extends Model
     public function scopeFeatured($query)
     {
         return $query->where('featured', true);
+    }
+
+    public static function findBySlug($slug)
+    {
+        return self::where('slug', $slug)->first();
     }
 
 }
