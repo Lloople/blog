@@ -12,6 +12,8 @@
     
     <!-- Styles -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    
+    @section('styles')
 </head>
 <body class="bg-brand-lightest h-screen">
 <div id="app">
@@ -35,5 +37,6 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+@section('scripts')
 </body>
 </html>
