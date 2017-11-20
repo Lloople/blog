@@ -10,7 +10,7 @@ class SidebarTagsViewComposer
 
     public function compose(View $view)
     {
-        $view->with('tags', Tag::get());
+        $view->with('tags', Tag::take(20)->get());
     }
 
 }

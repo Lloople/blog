@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    use Sluggable;
+
     public $dates = ['published_at'];
 
     public function category()
@@ -16,6 +19,16 @@ class Post extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'posts_tags');
+    }
+
+    public function getBodyMarkdownAttribute()
+    {
+        return (new \Parsedown())->text($this->body);
+    }
+
+    public function getUrlAttribute()
+    {
+        return route('posts.show', $this->slug);
     }
 
     public function scopePublished($query)
@@ -33,9 +46,13 @@ class Post extends Model
         return $query->where('featured', true);
     }
 
-    public static function findBySlug($slug)
+    public function scopeWhereHasTag($query, ...$tags)
     {
-        return self::where('slug', $slug)->first();
+        return $query->whereHas('tags', function ($queryTags) use ($tags) {
+            return $queryTags->whereIn('slug', $tags);
+        });
     }
+
+
 
 }

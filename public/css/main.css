@@ -503,7 +503,7 @@ button,
 
 .post {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   min-width: 100%;
 }
 
@@ -516,7 +516,6 @@ button,
   border-top-left-radius: .25rem;
   border-top-right-radius: .25rem;
   text-align: center;
-  overflow: hidden;
 }
 
 .post-body {
@@ -554,6 +553,24 @@ button,
   font-size: .875rem;
   color: #70818a;
 }
+
+.title {
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.navbar-link {
+  text-decoration: none;
+  margin-right: 0.5rem;
+  color: #f3f7f9;
+  padding: 1rem;
+}
+
+.navbar-link-active {
+  background-color: #ffffff;
+  color: #222b2f;
+}
+
 
 
 /**

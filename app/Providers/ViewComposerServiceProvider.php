@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\ViewComposers\NavbarMenuViewComposer;
 use App\Http\ViewComposers\SidebarCategoriesViewComposer;
 use App\Http\ViewComposers\SidebarFeaturedPostsViewComposer;
 use App\Http\ViewComposers\SidebarTagsViewComposer;
@@ -17,6 +18,8 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer('layouts.app', NavbarMenuViewComposer::class);
+
         View::composer('sidebar.featured_posts', SidebarFeaturedPostsViewComposer::class);
         View::composer('sidebar.categories', SidebarCategoriesViewComposer::class);
         View::composer('sidebar.tags', SidebarTagsViewComposer::class);
