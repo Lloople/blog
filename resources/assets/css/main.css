@@ -1,16 +1,9 @@
-/**
- * This injects Tailwind's base styles, which is a combination of
- * Normalize.css and some additional base styles.
- *
- * You can see the styles here:
- * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
- */
 @tailwind preflight;
-
 
 .post {
     @apply .w-full .mb-8 .min-w-full;
 }
+
 .post-thumbnail {
     @apply .h-48 .flex-none .bg-cover .rounded-t .text-center;
 }
@@ -18,6 +11,7 @@
 .post-body {
     @apply .w-full .bg-grey-lighter .rounded-b .p-4 .flex .flex-col .justify-between .leading-normal;
 }
+
 .post-title {
     @apply .text-black .font-bold .text-xl .mb-2;
 }
@@ -34,49 +28,4 @@
     @apply .mb-4 .uppercase;
 }
 
-.navbar-link {
-    @apply .no-underline .mr-2 .text-grey-lighter .p-4;
-}
-
-.navbar-link-active {
-    @apply .bg-white .text-black;
-}
-
-
-
-/**
- * Here you would add any of your custom component classes; stuff that you'd
- * want loaded *before* the utilities so that the utilities could still
- * override them.
- *
- * Example:
- *
- * .btn { ... }
- * .form-input { ... }
- *
- * Or if using a preprocessor:
- *
- * @import "components/buttons";
- * @import "components/forms";
- */
-
-/**
- * This injects all of Tailwind's utility classes, generated based on your
- * config file.
- */
 @tailwind utilities;
-
-/**
- * Here you would add any custom utilities you need that don't come out of the
- * box with Tailwind.
- *
- * Example :
- *
- * .bg-pattern-graph-paper { ... }
- * .skew-45 { ... }
- *
- * Or if using a preprocessor..
- *
- * @import "utilities/background-patterns";
- * @import "utilities/skew-transforms";
- */

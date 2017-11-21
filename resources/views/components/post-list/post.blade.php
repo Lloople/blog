@@ -1,7 +1,5 @@
 <div class="post lg:flex shadow-md">
-    @if ($positionLeft)
-        @include('components.post-list.thumbnail', ['rounded' => 'l'])
-    @endif
+    @include('components.post-list.thumbnail')
     <div class="post-body lg:rounded-b-none lg:rounded-r">
         <p class="post-date">{{ $post->published_at->format('d/m/Y H:i') }}</p>
         <div class="mb-4">
@@ -20,7 +18,4 @@
             @endforeach
         </p>
     </div>
-    @if (! $positionLeft)
-        @include('components.post-list.thumbnail', ['rounded' => 'r'])
-    @endif
 </div>
