@@ -8,10 +8,6 @@
     @apply .h-48 .flex-none .bg-cover .rounded-t .text-center;
 }
 
-.post-body {
-    @apply .w-full .bg-grey-lighter .rounded-b .p-4 .flex .flex-col .justify-between .leading-normal;
-}
-
 .post-title {
     @apply .text-black .font-bold .text-xl .mb-2;
 }

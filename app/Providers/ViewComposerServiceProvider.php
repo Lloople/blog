@@ -18,7 +18,7 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('layouts.app', NavbarMenuViewComposer::class);
+        View::composer('components.navbar', NavbarMenuViewComposer::class);
 
         View::composer('sidebar.featured_posts', SidebarFeaturedPostsViewComposer::class);
         View::composer('sidebar.categories', SidebarCategoriesViewComposer::class);

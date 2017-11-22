@@ -614,25 +614,6 @@ button,
   text-align: center;
 }
 
-.post-body {
-  width: 100%;
-  background-color: #f3f7f9;
-  border-bottom-right-radius: .25rem;
-  border-bottom-left-radius: .25rem;
-  padding: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  line-height: 1.5;
-}
-
 .post-title {
   color: #222b2f;
   font-weight: 700;

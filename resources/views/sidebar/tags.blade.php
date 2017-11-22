@@ -1,5 +1,5 @@
 @if ($tags->count())
-    <div class="mb-8">
+    <div class="mb-8 w-1/3 lg:w-full">
         <h3 class="title">Tags</h3>
         @foreach($tags as $tag)
             <a class="no-underline text-grey-darkest m-l-2 lowercase mb-4" href="{{ $tag->url }}">
