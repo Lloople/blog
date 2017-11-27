@@ -34,7 +34,12 @@
         </div>
     </div>
 </div>
-
+<script>
+    window.algolia = {
+        app_id: "{{ config('scout.algolia.id') }}",
+        search_key: "{{ config('scout.algolia.secret') }}"
+    }
+</script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 @yield('scripts')

@@ -14,7 +14,7 @@
                 @endforeach
             </div>
             <div class="flex-1 block text-center lg:text-right">
-                <input type="text" class="inline-block shadow-md rounded p-4 lg:w-64" placeholder="Search..." name="search">
+                <algolia-instantsearch></algolia-instantsearch>
             </div>
         </div>
     </div>

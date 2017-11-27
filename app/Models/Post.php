@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
-    use Sluggable;
+    use Sluggable, Searchable;
 
     public $dates = ['published_at'];
 
