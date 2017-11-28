@@ -1,13 +1,13 @@
 <template>
     <ais-index :search-store="searchStore">
         <ais-input></ais-input>
-        <results v-show="searchStore.query.length > 0">
+        <ais-results v-show="searchStore.query.length > 0">
             <template slot-scope="{ result }">
                 <h2>
                     <ais-highlight :result="result" attribute-name="name"></ais-highlight>
                 </h2>
             </template>
-        </results>
+        </ais-results>
     </ais-index>
 </template>
 
