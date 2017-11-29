@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Theme;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('theme', \App\Theme::class);
+        $this->app->singleton('theme', function () {
+
+            return \App\Models\Theme::where('selected', true)->first();
+
+        });
     }
 }
