@@ -10,7 +10,7 @@ class PostsController extends Controller
     public function index()
     {
         $data = [
-            'posts' => Post::published()->visible()->paginate(25),
+            'posts' => Post::published()->visible()->paginate(10),
         ];
 
         return view('posts.index', $data);

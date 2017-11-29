@@ -1,4 +1,4 @@
-<nav class="bg-{{ app('theme')->getMainColor() }} lg:h-24 my-8 lg:my-0 md:w-5/6 md:mx-auto">
+<nav class="bg-{{ app('theme')->background }} lg:h-24 my-8 lg:my-0 md:w-5/6 md:mx-auto">
     <div class="mx-auto h-full">
         <div class="lg:flex items-center justify-between lg:h-24">
             <div class="lg:mr-6 block text-center">
@@ -8,7 +8,7 @@
             </div>
             <div class="flex-1 lg:w-3/4 text-center lg:text-left m-8 uppercase text-sm no-underline">
                 @foreach($navbarMenu as $menuElement)
-                    <a class="no-underline rounded p-4 text-{{ app('theme')->getHighlightColor() }} {{ $menuElement->active ? 'text-'.app('theme')->getHighlightColorText().' shadow-md bg-'.app('theme')->getHighlightColor() : '' }}" href="{{ $menuElement->url }}">
+                    <a class="no-underline rounded p-4 text-{{ app('theme')->menu_item_text }} {{ $menuElement->active ? 'text-'.app('theme')->menu_item_active_text.' shadow-md bg-'.app('theme')->menu_item_active_background : '' }}" href="{{ $menuElement->url }}">
                         {{ $menuElement->title }}
                     </a>
                 @endforeach

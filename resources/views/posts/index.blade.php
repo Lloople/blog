@@ -11,5 +11,9 @@
                 @include('components.post-list.post', ['post' => $post, 'positionLeft' => $loop->index % 2 == 0])
             </div>
         @endforeach
+        
+    </div>
+    <div class="mb-8">
+        {{ $posts->links('components.pagination') }}
     </div>
 @endsection

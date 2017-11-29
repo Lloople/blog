@@ -12,12 +12,12 @@
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
-<body class="bg-{{ app('theme')->getMainColor() }} h-screen">
+<body class="bg-{{ app('theme')->background }} h-screen">
 <div id="app">
     @include('components.navbar')
     
     <div class="flex flex-wrap">
-        <div class="shadow-md mb-8 md:w-5/6 sm:w-full md:ml-auto md:mr-auto p-4 bg-{{ app('theme')->getColor() }} rounded">
+        <div class="shadow-md mb-8 md:w-5/6 sm:w-full md:ml-auto md:mr-auto p-4 bg-{{ app('theme')->container_background }} rounded">
             <div class="flex flex-wrap">
                 <div class="md:w-4/5 sm:w-full">
                     @yield('content')
