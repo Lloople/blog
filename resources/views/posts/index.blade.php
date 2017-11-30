@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="w-4/5 mx-auto">
-        <h3 class="title">Recent Posts</h3>
+        <h3 class="title text-{{ app('theme')->title }}">Recent Posts</h3>
     </div>
 
     <div class="flex flex-wrap posts-list">
