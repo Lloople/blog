@@ -1,0 +1,11 @@
+@tailwind preflight;
+
+@import "components/post";
+
+@import "components/search";
+
+.title {
+    @apply .mb-4 .uppercase;
+}
+
+@tailwind utilities;

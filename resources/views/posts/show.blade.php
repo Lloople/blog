@@ -5,13 +5,13 @@
 @section('title', $post->title)
 
 @section('content')
-    <h3 class="title">{{ $post->title }}</h3>
+    <h3 class="title text-{{ app('theme')->title }}">{{ $post->title }}</h3>
     
     @if ($post->thumbnail != '')
         <img class="mr-auto ml-auto w-2/4 rounded mb-4 mt-4 flex" src="{{ $post->thumbnail }}" alt="{{ $post->title }}">
     @endif
     
-    <div class="p-4">
+    <div class="p-4 text-{{ app('theme')->text }}">
         {!! $post->body_markdown !!}
     </div>
 @endsection
