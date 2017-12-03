@@ -1,0 +1,16 @@
+.search-input {
+  @apply p-4 rounded shadow w-full;
+}
+
+.search-results {
+  @apply w-full text-left absolute content-center flex-col pin-x mx-auto bg-white shadow-md rounded-t-none rounded;
+}
+
+.search-results-result {
+  @apply block no-underline text-black p-4 border-b-2 border-grey-lighter;
+}
+
+.search-results em {
+  @apply bg-grey-lighter;
+  font-style: normal;
+}

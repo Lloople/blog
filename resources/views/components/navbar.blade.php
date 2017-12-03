@@ -14,7 +14,7 @@
                 @endforeach
             </div>
             <div class="flex-1 block text-center lg:text-right">
-                <algolia-instantsearch></algolia-instantsearch>
+                <instant-search></instant-search>
             </div>
         </div>
     </div>

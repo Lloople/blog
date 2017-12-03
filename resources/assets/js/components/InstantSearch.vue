@@ -1,24 +1,53 @@
 <template>
-    <ais-index :search-store="searchStore">
-        <ais-input></ais-input>
-        <ais-results v-show="searchStore.query.length > 0">
-            <template slot-scope="{ result }">
-                <h2>
-                    <ais-highlight :result="result" attribute-name="name"></ais-highlight>
-                </h2>
-            </template>
-        </ais-results>
-    </ais-index>
+    <div id="search-posts" class="relative">
+        <input placeholder="Search..." type="text" class="search-input lg:w-auto" v-model="query" v-on:input="search">
+        <div v-if="query.length" class="search-results lg:mx-0 lg:pin-r">
+            <div v-if="results.length">
+                <ul class="list-reset">
+                    <li v-for="result in results">
+                        <a class="search-results-result" :href="'/posts/'+result.slug" v-html="result._highlightResult.title.value"></a>
+                    </li>
+                </ul>
+            </div>
+            <div v-else>
+                <ul class="list-reset">
+                    <li>
+                        <p class="search-results-result">
+                            No posts found
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-    import { createFromAlgoliaCredentials } from 'vue-instantsearch';
-
-    const searchStore = createFromAlgoliaCredentials(window.algolia.app_id, window.algolia.search_key);
+    import algoliasearch from 'algoliasearch';
 
     export default {
+
         data() {
-            return { searchStore };
+            return {
+                query: '',
+                results: []
+            }
+        },
+
+        created() {
+            const client = algoliasearch(window.algolia.app_id, window.algolia.search_key);
+
+            this.index = client.initIndex('posts');
+        },
+
+        methods: {
+            search(e) {
+                this.index.search({
+                    query: this.query
+                }, (error, response) => {
+                    this.results = response.hits;
+                })
+            }
         }
     }
 </script>
