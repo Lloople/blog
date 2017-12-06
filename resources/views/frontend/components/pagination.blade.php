@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <ul class="list-reset text-center">
+    <ul class="pagination list-reset text-center">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="inline-block">

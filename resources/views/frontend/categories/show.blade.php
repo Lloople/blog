@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('frontend.layouts.app')
 
 <?php /** @var \App\Models\Category $category */ ?>
 
@@ -10,7 +10,7 @@
     <div class="flex flex-wrap posts-list">
         @forelse($category->posts as $post)
             <div class="w-4/5 ml-auto mr-auto">
-                @include('components.post-list.post', ['post' => $post, 'positionLeft' => $loop->index % 2 == 0])
+                @include('frontend.components.post-list.post', ['post' => $post, 'positionLeft' => $loop->index % 2 == 0])
             </div>
         @empty
             <div class="w-4/5 ml-auto mr-auto">

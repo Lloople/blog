@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('frontend.layouts.app')
 
 @section('content')
     <div class="w-4/5 mx-auto">
@@ -8,12 +8,12 @@
     <div class="flex flex-wrap posts-list">
         @foreach($posts as $post)
             <div class="w-4/5 mx-auto">
-                @include('components.post-list.post', ['post' => $post, 'positionLeft' => $loop->index % 2 == 0])
+                @include('frontend.components.post-list.post', ['post' => $post, 'positionLeft' => $loop->index % 2 == 0])
             </div>
         @endforeach
         
     </div>
     <div class="mb-8">
-        {{ $posts->links('components.pagination') }}
+        {{ $posts->links('frontend.components.pagination') }}
     </div>
 @endsection

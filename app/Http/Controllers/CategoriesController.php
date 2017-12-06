@@ -13,7 +13,7 @@ class CategoriesController extends Controller
             'categories' => Category::all()
         ];
 
-        return view('categories.index', $data);
+        return view('frontend.categories.index', $data);
     }
 
     public function show($slug)
@@ -26,6 +26,6 @@ class CategoriesController extends Controller
             'category' => $category,
         ];
 
-        return view('categories.show', $data);
+        return view('frontend.categories.show', $data);
     }
 }

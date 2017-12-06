@@ -11,3 +11,12 @@ Route::get('/categories/{slug}', 'CategoriesController@show')->name('categories.
 Route::get('/tags', 'TagsController@index')->name('tags.index');
 
 Route::get('/tags/{slug}', 'TagsController@show')->name('tags.show');
+
+Auth::routes();
+
+Route::group(['prefix' => 'backend', 'middleware' => 'auth', 'as' => 'backend.'], function () {
+
+    Route::redirect('', 'backend/posts');
+    Route::view('posts', 'backend.posts.index');
+});
+

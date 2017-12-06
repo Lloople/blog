@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('frontend.layouts.app')
 
 <?php /** @var \App\Models\Post $post */ ?>
 

@@ -9,12 +9,12 @@
     <title>@yield('title', config('app.name')) </title>
 
     @yield('extra-headers')
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/frontend.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
 <body class="bg-{{ app('theme')->background }} h-screen">
 <div id="app">
-    @include('components.navbar')
+    @include('frontend.components.navbar')
     
     <div class="flex flex-wrap">
         <div class="shadow-md mb-8 md:w-5/6 sm:w-full md:ml-auto md:mr-auto p-4 bg-{{ app('theme')->container_background }} rounded">
@@ -25,9 +25,9 @@
                 <div class="w-4/5 mx-auto lg:w-1/5">
                     <div class="flex flex-wrap">
                     
-                    @include('sidebar.featured_posts')
-                    @include('sidebar.categories')
-                    @include('sidebar.tags')
+                    @include('frontend.sidebar.featured_posts')
+                    @include('frontend.sidebar.categories')
+                    @include('frontend.sidebar.tags')
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
         search_key: "{{ config('scout.algolia.secret') }}"
     }
 </script>
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/frontend.js') }}"></script>
 
 @yield('scripts')
 </body>

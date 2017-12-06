@@ -1,0 +1,13 @@
+
+.table-component-search {
+  @apply p-2 rounded border-grey-lighter border-2 float-right;
+}
+
+.table-component-table {
+  @apply p-4 bg-grey-lightest w-full;
+}
+
+.table-component .pagination {
+  display: block;
+  @apply list-reset;
+}

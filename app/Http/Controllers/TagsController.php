@@ -14,7 +14,7 @@ class TagsController extends Controller
             'tags' => Tag::all()
         ];
 
-        return view('tags.index', $data);
+        return view('frontend.tags.index', $data);
     }
 
     public function show($slug)
@@ -24,6 +24,6 @@ class TagsController extends Controller
             'posts' => Post::published()->visible()->whereHasTag($slug)->paginate(25),
         ];
 
-        return view('tags.show', $data);
+        return view('frontend.tags.show', $data);
     }
 }
