@@ -1,5 +1,7 @@
 @tailwind preflight;
 
-@import "./components/vue-tables";
+@import "components/vue-tables";
+
+@import "../../css/components/pagination";
 
 @tailwind utilities;

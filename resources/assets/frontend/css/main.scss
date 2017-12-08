@@ -4,8 +4,10 @@
 
 @import "components/search";
 
+@import "../../css/components/pagination";
+
 .title {
-    @apply .mb-4 .uppercase;
+    @apply mb-4 uppercase;
 }
 
 @tailwind utilities;

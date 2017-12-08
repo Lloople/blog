@@ -675,6 +675,33 @@ button,
   font-style: normal;
 }
 
+ul.pagination {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+ul.pagination > li {
+  display: inline-block;
+  cursor: pointer;
+}
+
+ul.pagination > li > * {
+  padding: 1rem;
+  display: inline-block;
+}
+
+ul.pagination > li > a {
+  text-decoration: none;
+}
+
+ul.pagination > li.active > span {
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+  border-radius: .25rem;
+}
+
 .title {
   margin-bottom: 1rem;
   text-transform: uppercase;

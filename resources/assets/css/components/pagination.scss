@@ -1,0 +1,19 @@
+ul.pagination {
+  @apply list-reset text-center;
+}
+
+ul.pagination > li {
+  @apply inline-block cursor-pointer;
+}
+
+ul.pagination > li > * {
+  @apply p-4 inline-block;
+}
+
+ul.pagination > li > a {
+  @apply no-underline;
+}
+
+ul.pagination > li.active > span {
+  @apply shadow rounded;
+}
