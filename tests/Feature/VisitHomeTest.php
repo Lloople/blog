@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Post;
+use App\Models\Theme;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -10,6 +11,13 @@ class VisitHomeTest extends TestCase
 {
 
     use RefreshDatabase;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        factory(Theme::class)->create();
+    }
 
     /** @test */
     public function can_visit_home_page()
@@ -29,7 +37,7 @@ class VisitHomeTest extends TestCase
 
         $response = $this->get('/');
 
-        $response->assertSee('class="featured-post"');
+        $response->assertSee('<h3 class="title text-black">Featured Posts</h3>');
 
         $response->assertSee('Dummy Featured Post');
     }
