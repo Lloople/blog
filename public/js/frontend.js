@@ -384,6 +384,8 @@ window.Vue = __webpack_require__(17);
 
 Vue.component('instant-search', __webpack_require__(175));
 
+// TODO: put highlight.js somehow ¯\_(ツ)_/¯
+
 var app = new Vue({
     el: '#app'
 });

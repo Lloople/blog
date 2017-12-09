@@ -10,8 +10,8 @@
     </div>
     
     <div class="w-4/5 mx-auto">
-        <div class="post lg:flex shadow-md">
-            <div class="w-full bg-{{ app('theme')->posts_list_background }} rounded-b p-4 flex flex-col justify-between leading-normal lg:rounded-b-none lg:rounded-r">
+        <div class="post lg:flex">
+            <div class="w-full p-4 flex flex-col justify-between leading-normal">
                 <span class="post-date">{{ $post->published_at->format('d/m/Y H:i') }}</span>
                 
                 <div class="mb-4">
