@@ -597,25 +597,60 @@ button,
   cursor: pointer;
 }
 
-.table-component-search {
+.table-component__filter {
+  float: right;
+  margin-bottom: 2rem;
+}
+
+.table-component__filter > a {
+  padding: 0.5rem;
+  background-color: #f3f7f9;
+  border-radius: .25rem;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+  cursor: pointer;
+}
+
+.table-component__filter > input {
   padding: 0.5rem;
   border-radius: .25rem;
   border-color: #f3f7f9;
   border-width: 2px;
-  float: right;
 }
 
 .table-component-table {
   padding: 1rem;
-  background-color: #fafcfc;
   width: 100%;
 }
 
+.table-component-table tbody tr:nth-child(even) {
+  background-color: #f3f7f9;
+}
+
+.table-component-table td {
+  padding: 0.25rem;
+}
+
 .table-component .pagination {
-  display: block;
   list-style: none;
   margin: 0;
   padding: 0;
+  display: block;
+  margin-top: 2rem;
+}
+
+.table-component-btn {
+  padding: 0.5rem;
+  border-radius: .25rem;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+  display: inline-block;
+  color: #ffffff;
+  font-size: .75rem;
+}
+
+ul.pagination > li.active {
+  background-color: #f3f7f9;
 }
 
 ul.pagination {
@@ -639,7 +674,7 @@ ul.pagination > li > a {
   text-decoration: none;
 }
 
-ul.pagination > li.active > span {
+ul.pagination > li.active {
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
   border-radius: .25rem;

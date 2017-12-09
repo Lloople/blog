@@ -40,6 +40,8 @@
     </div>
 </div>
 
+<script src="{{ asset('js/manifest.js') }}"></script>
+<script src="{{ asset('js/vendor.js') }}"></script>
 <script src="{{ asset('js/backend.js') }}"></script>
 
 @yield('scripts')

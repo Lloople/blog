@@ -14,6 +14,6 @@ ul.pagination > li > a {
   @apply no-underline;
 }
 
-ul.pagination > li.active > span {
+ul.pagination > li.active {
   @apply shadow rounded;
 }

@@ -40,6 +40,8 @@
         search_key: "{{ config('scout.algolia.secret') }}"
     }
 </script>
+<script src="{{ asset('js/manifest.js') }}"></script>
+<script src="{{ asset('js/vendor.js') }}"></script>
 <script src="{{ asset('js/frontend.js') }}"></script>
 
 @yield('scripts')

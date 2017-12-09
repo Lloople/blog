@@ -696,7 +696,7 @@ ul.pagination > li > a {
   text-decoration: none;
 }
 
-ul.pagination > li.active > span {
+ul.pagination > li.active {
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
   border-radius: .25rem;
