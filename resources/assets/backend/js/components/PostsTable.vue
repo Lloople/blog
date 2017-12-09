@@ -13,13 +13,13 @@
         <table-column show="url" label="" cell-class="text-center">
             <template slot-scope="row">
                 <a :href="`${row.url_edit}`" class="button text-xs bg-green">
-                    <span class="fas fa-fw fa-pencil-alt"></span>
+                    <span class="fa fa-fw fa-pencil"></span>
                 </a>
                 <a :href="`${row.url}`" target="_blank" class="button text-xs bg-blue">
-                    <span class="fas fa-fw fa-eye"></span>
+                    <span class="fa fa-fw fa-eye"></span>
                 </a>
                 <a :href="`${row.url_delete}`" @click="confirmDelete(row, $event)" class="button text-xs bg-red">
-                    <span class="fas fa-fw fa-trash"></span>
+                    <span class="fa fa-fw fa-trash"></span>
                 </a>
             </template>
         </table-column>

@@ -68,4 +68,16 @@ class Post extends Model
         });
     }
 
+    public function syncTags($rawTags)
+    {
+        $tags = collect(explode(', ', $rawTags))->map(function ($rawTag) {
+            $tag = Tag::findOrCreateByName(trim($rawTag));
+
+            return $tag;
+
+        });
+
+        $this->tags()->sync($tags->pluck('id')->toArray());
+    }
+
 }

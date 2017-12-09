@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\ViewModels\PostDetailViewModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Lloople\Notificator\Notificator;
 
 class PostsController extends Controller
 {
@@ -30,10 +33,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        $data = [
-            'post' => new Post()
-        ];
-        return view('backend.posts.edit', $data);
+        return view('backend.posts.edit', [ 'view' => new PostDetailViewModel(new Post())]);
     }
 
     /**
@@ -45,7 +45,23 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post();
+        $post->title = $request->title;
+        $post->slug = str_slug($request->title);
+        $post->thumbnail = '';
+        $post->category_id = $request->category;
+        $post->published_at = Carbon::createFromFormat('Y-m-d\TH:i', $request->published_at);
+        $post->featured = $request->has('featured');
+        $post->visible = $request->has('visible');
+        $post->body = $request->body;
+
+        $post->save();
+
+        $post->syncTags($request->tags);
+
+        Notificator::success('Post created successfully');
+
+        return redirect()->route('backend.posts.edit', $post);
     }
 
     /**
@@ -57,11 +73,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        $data = [
-            'post' => $post
-        ];
-
-        return view('backend.posts.edit', $data);
+        return view('backend.posts.edit', [ 'view' => new PostDetailViewModel($post)]);
     }
 
     /**

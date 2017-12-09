@@ -8,7 +8,7 @@
                     {{ $post->title }}
                 </a>
             </div>
-            <p class="post-resume text-{{ app('theme')->text }}">{{ str_limit($post->body, 200) }}</p>
+            <p class="post-resume text-{{ app('theme')->text }}">{!! str_limit(strip_tags($post->body_markdown), 200) !!}</p>
         </div>
         <p class="post-date">
             @foreach($post->tags as $tag)
