@@ -60,8 +60,10 @@ class Post extends Model
                 ->orWhere('published_at', 'like', "%{$search}%")
                 ->orWhere('body', 'like', "%{$search}%")
                 ->orWhereHas('tags', function ($tags) use ($search) {
-                    return $tags->where('title', 'like', "%{$search}%")
-                        ->orWhere('slug', 'like', "%{$search}%");
+                    return $tags->where('name', 'like', "%{$search}%");
+                })
+                ->orWhereHas('category', function ($category) use ($search) {
+                    return $category->where('name', 'like', "%{$search}%");
                 });
         });
     }
