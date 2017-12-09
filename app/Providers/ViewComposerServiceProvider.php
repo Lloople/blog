@@ -18,11 +18,11 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('components.navbar', NavbarMenuViewComposer::class);
+        View::composer('frontend.components.navbar', NavbarMenuViewComposer::class);
 
-        View::composer('sidebar.featured_posts', SidebarFeaturedPostsViewComposer::class);
-        View::composer('sidebar.categories', SidebarCategoriesViewComposer::class);
-        View::composer('sidebar.tags', SidebarTagsViewComposer::class);
+        View::composer('frontend.sidebar.featured_posts', SidebarFeaturedPostsViewComposer::class);
+        View::composer('frontend.sidebar.categories', SidebarCategoriesViewComposer::class);
+        View::composer('frontend.sidebar.tags', SidebarTagsViewComposer::class);
     }
 
     /**

@@ -1,0 +1,15 @@
+.form-horizontal-field {
+  @apply flex mt-4;
+}
+
+.form-horizontal-label {
+  @apply float-right p-2;
+}
+
+.form-input {
+  @apply py-1 px-2 border-2 border-grey-lighter inline-block rounded shadow;
+}
+
+.form-checkbox {
+  @apply p-2 inline-block;
+}

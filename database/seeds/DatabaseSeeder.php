@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(ThemesSeeder::class);
         $this->call(PostsSeeder::class);
+        $this->call(BackendUserSeeder::class);
     }
 }

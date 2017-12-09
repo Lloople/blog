@@ -10,10 +10,10 @@ class PostsController extends Controller
     public function index()
     {
         $data = [
-            'posts' => Post::published()->visible()->paginate(10),
+            'posts' => Post::published()->visible()->orderBy('published_at', 'DESC')->paginate(10),
         ];
 
-        return view('posts.index', $data);
+        return view('frontend.posts.index', $data);
     }
 
     public function show($slug)
@@ -26,6 +26,6 @@ class PostsController extends Controller
             'post' => $post,
         ];
 
-        return view('posts.show', $data);
+        return view('frontend.posts.show', $data);
     }
 }

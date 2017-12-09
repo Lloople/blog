@@ -1,0 +1,19 @@
+.post {
+  @apply w-full mb-2 min-w-full;
+}
+
+.post-title {
+  @apply text-black font-bold text-xl mb-2;
+}
+
+.post-resume {
+  @apply text-grey-darker text-base;
+}
+
+.post-date {
+  @apply text-sm text-grey-dark;
+}
+
+.post-content p {
+  @apply py-4;
+}

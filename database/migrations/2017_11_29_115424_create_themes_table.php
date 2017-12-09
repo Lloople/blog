@@ -19,7 +19,6 @@ class CreateThemesTable extends Migration
             $table->boolean('selected')->default(false);
             $table->string('background');
             $table->string('container_background');
-            $table->string('posts_list_background');
             $table->string('menu_item_text');
             $table->string('menu_item_background');
             $table->string('menu_item_active_text');

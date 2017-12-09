@@ -1,0 +1,36 @@
+
+.table-component__filter {
+  @apply float-right mb-8;
+}
+
+.table-component__filter > a {
+  @apply p-2 bg-grey-lighter rounded shadow cursor-pointer;
+}
+
+.table-component__filter > input {
+  @apply p-2 rounded border-grey-lighter border-2;
+}
+
+.table-component-table {
+  @apply p-4 w-full;
+}
+
+.table-component-table tbody tr:nth-child(even) {
+  @apply bg-grey-lighter;
+}
+
+.table-component-table td {
+  @apply p-1;
+}
+
+.table-component .pagination {
+  @apply list-reset block mt-8;
+}
+
+.button {
+  @apply p-2 rounded shadow inline-block text-white no-underline;
+}
+
+ul.pagination > li.active {
+  @apply bg-grey-lighter;
+}

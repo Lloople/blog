@@ -10,10 +10,10 @@ class CategoriesController extends Controller
     public function index()
     {
         $data = [
-            'categories' => Category::all()
+            'categories' => Category::orderBy('name')->get()
         ];
 
-        return view('categories.index', $data);
+        return view('frontend.categories.index', $data);
     }
 
     public function show($slug)
@@ -26,6 +26,6 @@ class CategoriesController extends Controller
             'category' => $category,
         ];
 
-        return view('categories.show', $data);
+        return view('frontend.categories.show', $data);
     }
 }

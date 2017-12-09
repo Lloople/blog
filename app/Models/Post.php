@@ -8,7 +8,7 @@ use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
-    use Sluggable, Searchable;
+    use Sluggable;
 
     public $dates = ['published_at'];
 
@@ -52,6 +52,32 @@ class Post extends Model
         return $query->whereHas('tags', function ($queryTags) use ($tags) {
             return $queryTags->whereIn('slug', $tags);
         });
+    }
+
+    public function scopeSearchLike($query, $search) {
+        return $query->where(function ($post) use ($search) {
+            return $post->where('title', 'like', "%{$search}%")
+                ->orWhere('published_at', 'like', "%{$search}%")
+                ->orWhere('body', 'like', "%{$search}%")
+                ->orWhereHas('tags', function ($tags) use ($search) {
+                    return $tags->where('name', 'like', "%{$search}%");
+                })
+                ->orWhereHas('category', function ($category) use ($search) {
+                    return $category->where('name', 'like', "%{$search}%");
+                });
+        });
+    }
+
+    public function syncTags($rawTags)
+    {
+        $tags = collect(explode(', ', $rawTags))->map(function ($rawTag) {
+            $tag = Tag::findOrCreateByName(trim($rawTag));
+
+            return $tag;
+
+        });
+
+        $this->tags()->sync($tags->pluck('id')->toArray());
     }
 
 }

@@ -19,4 +19,22 @@ class Tag extends Model
     {
         return route('tags.show', $this->slug);
     }
+
+    public static function findOrCreateByName($name)
+    {
+        if (($tag = self::where('name', $name)->first()) !== null) {
+            return $tag;
+        }
+
+        $tag = new self();
+
+        $tag->name = $name;
+        $tag->slug = str_slug($name);
+
+        $tag->save();
+
+        $tag->fresh();
+
+        return $tag;
+    }
 }
