@@ -23,7 +23,12 @@
                     </a>
                 </div>
                 <div class="flex-1 lg:w-3/4 text-center lg:text-left m-8 uppercase text-sm no-underline">
-                
+                    <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.posts.index') ? 'bg-white shadow' : '' }}" href="{{ route('backend.posts.index') }}">
+                        Posts
+                    </a>
+                    <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.posts.create') ? 'bg-white shadow' : '' }}" href="{{ route('backend.posts.create') }}">
+                        Create a post
+                    </a>
                 </div>
             </div>
         </div>
