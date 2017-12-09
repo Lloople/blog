@@ -4417,8 +4417,7 @@ ul.pagination > li.active {
   border-color: #f3f7f9;
   display: inline-block;
   border-radius: .25rem;
-  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+  background-color: #ffffff;
 }
 
 .form-checkbox {
