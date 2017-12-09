@@ -17,6 +17,13 @@ Auth::routes();
 Route::group(['prefix' => 'backend', 'middleware' => 'auth', 'as' => 'backend.'], function () {
 
     Route::redirect('', 'backend/posts');
-    Route::view('posts', 'backend.posts.index');
+
+    Route::resource('posts', 'Backend\PostsController', ['except' => 'show']);
+
+    Route::group(['prefix' => 'resources', 'middleware' => 'auth', 'as' => 'resources.'], function () {
+        Route::get('posts', 'Backend\PostsController@resource');
+    });
 });
+
+
 
