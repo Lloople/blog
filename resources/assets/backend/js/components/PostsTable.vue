@@ -1,14 +1,28 @@
 <template>
     <table-component
         :data="fetchData"
-        filter-input-class="table-component-search"
-        show-caption="false"
-        sort-by="published_at"
+        :show-caption="false"
         filter-placeholder="Search posts..."
         table-class="table-component-table"
+        ref="table"
     >
-        <table-column show="title" label="Title"></table-column>
-        <table-column show="published_at" label="Published Date" data-type="date:DD/MM/YYYY"></table-column>
+        <table-column show="category" label="Category" header-class="text-left hidden md:table-cell" cell-class="hidden md:table-cell"></table-column>
+        <table-column show="title" label="Title" header-class="text-left"></table-column>
+        <table-column show="tags" label="Tags" header-class="text-left hidden md:table-cell" cell-class="hidden md:table-cell"></table-column>
+        <table-column show="published_at" label="Date" header-class="text-left"></table-column>
+        <table-column show="url" label="" cell-class="text-center">
+            <template slot-scope="row">
+                <a :href="`${row.url_edit}`" class="table-component-btn bg-green">
+                    <span class="fas fa-fw fa-pencil-alt"></span>
+                </a>
+                <a :href="`${row.url}`" target="_blank" class="table-component-btn bg-blue">
+                    <span class="fas fa-fw fa-eye"></span>
+                </a>
+                <a :href="`${row.url_delete}`" @click="confirmDelete(row, $event)" class="table-component-btn bg-red">
+                    <span class="fas fa-fw fa-trash"></span>
+                </a>
+            </template>
+        </table-column>
     </table-component>
 </template>
 
@@ -22,39 +36,29 @@
     export default {
         methods: {
             async fetchData({ page, filter, sort }) {
-
                 if (filter != previousFilter) {
                     page = 0;
                 }
 
                 previousFilter = filter;
 
-                this.removeCurrentActivePage();
-
-
                 const response = await axios.get('/api/posts?page='+page+'&q='+filter, { page, filter });
-                this.setPageActive();
 
                 return {
                     data: response.data.data,
                     pagination : {
-                        totalPages: response.data.last_page,
+                        totalPages: response.data.meta.last_page,
                         currentPage: page,
-                        count: response.data.count
+                        count: response.data.meta.total
                     }
                 }
             },
+            async confirmDelete(row, ev) {
+                ev.preventDefault();
+                if (confirm("Confirm delete?")) {
+                    await axios.delete(row.url_delete);
 
-            removeCurrentActivePage() {
-                document.querySelectorAll('ul.pagination>li>a').forEach((pageBtn) => {
-                    pageBtn.classList.remove('text-white', 'bg-black', 'rounded', 'shadow');
-                });
-            },
-            setPageActive() {
-                let activePage = document.querySelector('ul.pagination>li.active>a');
-
-                if (activePage) {
-                    activePage.classList.add('text-white', 'bg-black', 'rounded', 'shadow');
+                    this.$refs.table.refresh();
                 }
             }
         }

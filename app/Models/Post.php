@@ -54,4 +54,16 @@ class Post extends Model
         });
     }
 
+    public function scopeSearchLike($query, $search) {
+        return $query->where(function ($post) use ($search) {
+            return $post->where('title', 'like', "%{$search}%")
+                ->orWhere('published_at', 'like', "%{$search}%")
+                ->orWhere('body', 'like', "%{$search}%")
+                ->orWhereHas('tags', function ($tags) use ($search) {
+                    return $tags->where('title', 'like', "%{$search}%")
+                        ->orWhere('slug', 'like', "%{$search}%");
+                });
+        });
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,7 +10,7 @@ use App\Http\Controllers\Controller;
 class PostsController extends Controller
 {
 
-    private $pagination = 5;
+    private $pagination = 10;
 
     /**
      * Display a listing of the resource.
@@ -19,12 +20,13 @@ class PostsController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::select('title', 'published_at', 'id');
+        $posts = Post::with('tags');
 
         if ($request->has('q')) {
-            $posts->where('title', 'like', "%{$request->q}%");
+            $posts->searchLike($request->q);
         }
-        return $posts->orderBy('published_at')->paginate($this->pagination);
+
+        return PostResource::collection($posts->orderBy('published_at', 'DESC')->paginate($this->pagination));
     }
 
     /**
@@ -74,11 +76,17 @@ class PostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Post $post
+     *
+     * @return array
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->tags()->sync([]);
+
+        $post->delete();
+
+        return ['result' => true];
     }
 }
