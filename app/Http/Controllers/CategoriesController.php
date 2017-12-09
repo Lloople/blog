@@ -10,7 +10,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $data = [
-            'categories' => Category::all()
+            'categories' => Category::orderBy('name')->get()
         ];
 
         return view('frontend.categories.index', $data);
