@@ -27,8 +27,8 @@
   @apply list-reset block mt-8;
 }
 
-.table-component-btn {
-  @apply p-2 rounded shadow inline-block text-white text-xs;
+.button {
+  @apply p-2 rounded shadow inline-block text-white no-underline;
 }
 
 ul.pagination > li.active {

@@ -21579,7 +21579,7 @@ var previousFilter = '';
                                 previousFilter = filter;
 
                                 _context.next = 4;
-                                return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/posts?page=' + page + '&q=' + filter, { page: page, filter: filter });
+                                return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/backend/resources/posts?page=' + page + '&q=' + filter, { page: page, filter: filter });
 
                             case 4:
                                 response = _context.sent;
@@ -21614,7 +21614,7 @@ var previousFilter = '';
                             case 0:
                                 ev.preventDefault();
 
-                                if (!confirm("Confirm delete?")) {
+                                if (!confirm("Are you sure you want to delete the post '" + row.title + "'? This action cannot be undone")) {
                                     _context2.next = 5;
                                     break;
                                 }
@@ -21703,7 +21703,7 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    staticClass: "table-component-btn bg-green",
+                    staticClass: "button text-xs bg-green",
                     attrs: { href: "" + row.url_edit }
                   },
                   [_c("span", { staticClass: "fas fa-fw fa-pencil-alt" })]
@@ -21712,7 +21712,7 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    staticClass: "table-component-btn bg-blue",
+                    staticClass: "button text-xs bg-blue",
                     attrs: { href: "" + row.url, target: "_blank" }
                   },
                   [_c("span", { staticClass: "fas fa-fw fa-eye" })]
@@ -21721,7 +21721,7 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    staticClass: "table-component-btn bg-red",
+                    staticClass: "button text-xs bg-red",
                     attrs: { href: "" + row.url_delete },
                     on: {
                       click: function($event) {

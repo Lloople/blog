@@ -639,14 +639,14 @@ button,
   margin-top: 2rem;
 }
 
-.table-component-btn {
+.button {
   padding: 0.5rem;
   border-radius: .25rem;
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
   display: inline-block;
   color: #ffffff;
-  font-size: .75rem;
+  text-decoration: none;
 }
 
 ul.pagination > li.active {

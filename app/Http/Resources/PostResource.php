@@ -18,8 +18,8 @@ class PostResource extends Resource
         return [
             'id' => $this->id,
             'url' => $this->url,
-            'url_edit' => route('posts.edit', $this),
-            'url_delete' => route('posts.destroy', $this),
+            'url_edit' => route('backend.posts.edit', $this),
+            'url_delete' => route('backend.posts.destroy', $this),
             'title' => Str::words($this->title, 5),
             'category' => $this->category->name,
             'tags' => $this->tags->take(3)->implode('name', ', '),

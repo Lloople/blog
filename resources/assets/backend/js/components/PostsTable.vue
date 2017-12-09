@@ -12,13 +12,13 @@
         <table-column show="published_at" label="Date" header-class="text-left"></table-column>
         <table-column show="url" label="" cell-class="text-center">
             <template slot-scope="row">
-                <a :href="`${row.url_edit}`" class="table-component-btn bg-green">
+                <a :href="`${row.url_edit}`" class="button text-xs bg-green">
                     <span class="fas fa-fw fa-pencil-alt"></span>
                 </a>
-                <a :href="`${row.url}`" target="_blank" class="table-component-btn bg-blue">
+                <a :href="`${row.url}`" target="_blank" class="button text-xs bg-blue">
                     <span class="fas fa-fw fa-eye"></span>
                 </a>
-                <a :href="`${row.url_delete}`" @click="confirmDelete(row, $event)" class="table-component-btn bg-red">
+                <a :href="`${row.url_delete}`" @click="confirmDelete(row, $event)" class="button text-xs bg-red">
                     <span class="fas fa-fw fa-trash"></span>
                 </a>
             </template>
@@ -42,7 +42,7 @@
 
                 previousFilter = filter;
 
-                const response = await axios.get('/api/posts?page='+page+'&q='+filter, { page, filter });
+                const response = await axios.get('/backend/resources/posts?page='+page+'&q='+filter, { page, filter });
 
                 return {
                     data: response.data.data,
@@ -55,7 +55,7 @@
             },
             async confirmDelete(row, ev) {
                 ev.preventDefault();
-                if (confirm("Confirm delete?")) {
+                if (confirm("Are you sure you want to delete the post '"+row.title+"'? This action cannot be undone")) {
                     await axios.delete(row.url_delete);
 
                     this.$refs.table.refresh();

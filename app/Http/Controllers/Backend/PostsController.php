@@ -20,13 +20,7 @@ class PostsController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::with('tags');
-
-        if ($request->has('q')) {
-            $posts->searchLike($request->q);
-        }
-
-        return PostResource::collection($posts->orderBy('published_at', 'DESC')->paginate($this->pagination));
+        return view('backend.posts.index');
     }
 
     /**
@@ -36,14 +30,18 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'post' => new Post()
+        ];
+        return view('backend.posts.edit', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     *
+     * @return void
      */
     public function store(Request $request)
     {
@@ -53,22 +51,28 @@ class PostsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \App\Models\Post $post
+     *
+     * @return void
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        $data = [
+            'post' => $post
+        ];
+
+        return view('backend.posts.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param  Post $post
+     *
+     * @return void
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -88,5 +92,16 @@ class PostsController extends Controller
         $post->delete();
 
         return ['result' => true];
+    }
+
+    public function resource(Request $request)
+    {
+        $posts = Post::with('tags');
+
+        if ($request->has('q')) {
+            $posts->searchLike($request->q);
+        }
+
+        return PostResource::collection($posts->orderBy('published_at', 'DESC')->paginate($this->pagination));
     }
 }
