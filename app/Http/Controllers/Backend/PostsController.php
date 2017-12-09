@@ -48,7 +48,6 @@ class PostsController extends Controller
         $post = new Post();
         $post->title = $request->title;
         $post->slug = str_slug($request->title);
-        $post->thumbnail = '';
         $post->category_id = $request->category;
         $post->published_at = Carbon::createFromFormat('Y-m-d\TH:i', $request->published_at);
         $post->featured = $request->has('featured');
@@ -86,7 +85,21 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->title = $request->title;
+        $post->slug = str_slug($request->title);
+        $post->category_id = $request->category;
+        $post->published_at = Carbon::createFromFormat('Y-m-d\TH:i', $request->published_at);
+        $post->featured = $request->has('featured');
+        $post->visible = $request->has('visible');
+        $post->body = $request->body;
+
+        $post->save();
+
+        $post->syncTags($request->tags);
+
+        Notificator::success('Post edited successfully');
+
+        return redirect()->route('backend.posts.edit', $post);
     }
 
     /**

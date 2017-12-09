@@ -27,11 +27,11 @@ class PostDetailViewModel
             : "Create Post";
 
         $this->action = $post->exists
-            ? route('backend.posts.edit', $this->post)
+            ? route('backend.posts.update', $this->post)
             : route('backend.posts.store');
 
         $this->method = $post->exists
-            ? 'PATCH'
+            ? 'PUT'
             : 'POST';
 
         $this->categories = Category::select('id', 'name')->get();

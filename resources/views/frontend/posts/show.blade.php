@@ -14,7 +14,7 @@
             <div class="w-full p-4 flex flex-col justify-between leading-normal">
                 <span class="post-date">{{ $post->published_at->format('d/m/Y H:i') }}</span>
                 
-                <div class="mb-4">
+                <div class="mb-4 post-content">
                     {!! $post->body_markdown !!}
                 </div>
                 <span class="post-date">

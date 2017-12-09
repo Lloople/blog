@@ -620,6 +620,11 @@ button,
   color: #70818a;
 }
 
+.post-content p {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .search-input {
   padding: 1rem;
   border-radius: .25rem;

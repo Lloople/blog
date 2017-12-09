@@ -13,3 +13,7 @@
 .post-date {
   @apply text-sm text-grey-dark;
 }
+
+.post-content p {
+  @apply py-4;
+}
