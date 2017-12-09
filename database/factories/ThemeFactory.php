@@ -9,7 +9,6 @@ $factory->define(Theme::class, function (Faker $faker) {
         'selected'                    => true,
         'background'                  => 'grey-lighter',
         'container_background'        => 'white',
-        'posts_list_background'       => 'grey-lighter',
         'menu_item_text'              => 'black',
         'menu_item_background'        => 'white',
         'menu_item_active_text'       => 'white',

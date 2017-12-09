@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Theme;
 use Illuminate\Database\Seeder;
 
 class ThemesSeeder extends Seeder
@@ -16,10 +17,10 @@ class ThemesSeeder extends Seeder
 
         $themes = collect([]);
 
-        factory(\App\Models\Theme::class)->create();
+        factory(Theme::class)->create();
 
         $themes->each(function ($theme) {
-            factory(\App\Models\Theme::class)->create($theme);
+            factory(Theme::class)->create($theme);
 
         });
     }
