@@ -11,7 +11,7 @@
         "laravel/framework": "5.5.*",
         "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
-        "spatie/image": "^1.3"
+        "lloople/laravel-notificator": "^1.5"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

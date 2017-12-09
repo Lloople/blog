@@ -1,7 +1,10 @@
 @tailwind preflight;
 
+@import "../../css/components/font-awesome/font-awesome";
 @import "components/vue-tables";
+@import "components/simpleMde";
 
 @import "../../css/components/pagination";
+@import "../../css/components/form";
 
 @tailwind utilities;

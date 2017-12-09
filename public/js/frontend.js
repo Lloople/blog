@@ -1,174 +1,9 @@
-webpackJsonp([1],[
-/* 0 */,
-/* 1 */,
-/* 2 */
-/***/ (function(module, exports) {
+webpackJsonp([2],{
 
-var toString = {}.toString;
-
-module.exports = Array.isArray || function (arr) {
-  return toString.call(arr) == '[object Array]';
-};
-
-
-/***/ }),
-/* 3 */,
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = function clone(obj) {
-  return JSON.parse(JSON.stringify(obj));
-};
-
-
-/***/ }),
-/* 5 */
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-// This file hosts our error definitions
-// We use custom error "types" so that we can act on them when we need it
-// e.g.: if error instanceof errors.UnparsableJSON then..
-
-var inherits = __webpack_require__(8);
-
-function AlgoliaSearchError(message, extraProperties) {
-  var forEach = __webpack_require__(6);
-
-  var error = this;
-
-  // try to get a stacktrace
-  if (typeof Error.captureStackTrace === 'function') {
-    Error.captureStackTrace(this, this.constructor);
-  } else {
-    error.stack = (new Error()).stack || 'Cannot get a stacktrace, browser is too old';
-  }
-
-  this.name = 'AlgoliaSearchError';
-  this.message = message || 'Unknown error';
-
-  if (extraProperties) {
-    forEach(extraProperties, function addToErrorObject(value, key) {
-      error[key] = value;
-    });
-  }
-}
-
-inherits(AlgoliaSearchError, Error);
-
-function createCustomError(name, message) {
-  function AlgoliaSearchCustomError() {
-    var args = Array.prototype.slice.call(arguments, 0);
-
-    // custom message not set, use default
-    if (typeof args[0] !== 'string') {
-      args.unshift(message);
-    }
-
-    AlgoliaSearchError.apply(this, args);
-    this.name = 'AlgoliaSearch' + name + 'Error';
-  }
-
-  inherits(AlgoliaSearchCustomError, AlgoliaSearchError);
-
-  return AlgoliaSearchCustomError;
-}
-
-// late exports to let various fn defs and inherits take place
-module.exports = {
-  AlgoliaSearchError: AlgoliaSearchError,
-  UnparsableJSON: createCustomError(
-    'UnparsableJSON',
-    'Could not parse the incoming response as JSON, see err.more for details'
-  ),
-  RequestTimeout: createCustomError(
-    'RequestTimeout',
-    'Request timedout before getting a response'
-  ),
-  Network: createCustomError(
-    'Network',
-    'Network issue, see err.more for details'
-  ),
-  JSONPScriptFail: createCustomError(
-    'JSONPScriptFail',
-    '<script> was loaded but did not call our provided callback'
-  ),
-  JSONPScriptError: createCustomError(
-    'JSONPScriptError',
-    '<script> unable to load due to an `error` event on it'
-  ),
-  Unknown: createCustomError(
-    'Unknown',
-    'Unknown error occured'
-  )
-};
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-
-var hasOwn = Object.prototype.hasOwnProperty;
-var toString = Object.prototype.toString;
-
-module.exports = function forEach (obj, fn, ctx) {
-    if (toString.call(fn) !== '[object Function]') {
-        throw new TypeError('iterator must be a function');
-    }
-    var l = obj.length;
-    if (l === +l) {
-        for (var i = 0; i < l; i++) {
-            fn.call(ctx, obj[i], i, obj);
-        }
-    } else {
-        for (var k in obj) {
-            if (hasOwn.call(obj, k)) {
-                fn.call(ctx, obj[k], k, obj);
-            }
-        }
-    }
-};
-
-
-
-/***/ }),
-/* 7 */,
-/* 8 */
-/***/ (function(module, exports) {
-
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var foreach = __webpack_require__(6);
+var foreach = __webpack_require__(7);
 
 module.exports = function map(arr, fn) {
   var newArr = [];
@@ -180,8 +15,118 @@ module.exports = function map(arr, fn) {
 
 
 /***/ }),
-/* 10 */,
-/* 11 */
+
+/***/ 12:
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -190,7 +135,7 @@ module.exports = function map(arr, fn) {
  * Expose `debug()` as the module.
  */
 
-exports = module.exports = __webpack_require__(182);
+exports = module.exports = __webpack_require__(187);
 exports.log = log;
 exports.formatArgs = formatArgs;
 exports.save = save;
@@ -370,13 +315,14 @@ function localstorage() {
   } catch (e) {}
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 12 */
+
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
-window._ = __webpack_require__(13);
+window._ = __webpack_require__(15);
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -384,7 +330,7 @@ window._ = __webpack_require__(13);
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(10);
+window.axios = __webpack_require__(11);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -418,829 +364,41 @@ if (token) {
 // });
 
 /***/ }),
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */
-/***/ (function(module, exports) {
 
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-module.exports = function deprecate(fn, message) {
-  var warned = false;
-
-  function deprecated() {
-    if (!warned) {
-      /* eslint no-console:0 */
-      console.warn(message);
-      warned = true;
-    }
-
-    return fn.apply(this, arguments);
-  }
-
-  return deprecated;
-};
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports) {
-
-module.exports = function deprecatedMessage(previousUsage, newUsage) {
-  var githubAnchorLink = previousUsage.toLowerCase()
-    .replace(/[\.\(\)]/g, '');
-
-  return 'algoliasearch: `' + previousUsage + '` was replaced by `' + newUsage +
-    '`. Please see https://github.com/algolia/algoliasearch-client-javascript/wiki/Deprecated#' + githubAnchorLink;
-};
-
-
-/***/ }),
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */
+/***/ 153:
 /***/ (function(module, exports, __webpack_require__) {
 
-var buildSearchMethod = __webpack_require__(26);
-var deprecate = __webpack_require__(17);
-var deprecatedMessage = __webpack_require__(18);
-
-module.exports = IndexCore;
-
-/*
-* Index class constructor.
-* You should not use this method directly but use initIndex() function
-*/
-function IndexCore(algoliasearch, indexName) {
-  this.indexName = indexName;
-  this.as = algoliasearch;
-  this.typeAheadArgs = null;
-  this.typeAheadValueOption = null;
-
-  // make sure every index instance has it's own cache
-  this.cache = {};
-}
-
-/*
-* Clear all queries in cache
-*/
-IndexCore.prototype.clearCache = function() {
-  this.cache = {};
-};
-
-/*
-* Search inside the index using XMLHttpRequest request (Using a POST query to
-* minimize number of OPTIONS queries: Cross-Origin Resource Sharing).
-*
-* @param {string} [query] the full text query
-* @param {object} [args] (optional) if set, contains an object with query parameters:
-* - page: (integer) Pagination parameter used to select the page to retrieve.
-*                   Page is zero-based and defaults to 0. Thus,
-*                   to retrieve the 10th page you need to set page=9
-* - hitsPerPage: (integer) Pagination parameter used to select the number of hits per page. Defaults to 20.
-* - attributesToRetrieve: a string that contains the list of object attributes
-* you want to retrieve (let you minimize the answer size).
-*   Attributes are separated with a comma (for example "name,address").
-*   You can also use an array (for example ["name","address"]).
-*   By default, all attributes are retrieved. You can also use '*' to retrieve all
-*   values when an attributesToRetrieve setting is specified for your index.
-* - attributesToHighlight: a string that contains the list of attributes you
-*   want to highlight according to the query.
-*   Attributes are separated by a comma. You can also use an array (for example ["name","address"]).
-*   If an attribute has no match for the query, the raw value is returned.
-*   By default all indexed text attributes are highlighted.
-*   You can use `*` if you want to highlight all textual attributes.
-*   Numerical attributes are not highlighted.
-*   A matchLevel is returned for each highlighted attribute and can contain:
-*      - full: if all the query terms were found in the attribute,
-*      - partial: if only some of the query terms were found,
-*      - none: if none of the query terms were found.
-* - attributesToSnippet: a string that contains the list of attributes to snippet alongside
-* the number of words to return (syntax is `attributeName:nbWords`).
-*    Attributes are separated by a comma (Example: attributesToSnippet=name:10,content:10).
-*    You can also use an array (Example: attributesToSnippet: ['name:10','content:10']).
-*    By default no snippet is computed.
-* - minWordSizefor1Typo: the minimum number of characters in a query word to accept one typo in this word.
-* Defaults to 3.
-* - minWordSizefor2Typos: the minimum number of characters in a query word
-* to accept two typos in this word. Defaults to 7.
-* - getRankingInfo: if set to 1, the result hits will contain ranking
-* information in _rankingInfo attribute.
-* - aroundLatLng: search for entries around a given
-* latitude/longitude (specified as two floats separated by a comma).
-*   For example aroundLatLng=47.316669,5.016670).
-*   You can specify the maximum distance in meters with the aroundRadius parameter (in meters)
-*   and the precision for ranking with aroundPrecision
-*   (for example if you set aroundPrecision=100, two objects that are distant of
-*   less than 100m will be considered as identical for "geo" ranking parameter).
-*   At indexing, you should specify geoloc of an object with the _geoloc attribute
-*   (in the form {"_geoloc":{"lat":48.853409, "lng":2.348800}})
-* - insideBoundingBox: search entries inside a given area defined by the two extreme points
-* of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).
-*   For example insideBoundingBox=47.3165,4.9665,47.3424,5.0201).
-*   At indexing, you should specify geoloc of an object with the _geoloc attribute
-*   (in the form {"_geoloc":{"lat":48.853409, "lng":2.348800}})
-* - numericFilters: a string that contains the list of numeric filters you want to
-* apply separated by a comma.
-*   The syntax of one filter is `attributeName` followed by `operand` followed by `value`.
-*   Supported operands are `<`, `<=`, `=`, `>` and `>=`.
-*   You can have multiple conditions on one attribute like for example numericFilters=price>100,price<1000.
-*   You can also use an array (for example numericFilters: ["price>100","price<1000"]).
-* - tagFilters: filter the query by a set of tags. You can AND tags by separating them by commas.
-*   To OR tags, you must add parentheses. For example, tags=tag1,(tag2,tag3) means tag1 AND (tag2 OR tag3).
-*   You can also use an array, for example tagFilters: ["tag1",["tag2","tag3"]]
-*   means tag1 AND (tag2 OR tag3).
-*   At indexing, tags should be added in the _tags** attribute
-*   of objects (for example {"_tags":["tag1","tag2"]}).
-* - facetFilters: filter the query by a list of facets.
-*   Facets are separated by commas and each facet is encoded as `attributeName:value`.
-*   For example: `facetFilters=category:Book,author:John%20Doe`.
-*   You can also use an array (for example `["category:Book","author:John%20Doe"]`).
-* - facets: List of object attributes that you want to use for faceting.
-*   Comma separated list: `"category,author"` or array `['category','author']`
-*   Only attributes that have been added in **attributesForFaceting** index setting
-*   can be used in this parameter.
-*   You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
-* - queryType: select how the query words are interpreted, it can be one of the following value:
-*    - prefixAll: all query words are interpreted as prefixes,
-*    - prefixLast: only the last word is interpreted as a prefix (default behavior),
-*    - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
-* - optionalWords: a string that contains the list of words that should
-* be considered as optional when found in the query.
-*   Comma separated and array are accepted.
-* - distinct: If set to 1, enable the distinct feature (disabled by default)
-* if the attributeForDistinct index setting is set.
-*   This feature is similar to the SQL "distinct" keyword: when enabled
-*   in a query with the distinct=1 parameter,
-*   all hits containing a duplicate value for the attributeForDistinct attribute are removed from results.
-*   For example, if the chosen attribute is show_name and several hits have
-*   the same value for show_name, then only the best
-*   one is kept and others are removed.
-* - restrictSearchableAttributes: List of attributes you want to use for
-* textual search (must be a subset of the attributesToIndex index setting)
-* either comma separated or as an array
-* @param {function} [callback] the result callback called with two arguments:
-*  error: null or Error('message'). If false, the content contains the error.
-*  content: the server answer that contains the list of results.
-*/
-IndexCore.prototype.search = buildSearchMethod('query');
-
-/*
-* -- BETA --
-* Search a record similar to the query inside the index using XMLHttpRequest request (Using a POST query to
-* minimize number of OPTIONS queries: Cross-Origin Resource Sharing).
-*
-* @param {string} [query] the similar query
-* @param {object} [args] (optional) if set, contains an object with query parameters.
-*   All search parameters are supported (see search function), restrictSearchableAttributes and facetFilters
-*   are the two most useful to restrict the similar results and get more relevant content
-*/
-IndexCore.prototype.similarSearch = buildSearchMethod('similarQuery');
-
-/*
-* Browse index content. The response content will have a `cursor` property that you can use
-* to browse subsequent pages for this query. Use `index.browseFrom(cursor)` when you want.
-*
-* @param {string} query - The full text query
-* @param {Object} [queryParameters] - Any search query parameter
-* @param {Function} [callback] - The result callback called with two arguments
-*   error: null or Error('message')
-*   content: the server answer with the browse result
-* @return {Promise|undefined} Returns a promise if no callback given
-* @example
-* index.browse('cool songs', {
-*   tagFilters: 'public,comments',
-*   hitsPerPage: 500
-* }, callback);
-* @see {@link https://www.algolia.com/doc/rest_api#Browse|Algolia REST API Documentation}
-*/
-IndexCore.prototype.browse = function(query, queryParameters, callback) {
-  var merge = __webpack_require__(27);
-
-  var indexObj = this;
-
-  var page;
-  var hitsPerPage;
-
-  // we check variadic calls that are not the one defined
-  // .browse()/.browse(fn)
-  // => page = 0
-  if (arguments.length === 0 || arguments.length === 1 && typeof arguments[0] === 'function') {
-    page = 0;
-    callback = arguments[0];
-    query = undefined;
-  } else if (typeof arguments[0] === 'number') {
-    // .browse(2)/.browse(2, 10)/.browse(2, fn)/.browse(2, 10, fn)
-    page = arguments[0];
-    if (typeof arguments[1] === 'number') {
-      hitsPerPage = arguments[1];
-    } else if (typeof arguments[1] === 'function') {
-      callback = arguments[1];
-      hitsPerPage = undefined;
-    }
-    query = undefined;
-    queryParameters = undefined;
-  } else if (typeof arguments[0] === 'object') {
-    // .browse(queryParameters)/.browse(queryParameters, cb)
-    if (typeof arguments[1] === 'function') {
-      callback = arguments[1];
-    }
-    queryParameters = arguments[0];
-    query = undefined;
-  } else if (typeof arguments[0] === 'string' && typeof arguments[1] === 'function') {
-    // .browse(query, cb)
-    callback = arguments[1];
-    queryParameters = undefined;
-  }
-
-  // otherwise it's a .browse(query)/.browse(query, queryParameters)/.browse(query, queryParameters, cb)
-
-  // get search query parameters combining various possible calls
-  // to .browse();
-  queryParameters = merge({}, queryParameters || {}, {
-    page: page,
-    hitsPerPage: hitsPerPage,
-    query: query
-  });
-
-  var params = this.as._getSearchParams(queryParameters, '');
-
-  return this.as._jsonRequest({
-    method: 'POST',
-    url: '/1/indexes/' + encodeURIComponent(indexObj.indexName) + '/browse',
-    body: {params: params},
-    hostType: 'read',
-    callback: callback
-  });
-};
-
-/*
-* Continue browsing from a previous position (cursor), obtained via a call to `.browse()`.
-*
-* @param {string} query - The full text query
-* @param {Object} [queryParameters] - Any search query parameter
-* @param {Function} [callback] - The result callback called with two arguments
-*   error: null or Error('message')
-*   content: the server answer with the browse result
-* @return {Promise|undefined} Returns a promise if no callback given
-* @example
-* index.browseFrom('14lkfsakl32', callback);
-* @see {@link https://www.algolia.com/doc/rest_api#Browse|Algolia REST API Documentation}
-*/
-IndexCore.prototype.browseFrom = function(cursor, callback) {
-  return this.as._jsonRequest({
-    method: 'POST',
-    url: '/1/indexes/' + encodeURIComponent(this.indexName) + '/browse',
-    body: {cursor: cursor},
-    hostType: 'read',
-    callback: callback
-  });
-};
-
-/*
-* Search for facet values
-* https://www.algolia.com/doc/rest-api/search#search-for-facet-values
-*
-* @param {string} params.facetName Facet name, name of the attribute to search for values in.
-* Must be declared as a facet
-* @param {string} params.facetQuery Query for the facet search
-* @param {string} [params.*] Any search parameter of Algolia,
-* see https://www.algolia.com/doc/api-client/javascript/search#search-parameters
-* Pagination is not supported. The page and hitsPerPage parameters will be ignored.
-* @param callback (optional)
-*/
-IndexCore.prototype.searchForFacetValues = function(params, callback) {
-  var clone = __webpack_require__(4);
-  var omit = __webpack_require__(175);
-  var usage = 'Usage: index.searchForFacetValues({facetName, facetQuery, ...params}[, callback])';
-
-  if (params.facetName === undefined || params.facetQuery === undefined) {
-    throw new Error(usage);
-  }
-
-  var facetName = params.facetName;
-  var filteredParams = omit(clone(params), function(keyName) {
-    return keyName === 'facetName';
-  });
-  var searchParameters = this.as._getSearchParams(filteredParams, '');
-
-  return this.as._jsonRequest({
-    method: 'POST',
-    url: '/1/indexes/' +
-      encodeURIComponent(this.indexName) + '/facets/' + encodeURIComponent(facetName) + '/query',
-    hostType: 'read',
-    body: {params: searchParameters},
-    callback: callback
-  });
-};
-
-IndexCore.prototype.searchFacet = deprecate(function(params, callback) {
-  return this.searchForFacetValues(params, callback);
-}, deprecatedMessage(
-  'index.searchFacet(params[, callback])',
-  'index.searchForFacetValues(params[, callback])'
-));
-
-IndexCore.prototype._search = function(params, url, callback, additionalUA) {
-  return this.as._jsonRequest({
-    cache: this.cache,
-    method: 'POST',
-    url: url || '/1/indexes/' + encodeURIComponent(this.indexName) + '/query',
-    body: {params: params},
-    hostType: 'read',
-    fallback: {
-      method: 'GET',
-      url: '/1/indexes/' + encodeURIComponent(this.indexName),
-      body: {params: params}
-    },
-    callback: callback,
-    additionalUA: additionalUA
-  });
-};
-
-/*
-* Get an object from this index
-*
-* @param objectID the unique identifier of the object to retrieve
-* @param attrs (optional) if set, contains the array of attribute names to retrieve
-* @param callback (optional) the result callback called with two arguments
-*  error: null or Error('message')
-*  content: the object to retrieve or the error message if a failure occured
-*/
-IndexCore.prototype.getObject = function(objectID, attrs, callback) {
-  var indexObj = this;
-
-  if (arguments.length === 1 || typeof attrs === 'function') {
-    callback = attrs;
-    attrs = undefined;
-  }
-
-  var params = '';
-  if (attrs !== undefined) {
-    params = '?attributes=';
-    for (var i = 0; i < attrs.length; ++i) {
-      if (i !== 0) {
-        params += ',';
-      }
-      params += attrs[i];
-    }
-  }
-
-  return this.as._jsonRequest({
-    method: 'GET',
-    url: '/1/indexes/' + encodeURIComponent(indexObj.indexName) + '/' + encodeURIComponent(objectID) + params,
-    hostType: 'read',
-    callback: callback
-  });
-};
-
-/*
-* Get several objects from this index
-*
-* @param objectIDs the array of unique identifier of objects to retrieve
-*/
-IndexCore.prototype.getObjects = function(objectIDs, attributesToRetrieve, callback) {
-  var isArray = __webpack_require__(2);
-  var map = __webpack_require__(9);
-
-  var usage = 'Usage: index.getObjects(arrayOfObjectIDs[, callback])';
-
-  if (!isArray(objectIDs)) {
-    throw new Error(usage);
-  }
-
-  var indexObj = this;
-
-  if (arguments.length === 1 || typeof attributesToRetrieve === 'function') {
-    callback = attributesToRetrieve;
-    attributesToRetrieve = undefined;
-  }
-
-  var body = {
-    requests: map(objectIDs, function prepareRequest(objectID) {
-      var request = {
-        indexName: indexObj.indexName,
-        objectID: objectID
-      };
-
-      if (attributesToRetrieve) {
-        request.attributesToRetrieve = attributesToRetrieve.join(',');
-      }
-
-      return request;
-    })
-  };
-
-  return this.as._jsonRequest({
-    method: 'POST',
-    url: '/1/indexes/*/objects',
-    hostType: 'read',
-    body: body,
-    callback: callback
-  });
-};
-
-IndexCore.prototype.as = null;
-IndexCore.prototype.indexName = null;
-IndexCore.prototype.typeAheadArgs = null;
-IndexCore.prototype.typeAheadValueOption = null;
+__webpack_require__(154);
+__webpack_require__(200);
+module.exports = __webpack_require__(201);
 
 
 /***/ }),
-/* 26 */
+
+/***/ 154:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = buildSearchMethod;
+__webpack_require__(14);
 
-var errors = __webpack_require__(5);
+window.Vue = __webpack_require__(17);
 
-/**
- * Creates a search method to be used in clients
- * @param {string} queryParam the name of the attribute used for the query
- * @param {string} url the url
- * @return {function} the search method
- */
-function buildSearchMethod(queryParam, url) {
-  /**
-   * The search method. Prepares the data and send the query to Algolia.
-   * @param {string} query the string used for query search
-   * @param {object} args additional parameters to send with the search
-   * @param {function} [callback] the callback to be called with the client gets the answer
-   * @return {undefined|Promise} If the callback is not provided then this methods returns a Promise
-   */
-  return function search(query, args, callback) {
-    // warn V2 users on how to search
-    if (typeof query === 'function' && typeof args === 'object' ||
-      typeof callback === 'object') {
-      // .search(query, params, cb)
-      // .search(cb, params)
-      throw new errors.AlgoliaSearchError('index.search usage is index.search(query, params, cb)');
-    }
-
-    // Normalizing the function signature
-    if (arguments.length === 0 || typeof query === 'function') {
-      // Usage : .search(), .search(cb)
-      callback = query;
-      query = '';
-    } else if (arguments.length === 1 || typeof args === 'function') {
-      // Usage : .search(query/args), .search(query, cb)
-      callback = args;
-      args = undefined;
-    }
-    // At this point we have 3 arguments with values
-
-    // Usage : .search(args) // careful: typeof null === 'object'
-    if (typeof query === 'object' && query !== null) {
-      args = query;
-      query = undefined;
-    } else if (query === undefined || query === null) { // .search(undefined/null)
-      query = '';
-    }
-
-    var params = '';
-
-    if (query !== undefined) {
-      params += queryParam + '=' + encodeURIComponent(query);
-    }
-
-    var additionalUA;
-    if (args !== undefined) {
-      if (args.additionalUA) {
-        additionalUA = args.additionalUA;
-        delete args.additionalUA;
-      }
-      // `_getSearchParams` will augment params, do not be fooled by the = versus += from previous if
-      params = this.as._getSearchParams(args, params);
-    }
-
-
-    return this._search(params, url, callback, additionalUA);
-  };
-}
-
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var foreach = __webpack_require__(6);
-
-module.exports = function merge(destination/* , sources */) {
-  var sources = Array.prototype.slice.call(arguments);
-
-  foreach(sources, function(source) {
-    for (var keyName in source) {
-      if (source.hasOwnProperty(keyName)) {
-        if (typeof destination[keyName] === 'object' && typeof source[keyName] === 'object') {
-          destination[keyName] = merge({}, destination[keyName], source[keyName]);
-        } else if (source[keyName] !== undefined) {
-          destination[keyName] = source[keyName];
-        }
-      }
-    }
-  });
-
-  return destination;
-};
-
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports) {
-
-// Parse cloud does not supports setTimeout
-// We do not store a setTimeout reference in the client everytime
-// We only fallback to a fake setTimeout when not available
-// setTimeout cannot be override globally sadly
-module.exports = function exitPromise(fn, _setTimeout) {
-  _setTimeout(fn, 0);
-};
-
-
-/***/ }),
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */,
-/* 90 */,
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */,
-/* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */,
-/* 101 */,
-/* 102 */,
-/* 103 */,
-/* 104 */,
-/* 105 */,
-/* 106 */,
-/* 107 */,
-/* 108 */,
-/* 109 */,
-/* 110 */,
-/* 111 */,
-/* 112 */,
-/* 113 */,
-/* 114 */,
-/* 115 */,
-/* 116 */,
-/* 117 */,
-/* 118 */,
-/* 119 */,
-/* 120 */,
-/* 121 */,
-/* 122 */,
-/* 123 */,
-/* 124 */,
-/* 125 */,
-/* 126 */,
-/* 127 */,
-/* 128 */,
-/* 129 */,
-/* 130 */,
-/* 131 */,
-/* 132 */,
-/* 133 */,
-/* 134 */,
-/* 135 */,
-/* 136 */,
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
-/* 148 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(149);
-__webpack_require__(195);
-module.exports = __webpack_require__(196);
-
-
-/***/ }),
-/* 149 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(12);
-
-window.Vue = __webpack_require__(15);
-
-Vue.component('instant-search', __webpack_require__(170));
+Vue.component('instant-search', __webpack_require__(175));
 
 var app = new Vue({
     el: '#app'
 });
 
 /***/ }),
-/* 150 */,
-/* 151 */,
-/* 152 */,
-/* 153 */,
-/* 154 */,
-/* 155 */,
-/* 156 */,
-/* 157 */,
-/* 158 */,
-/* 159 */,
-/* 160 */,
-/* 161 */,
-/* 162 */,
-/* 163 */,
-/* 164 */,
-/* 165 */,
-/* 166 */,
-/* 167 */,
-/* 168 */,
-/* 169 */,
-/* 170 */
+
+/***/ 175:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(16)
+var normalizeComponent = __webpack_require__(12)
 /* script */
-var __vue_script__ = __webpack_require__(171)
+var __vue_script__ = __webpack_require__(176)
 /* template */
-var __vue_template__ = __webpack_require__(194)
+var __vue_template__ = __webpack_require__(199)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1280,12 +438,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 171 */
+
+/***/ 176:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_algoliasearch__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_algoliasearch__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_algoliasearch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_algoliasearch__);
 //
 //
@@ -1342,30 +501,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 172 */
+
+/***/ 177:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var AlgoliaSearch = __webpack_require__(173);
-var createAlgoliasearch = __webpack_require__(184);
+var AlgoliaSearch = __webpack_require__(178);
+var createAlgoliasearch = __webpack_require__(189);
 
 module.exports = createAlgoliasearch(AlgoliaSearch);
 
 
 /***/ }),
-/* 173 */
+
+/***/ 178:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = AlgoliaSearch;
 
-var Index = __webpack_require__(174);
-var deprecate = __webpack_require__(17);
-var deprecatedMessage = __webpack_require__(18);
-var AlgoliaSearchCore = __webpack_require__(180);
-var inherits = __webpack_require__(8);
-var errors = __webpack_require__(5);
+var Index = __webpack_require__(179);
+var deprecate = __webpack_require__(18);
+var deprecatedMessage = __webpack_require__(19);
+var AlgoliaSearchCore = __webpack_require__(185);
+var inherits = __webpack_require__(9);
+var errors = __webpack_require__(6);
 
 function AlgoliaSearch() {
   AlgoliaSearchCore.apply(this, arguments);
@@ -1457,7 +618,7 @@ AlgoliaSearch.prototype.copyIndex = function(srcIndexName, dstIndexName, scopeOr
  *  content: the server answer that contains the task ID
  */
 AlgoliaSearch.prototype.getLogs = function(offset, length, callback) {
-  var clone = __webpack_require__(4);
+  var clone = __webpack_require__(5);
   var params = {};
   if (typeof offset === 'object') {
     // getLogs(params)
@@ -1864,15 +1025,16 @@ function notImplemented() {
 
 
 /***/ }),
-/* 174 */
+
+/***/ 179:
 /***/ (function(module, exports, __webpack_require__) {
 
-var inherits = __webpack_require__(8);
-var IndexCore = __webpack_require__(25);
-var deprecate = __webpack_require__(17);
-var deprecatedMessage = __webpack_require__(18);
-var exitPromise = __webpack_require__(28);
-var errors = __webpack_require__(5);
+var inherits = __webpack_require__(9);
+var IndexCore = __webpack_require__(26);
+var deprecate = __webpack_require__(18);
+var deprecatedMessage = __webpack_require__(19);
+var exitPromise = __webpack_require__(29);
+var errors = __webpack_require__(6);
 
 var deprecateForwardToSlaves = deprecate(
   function() {},
@@ -2120,7 +1282,7 @@ Index.prototype.deleteObject = function(objectID, callback) {
 */
 Index.prototype.deleteObjects = function(objectIDs, callback) {
   var isArray = __webpack_require__(2);
-  var map = __webpack_require__(9);
+  var map = __webpack_require__(10);
 
   var usage = 'Usage: index.deleteObjects(arrayOfObjectIDs[, callback])';
 
@@ -2160,8 +1322,8 @@ Index.prototype.deleteObjects = function(objectIDs, callback) {
 * @deprecated see index.deleteBy
 */
 Index.prototype.deleteByQuery = deprecate(function(query, params, callback) {
-  var clone = __webpack_require__(4);
-  var map = __webpack_require__(9);
+  var clone = __webpack_require__(5);
+  var map = __webpack_require__(10);
 
   var indexObj = this;
   var client = indexObj.as;
@@ -2295,9 +1457,9 @@ Index.prototype.browseAll = function(query, queryParameters) {
     query = undefined;
   }
 
-  var merge = __webpack_require__(27);
+  var merge = __webpack_require__(28);
 
-  var IndexBrowser = __webpack_require__(178);
+  var IndexBrowser = __webpack_require__(183);
 
   var browser = new IndexBrowser();
   var client = this.as;
@@ -3087,12 +2249,35 @@ Index.prototype.updateApiKey = function(key, acls, params, callback) {
 
 
 /***/ }),
-/* 175 */
+
+/***/ 18:
+/***/ (function(module, exports) {
+
+module.exports = function deprecate(fn, message) {
+  var warned = false;
+
+  function deprecated() {
+    if (!warned) {
+      /* eslint no-console:0 */
+      console.warn(message);
+      warned = true;
+    }
+
+    return fn.apply(this, arguments);
+  }
+
+  return deprecated;
+};
+
+
+/***/ }),
+
+/***/ 180:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = function omit(obj, test) {
-  var keys = __webpack_require__(176);
-  var foreach = __webpack_require__(6);
+  var keys = __webpack_require__(181);
+  var foreach = __webpack_require__(7);
 
   var filtered = {};
 
@@ -3107,7 +2292,8 @@ module.exports = function omit(obj, test) {
 
 
 /***/ }),
-/* 176 */
+
+/***/ 181:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3117,7 +2303,7 @@ module.exports = function omit(obj, test) {
 var has = Object.prototype.hasOwnProperty;
 var toStr = Object.prototype.toString;
 var slice = Array.prototype.slice;
-var isArgs = __webpack_require__(177);
+var isArgs = __webpack_require__(182);
 var isEnumerable = Object.prototype.propertyIsEnumerable;
 var hasDontEnumBug = !isEnumerable.call({ toString: null }, 'toString');
 var hasProtoEnumBug = isEnumerable.call(function () {}, 'prototype');
@@ -3254,7 +2440,8 @@ module.exports = keysShim;
 
 
 /***/ }),
-/* 177 */
+
+/***/ 182:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3278,7 +2465,8 @@ module.exports = function isArguments(value) {
 
 
 /***/ }),
-/* 178 */
+
+/***/ 183:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3288,8 +2476,8 @@ module.exports = function isArguments(value) {
 
 module.exports = IndexBrowser;
 
-var inherits = __webpack_require__(8);
-var EventEmitter = __webpack_require__(179).EventEmitter;
+var inherits = __webpack_require__(9);
+var EventEmitter = __webpack_require__(184).EventEmitter;
 
 function IndexBrowser() {
 }
@@ -3324,7 +2512,8 @@ IndexBrowser.prototype._clean = function() {
 
 
 /***/ }),
-/* 179 */
+
+/***/ 184:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -3632,15 +2821,16 @@ function isUndefined(arg) {
 
 
 /***/ }),
-/* 180 */
+
+/***/ 185:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = AlgoliaSearchCore;
 
-var errors = __webpack_require__(5);
-var exitPromise = __webpack_require__(28);
-var IndexCore = __webpack_require__(25);
-var store = __webpack_require__(181);
+var errors = __webpack_require__(6);
+var exitPromise = __webpack_require__(29);
+var IndexCore = __webpack_require__(26);
+var store = __webpack_require__(186);
 
 // We will always put the API KEY in the JSON body in case of too long API KEY,
 // to avoid query string being too long and failing in various conditions (our server limit, browser limit,
@@ -3676,11 +2866,11 @@ var RESET_APP_DATA_TIMER =
  *           If you provide them, you will less benefit from our HA implementation
  */
 function AlgoliaSearchCore(applicationID, apiKey, opts) {
-  var debug = __webpack_require__(11)('algoliasearch');
+  var debug = __webpack_require__(13)('algoliasearch');
 
-  var clone = __webpack_require__(4);
+  var clone = __webpack_require__(5);
   var isArray = __webpack_require__(2);
-  var map = __webpack_require__(9);
+  var map = __webpack_require__(10);
 
   var usage = 'Usage: algoliasearch(applicationID, apiKey, opts)';
 
@@ -3818,7 +3008,7 @@ AlgoliaSearchCore.prototype.addAlgoliaAgent = function(algoliaAgent) {
 AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
   this._checkAppIdData();
 
-  var requestDebug = __webpack_require__(11)('algoliasearch:' + initialOpts.url);
+  var requestDebug = __webpack_require__(13)('algoliasearch:' + initialOpts.url);
 
   var body;
   var additionalUA = initialOpts.additionalUA || '';
@@ -4112,7 +3302,7 @@ AlgoliaSearchCore.prototype._getSearchParams = function(args, params) {
 };
 
 AlgoliaSearchCore.prototype._computeRequestHeaders = function(additionalUA, withAPIKey) {
-  var forEach = __webpack_require__(6);
+  var forEach = __webpack_require__(7);
 
   var ua = additionalUA ?
     this._ua + ';' + additionalUA :
@@ -4157,7 +3347,7 @@ AlgoliaSearchCore.prototype._computeRequestHeaders = function(additionalUA, with
  */
 AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
   var isArray = __webpack_require__(2);
-  var map = __webpack_require__(9);
+  var map = __webpack_require__(10);
 
   var usage = 'Usage: client.search(arrayOfQueries[, callback])';
 
@@ -4327,7 +3517,7 @@ AlgoliaSearchCore.prototype._cacheAppIdData = function(data) {
 };
 
 AlgoliaSearchCore.prototype._partialAppIdDataUpdate = function(newData) {
-  var foreach = __webpack_require__(6);
+  var foreach = __webpack_require__(7);
   var currentData = this._getAppIdData();
   foreach(newData, function(value, key) {
     currentData[key] = value;
@@ -4349,7 +3539,7 @@ AlgoliaSearchCore.prototype._getHostIndexByType = function(hostType) {
 };
 
 AlgoliaSearchCore.prototype._setHostIndexByType = function(hostIndex, hostType) {
-  var clone = __webpack_require__(4);
+  var clone = __webpack_require__(5);
   var newHostIndexes = clone(this._hostIndexes);
   newHostIndexes[hostType] = hostIndex;
   this._partialAppIdDataUpdate({hostIndexes: newHostIndexes});
@@ -4444,10 +3634,11 @@ function removeCredentials(headers) {
 
 
 /***/ }),
-/* 181 */
+
+/***/ 186:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {var debug = __webpack_require__(11)('algoliasearch:src/hostIndexState.js');
+/* WEBPACK VAR INJECTION */(function(global) {var debug = __webpack_require__(13)('algoliasearch:src/hostIndexState.js');
 var localStorageNamespace = 'algoliasearch-client-js';
 
 var store;
@@ -4534,10 +3725,11 @@ function cleanup() {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 182 */
+
+/***/ 187:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -4553,7 +3745,7 @@ exports.coerce = coerce;
 exports.disable = disable;
 exports.enable = enable;
 exports.enabled = enabled;
-exports.humanize = __webpack_require__(183);
+exports.humanize = __webpack_require__(188);
 
 /**
  * The currently active debug mode names, and names to skip.
@@ -4745,7 +3937,8 @@ function coerce(val) {
 
 
 /***/ }),
-/* 183 */
+
+/***/ 188:
 /***/ (function(module, exports) {
 
 /**
@@ -4903,24 +4096,25 @@ function plural(ms, n, name) {
 
 
 /***/ }),
-/* 184 */
+
+/***/ 189:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var global = __webpack_require__(185);
-var Promise = global.Promise || __webpack_require__(186).Promise;
+var global = __webpack_require__(190);
+var Promise = global.Promise || __webpack_require__(191).Promise;
 
 // This is the standalone browser build entry point
 // Browser implementation of the Algolia Search JavaScript client,
 // using XMLHttpRequest, XDomainRequest and JSONP as fallback
 module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
-  var inherits = __webpack_require__(8);
-  var errors = __webpack_require__(5);
-  var inlineHeaders = __webpack_require__(188);
-  var jsonpRequest = __webpack_require__(190);
-  var places = __webpack_require__(191);
+  var inherits = __webpack_require__(9);
+  var errors = __webpack_require__(6);
+  var inlineHeaders = __webpack_require__(193);
+  var jsonpRequest = __webpack_require__(195);
+  var places = __webpack_require__(196);
   uaSuffix = uaSuffix || '';
 
   if (false) {
@@ -4928,9 +4122,9 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
   }
 
   function algoliasearch(applicationID, apiKey, opts) {
-    var cloneDeep = __webpack_require__(4);
+    var cloneDeep = __webpack_require__(5);
 
-    var getDocumentProtocol = __webpack_require__(192);
+    var getDocumentProtocol = __webpack_require__(197);
 
     opts = cloneDeep(opts || {});
 
@@ -4943,14 +4137,14 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
     return new AlgoliaSearchBrowser(applicationID, apiKey, opts);
   }
 
-  algoliasearch.version = __webpack_require__(193);
+  algoliasearch.version = __webpack_require__(198);
   algoliasearch.ua = 'Algolia for vanilla JavaScript ' + uaSuffix + algoliasearch.version;
   algoliasearch.initPlaces = places(algoliasearch);
 
   // we expose into window no matter how we are used, this will allow
   // us to easily debug any website running algolia
   global.__algolia = {
-    debug: __webpack_require__(11),
+    debug: __webpack_require__(13),
     algoliasearch: algoliasearch
   };
 
@@ -5129,7 +4323,22 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
 
 
 /***/ }),
-/* 185 */
+
+/***/ 19:
+/***/ (function(module, exports) {
+
+module.exports = function deprecatedMessage(previousUsage, newUsage) {
+  var githubAnchorLink = previousUsage.toLowerCase()
+    .replace(/[\.\(\)]/g, '');
+
+  return 'algoliasearch: `' + previousUsage + '` was replaced by `' + newUsage +
+    '`. Please see https://github.com/algolia/algoliasearch-client-javascript/wiki/Deprecated#' + githubAnchorLink;
+};
+
+
+/***/ }),
+
+/***/ 190:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var win;
@@ -5146,10 +4355,11 @@ if (typeof window !== "undefined") {
 
 module.exports = win;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 186 */
+
+/***/ 191:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global) {var require;/*!
@@ -5289,7 +4499,7 @@ function flush() {
 function attemptVertx() {
   try {
     var r = require;
-    var vertx = __webpack_require__(187);
+    var vertx = __webpack_require__(192);
     vertxNext = vertx.runOnLoop || vertx.runOnContext;
     return useVertxTimer();
   } catch (e) {
@@ -6310,16 +5520,18 @@ return Promise$2;
 
 //# sourceMappingURL=es6-promise.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(4)))
 
 /***/ }),
-/* 187 */
+
+/***/ 192:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 188 */
+
+/***/ 193:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6327,7 +5539,7 @@ return Promise$2;
 
 module.exports = inlineHeaders;
 
-var encode = __webpack_require__(189);
+var encode = __webpack_require__(194);
 
 function inlineHeaders(url, headers) {
   if (/\?/.test(url)) {
@@ -6341,7 +5553,8 @@ function inlineHeaders(url, headers) {
 
 
 /***/ }),
-/* 189 */
+
+/***/ 194:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6433,7 +5646,8 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 190 */
+
+/***/ 195:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6441,7 +5655,7 @@ var objectKeys = Object.keys || function (obj) {
 
 module.exports = jsonpRequest;
 
-var errors = __webpack_require__(5);
+var errors = __webpack_require__(6);
 
 var JSONPCounter = 0;
 
@@ -6565,16 +5779,17 @@ function jsonpRequest(url, opts, cb) {
 
 
 /***/ }),
-/* 191 */
+
+/***/ 196:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = createPlacesClient;
 
-var buildSearchMethod = __webpack_require__(26);
+var buildSearchMethod = __webpack_require__(27);
 
 function createPlacesClient(algoliasearch) {
   return function places(appID, apiKey, opts) {
-    var cloneDeep = __webpack_require__(4);
+    var cloneDeep = __webpack_require__(5);
 
     opts = opts && cloneDeep(opts) || {};
     opts.hosts = opts.hosts || [
@@ -6608,7 +5823,8 @@ function createPlacesClient(algoliasearch) {
 
 
 /***/ }),
-/* 192 */
+
+/***/ 197:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6629,7 +5845,8 @@ function getDocumentProtocol() {
 
 
 /***/ }),
-/* 193 */
+
+/***/ 198:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6639,7 +5856,8 @@ module.exports = '3.24.7';
 
 
 /***/ }),
-/* 194 */
+
+/***/ 199:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -6723,16 +5941,690 @@ if (false) {
 }
 
 /***/ }),
-/* 195 */
+
+/***/ 2:
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+
+/***/ 200:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 196 */
+
+/***/ 201:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
+/***/ }),
+
+/***/ 26:
+/***/ (function(module, exports, __webpack_require__) {
+
+var buildSearchMethod = __webpack_require__(27);
+var deprecate = __webpack_require__(18);
+var deprecatedMessage = __webpack_require__(19);
+
+module.exports = IndexCore;
+
+/*
+* Index class constructor.
+* You should not use this method directly but use initIndex() function
+*/
+function IndexCore(algoliasearch, indexName) {
+  this.indexName = indexName;
+  this.as = algoliasearch;
+  this.typeAheadArgs = null;
+  this.typeAheadValueOption = null;
+
+  // make sure every index instance has it's own cache
+  this.cache = {};
+}
+
+/*
+* Clear all queries in cache
+*/
+IndexCore.prototype.clearCache = function() {
+  this.cache = {};
+};
+
+/*
+* Search inside the index using XMLHttpRequest request (Using a POST query to
+* minimize number of OPTIONS queries: Cross-Origin Resource Sharing).
+*
+* @param {string} [query] the full text query
+* @param {object} [args] (optional) if set, contains an object with query parameters:
+* - page: (integer) Pagination parameter used to select the page to retrieve.
+*                   Page is zero-based and defaults to 0. Thus,
+*                   to retrieve the 10th page you need to set page=9
+* - hitsPerPage: (integer) Pagination parameter used to select the number of hits per page. Defaults to 20.
+* - attributesToRetrieve: a string that contains the list of object attributes
+* you want to retrieve (let you minimize the answer size).
+*   Attributes are separated with a comma (for example "name,address").
+*   You can also use an array (for example ["name","address"]).
+*   By default, all attributes are retrieved. You can also use '*' to retrieve all
+*   values when an attributesToRetrieve setting is specified for your index.
+* - attributesToHighlight: a string that contains the list of attributes you
+*   want to highlight according to the query.
+*   Attributes are separated by a comma. You can also use an array (for example ["name","address"]).
+*   If an attribute has no match for the query, the raw value is returned.
+*   By default all indexed text attributes are highlighted.
+*   You can use `*` if you want to highlight all textual attributes.
+*   Numerical attributes are not highlighted.
+*   A matchLevel is returned for each highlighted attribute and can contain:
+*      - full: if all the query terms were found in the attribute,
+*      - partial: if only some of the query terms were found,
+*      - none: if none of the query terms were found.
+* - attributesToSnippet: a string that contains the list of attributes to snippet alongside
+* the number of words to return (syntax is `attributeName:nbWords`).
+*    Attributes are separated by a comma (Example: attributesToSnippet=name:10,content:10).
+*    You can also use an array (Example: attributesToSnippet: ['name:10','content:10']).
+*    By default no snippet is computed.
+* - minWordSizefor1Typo: the minimum number of characters in a query word to accept one typo in this word.
+* Defaults to 3.
+* - minWordSizefor2Typos: the minimum number of characters in a query word
+* to accept two typos in this word. Defaults to 7.
+* - getRankingInfo: if set to 1, the result hits will contain ranking
+* information in _rankingInfo attribute.
+* - aroundLatLng: search for entries around a given
+* latitude/longitude (specified as two floats separated by a comma).
+*   For example aroundLatLng=47.316669,5.016670).
+*   You can specify the maximum distance in meters with the aroundRadius parameter (in meters)
+*   and the precision for ranking with aroundPrecision
+*   (for example if you set aroundPrecision=100, two objects that are distant of
+*   less than 100m will be considered as identical for "geo" ranking parameter).
+*   At indexing, you should specify geoloc of an object with the _geoloc attribute
+*   (in the form {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+* - insideBoundingBox: search entries inside a given area defined by the two extreme points
+* of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).
+*   For example insideBoundingBox=47.3165,4.9665,47.3424,5.0201).
+*   At indexing, you should specify geoloc of an object with the _geoloc attribute
+*   (in the form {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+* - numericFilters: a string that contains the list of numeric filters you want to
+* apply separated by a comma.
+*   The syntax of one filter is `attributeName` followed by `operand` followed by `value`.
+*   Supported operands are `<`, `<=`, `=`, `>` and `>=`.
+*   You can have multiple conditions on one attribute like for example numericFilters=price>100,price<1000.
+*   You can also use an array (for example numericFilters: ["price>100","price<1000"]).
+* - tagFilters: filter the query by a set of tags. You can AND tags by separating them by commas.
+*   To OR tags, you must add parentheses. For example, tags=tag1,(tag2,tag3) means tag1 AND (tag2 OR tag3).
+*   You can also use an array, for example tagFilters: ["tag1",["tag2","tag3"]]
+*   means tag1 AND (tag2 OR tag3).
+*   At indexing, tags should be added in the _tags** attribute
+*   of objects (for example {"_tags":["tag1","tag2"]}).
+* - facetFilters: filter the query by a list of facets.
+*   Facets are separated by commas and each facet is encoded as `attributeName:value`.
+*   For example: `facetFilters=category:Book,author:John%20Doe`.
+*   You can also use an array (for example `["category:Book","author:John%20Doe"]`).
+* - facets: List of object attributes that you want to use for faceting.
+*   Comma separated list: `"category,author"` or array `['category','author']`
+*   Only attributes that have been added in **attributesForFaceting** index setting
+*   can be used in this parameter.
+*   You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
+* - queryType: select how the query words are interpreted, it can be one of the following value:
+*    - prefixAll: all query words are interpreted as prefixes,
+*    - prefixLast: only the last word is interpreted as a prefix (default behavior),
+*    - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
+* - optionalWords: a string that contains the list of words that should
+* be considered as optional when found in the query.
+*   Comma separated and array are accepted.
+* - distinct: If set to 1, enable the distinct feature (disabled by default)
+* if the attributeForDistinct index setting is set.
+*   This feature is similar to the SQL "distinct" keyword: when enabled
+*   in a query with the distinct=1 parameter,
+*   all hits containing a duplicate value for the attributeForDistinct attribute are removed from results.
+*   For example, if the chosen attribute is show_name and several hits have
+*   the same value for show_name, then only the best
+*   one is kept and others are removed.
+* - restrictSearchableAttributes: List of attributes you want to use for
+* textual search (must be a subset of the attributesToIndex index setting)
+* either comma separated or as an array
+* @param {function} [callback] the result callback called with two arguments:
+*  error: null or Error('message'). If false, the content contains the error.
+*  content: the server answer that contains the list of results.
+*/
+IndexCore.prototype.search = buildSearchMethod('query');
+
+/*
+* -- BETA --
+* Search a record similar to the query inside the index using XMLHttpRequest request (Using a POST query to
+* minimize number of OPTIONS queries: Cross-Origin Resource Sharing).
+*
+* @param {string} [query] the similar query
+* @param {object} [args] (optional) if set, contains an object with query parameters.
+*   All search parameters are supported (see search function), restrictSearchableAttributes and facetFilters
+*   are the two most useful to restrict the similar results and get more relevant content
+*/
+IndexCore.prototype.similarSearch = buildSearchMethod('similarQuery');
+
+/*
+* Browse index content. The response content will have a `cursor` property that you can use
+* to browse subsequent pages for this query. Use `index.browseFrom(cursor)` when you want.
+*
+* @param {string} query - The full text query
+* @param {Object} [queryParameters] - Any search query parameter
+* @param {Function} [callback] - The result callback called with two arguments
+*   error: null or Error('message')
+*   content: the server answer with the browse result
+* @return {Promise|undefined} Returns a promise if no callback given
+* @example
+* index.browse('cool songs', {
+*   tagFilters: 'public,comments',
+*   hitsPerPage: 500
+* }, callback);
+* @see {@link https://www.algolia.com/doc/rest_api#Browse|Algolia REST API Documentation}
+*/
+IndexCore.prototype.browse = function(query, queryParameters, callback) {
+  var merge = __webpack_require__(28);
+
+  var indexObj = this;
+
+  var page;
+  var hitsPerPage;
+
+  // we check variadic calls that are not the one defined
+  // .browse()/.browse(fn)
+  // => page = 0
+  if (arguments.length === 0 || arguments.length === 1 && typeof arguments[0] === 'function') {
+    page = 0;
+    callback = arguments[0];
+    query = undefined;
+  } else if (typeof arguments[0] === 'number') {
+    // .browse(2)/.browse(2, 10)/.browse(2, fn)/.browse(2, 10, fn)
+    page = arguments[0];
+    if (typeof arguments[1] === 'number') {
+      hitsPerPage = arguments[1];
+    } else if (typeof arguments[1] === 'function') {
+      callback = arguments[1];
+      hitsPerPage = undefined;
+    }
+    query = undefined;
+    queryParameters = undefined;
+  } else if (typeof arguments[0] === 'object') {
+    // .browse(queryParameters)/.browse(queryParameters, cb)
+    if (typeof arguments[1] === 'function') {
+      callback = arguments[1];
+    }
+    queryParameters = arguments[0];
+    query = undefined;
+  } else if (typeof arguments[0] === 'string' && typeof arguments[1] === 'function') {
+    // .browse(query, cb)
+    callback = arguments[1];
+    queryParameters = undefined;
+  }
+
+  // otherwise it's a .browse(query)/.browse(query, queryParameters)/.browse(query, queryParameters, cb)
+
+  // get search query parameters combining various possible calls
+  // to .browse();
+  queryParameters = merge({}, queryParameters || {}, {
+    page: page,
+    hitsPerPage: hitsPerPage,
+    query: query
+  });
+
+  var params = this.as._getSearchParams(queryParameters, '');
+
+  return this.as._jsonRequest({
+    method: 'POST',
+    url: '/1/indexes/' + encodeURIComponent(indexObj.indexName) + '/browse',
+    body: {params: params},
+    hostType: 'read',
+    callback: callback
+  });
+};
+
+/*
+* Continue browsing from a previous position (cursor), obtained via a call to `.browse()`.
+*
+* @param {string} query - The full text query
+* @param {Object} [queryParameters] - Any search query parameter
+* @param {Function} [callback] - The result callback called with two arguments
+*   error: null or Error('message')
+*   content: the server answer with the browse result
+* @return {Promise|undefined} Returns a promise if no callback given
+* @example
+* index.browseFrom('14lkfsakl32', callback);
+* @see {@link https://www.algolia.com/doc/rest_api#Browse|Algolia REST API Documentation}
+*/
+IndexCore.prototype.browseFrom = function(cursor, callback) {
+  return this.as._jsonRequest({
+    method: 'POST',
+    url: '/1/indexes/' + encodeURIComponent(this.indexName) + '/browse',
+    body: {cursor: cursor},
+    hostType: 'read',
+    callback: callback
+  });
+};
+
+/*
+* Search for facet values
+* https://www.algolia.com/doc/rest-api/search#search-for-facet-values
+*
+* @param {string} params.facetName Facet name, name of the attribute to search for values in.
+* Must be declared as a facet
+* @param {string} params.facetQuery Query for the facet search
+* @param {string} [params.*] Any search parameter of Algolia,
+* see https://www.algolia.com/doc/api-client/javascript/search#search-parameters
+* Pagination is not supported. The page and hitsPerPage parameters will be ignored.
+* @param callback (optional)
+*/
+IndexCore.prototype.searchForFacetValues = function(params, callback) {
+  var clone = __webpack_require__(5);
+  var omit = __webpack_require__(180);
+  var usage = 'Usage: index.searchForFacetValues({facetName, facetQuery, ...params}[, callback])';
+
+  if (params.facetName === undefined || params.facetQuery === undefined) {
+    throw new Error(usage);
+  }
+
+  var facetName = params.facetName;
+  var filteredParams = omit(clone(params), function(keyName) {
+    return keyName === 'facetName';
+  });
+  var searchParameters = this.as._getSearchParams(filteredParams, '');
+
+  return this.as._jsonRequest({
+    method: 'POST',
+    url: '/1/indexes/' +
+      encodeURIComponent(this.indexName) + '/facets/' + encodeURIComponent(facetName) + '/query',
+    hostType: 'read',
+    body: {params: searchParameters},
+    callback: callback
+  });
+};
+
+IndexCore.prototype.searchFacet = deprecate(function(params, callback) {
+  return this.searchForFacetValues(params, callback);
+}, deprecatedMessage(
+  'index.searchFacet(params[, callback])',
+  'index.searchForFacetValues(params[, callback])'
+));
+
+IndexCore.prototype._search = function(params, url, callback, additionalUA) {
+  return this.as._jsonRequest({
+    cache: this.cache,
+    method: 'POST',
+    url: url || '/1/indexes/' + encodeURIComponent(this.indexName) + '/query',
+    body: {params: params},
+    hostType: 'read',
+    fallback: {
+      method: 'GET',
+      url: '/1/indexes/' + encodeURIComponent(this.indexName),
+      body: {params: params}
+    },
+    callback: callback,
+    additionalUA: additionalUA
+  });
+};
+
+/*
+* Get an object from this index
+*
+* @param objectID the unique identifier of the object to retrieve
+* @param attrs (optional) if set, contains the array of attribute names to retrieve
+* @param callback (optional) the result callback called with two arguments
+*  error: null or Error('message')
+*  content: the object to retrieve or the error message if a failure occured
+*/
+IndexCore.prototype.getObject = function(objectID, attrs, callback) {
+  var indexObj = this;
+
+  if (arguments.length === 1 || typeof attrs === 'function') {
+    callback = attrs;
+    attrs = undefined;
+  }
+
+  var params = '';
+  if (attrs !== undefined) {
+    params = '?attributes=';
+    for (var i = 0; i < attrs.length; ++i) {
+      if (i !== 0) {
+        params += ',';
+      }
+      params += attrs[i];
+    }
+  }
+
+  return this.as._jsonRequest({
+    method: 'GET',
+    url: '/1/indexes/' + encodeURIComponent(indexObj.indexName) + '/' + encodeURIComponent(objectID) + params,
+    hostType: 'read',
+    callback: callback
+  });
+};
+
+/*
+* Get several objects from this index
+*
+* @param objectIDs the array of unique identifier of objects to retrieve
+*/
+IndexCore.prototype.getObjects = function(objectIDs, attributesToRetrieve, callback) {
+  var isArray = __webpack_require__(2);
+  var map = __webpack_require__(10);
+
+  var usage = 'Usage: index.getObjects(arrayOfObjectIDs[, callback])';
+
+  if (!isArray(objectIDs)) {
+    throw new Error(usage);
+  }
+
+  var indexObj = this;
+
+  if (arguments.length === 1 || typeof attributesToRetrieve === 'function') {
+    callback = attributesToRetrieve;
+    attributesToRetrieve = undefined;
+  }
+
+  var body = {
+    requests: map(objectIDs, function prepareRequest(objectID) {
+      var request = {
+        indexName: indexObj.indexName,
+        objectID: objectID
+      };
+
+      if (attributesToRetrieve) {
+        request.attributesToRetrieve = attributesToRetrieve.join(',');
+      }
+
+      return request;
+    })
+  };
+
+  return this.as._jsonRequest({
+    method: 'POST',
+    url: '/1/indexes/*/objects',
+    hostType: 'read',
+    body: body,
+    callback: callback
+  });
+};
+
+IndexCore.prototype.as = null;
+IndexCore.prototype.indexName = null;
+IndexCore.prototype.typeAheadArgs = null;
+IndexCore.prototype.typeAheadValueOption = null;
+
+
+/***/ }),
+
+/***/ 27:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = buildSearchMethod;
+
+var errors = __webpack_require__(6);
+
+/**
+ * Creates a search method to be used in clients
+ * @param {string} queryParam the name of the attribute used for the query
+ * @param {string} url the url
+ * @return {function} the search method
+ */
+function buildSearchMethod(queryParam, url) {
+  /**
+   * The search method. Prepares the data and send the query to Algolia.
+   * @param {string} query the string used for query search
+   * @param {object} args additional parameters to send with the search
+   * @param {function} [callback] the callback to be called with the client gets the answer
+   * @return {undefined|Promise} If the callback is not provided then this methods returns a Promise
+   */
+  return function search(query, args, callback) {
+    // warn V2 users on how to search
+    if (typeof query === 'function' && typeof args === 'object' ||
+      typeof callback === 'object') {
+      // .search(query, params, cb)
+      // .search(cb, params)
+      throw new errors.AlgoliaSearchError('index.search usage is index.search(query, params, cb)');
+    }
+
+    // Normalizing the function signature
+    if (arguments.length === 0 || typeof query === 'function') {
+      // Usage : .search(), .search(cb)
+      callback = query;
+      query = '';
+    } else if (arguments.length === 1 || typeof args === 'function') {
+      // Usage : .search(query/args), .search(query, cb)
+      callback = args;
+      args = undefined;
+    }
+    // At this point we have 3 arguments with values
+
+    // Usage : .search(args) // careful: typeof null === 'object'
+    if (typeof query === 'object' && query !== null) {
+      args = query;
+      query = undefined;
+    } else if (query === undefined || query === null) { // .search(undefined/null)
+      query = '';
+    }
+
+    var params = '';
+
+    if (query !== undefined) {
+      params += queryParam + '=' + encodeURIComponent(query);
+    }
+
+    var additionalUA;
+    if (args !== undefined) {
+      if (args.additionalUA) {
+        additionalUA = args.additionalUA;
+        delete args.additionalUA;
+      }
+      // `_getSearchParams` will augment params, do not be fooled by the = versus += from previous if
+      params = this.as._getSearchParams(args, params);
+    }
+
+
+    return this._search(params, url, callback, additionalUA);
+  };
+}
+
+
+/***/ }),
+
+/***/ 28:
+/***/ (function(module, exports, __webpack_require__) {
+
+var foreach = __webpack_require__(7);
+
+module.exports = function merge(destination/* , sources */) {
+  var sources = Array.prototype.slice.call(arguments);
+
+  foreach(sources, function(source) {
+    for (var keyName in source) {
+      if (source.hasOwnProperty(keyName)) {
+        if (typeof destination[keyName] === 'object' && typeof source[keyName] === 'object') {
+          destination[keyName] = merge({}, destination[keyName], source[keyName]);
+        } else if (source[keyName] !== undefined) {
+          destination[keyName] = source[keyName];
+        }
+      }
+    }
+  });
+
+  return destination;
+};
+
+
+/***/ }),
+
+/***/ 29:
+/***/ (function(module, exports) {
+
+// Parse cloud does not supports setTimeout
+// We do not store a setTimeout reference in the client everytime
+// We only fallback to a fake setTimeout when not available
+// setTimeout cannot be override globally sadly
+module.exports = function exitPromise(fn, _setTimeout) {
+  _setTimeout(fn, 0);
+};
+
+
+/***/ }),
+
+/***/ 5:
+/***/ (function(module, exports) {
+
+module.exports = function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+};
+
+
+/***/ }),
+
+/***/ 6:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// This file hosts our error definitions
+// We use custom error "types" so that we can act on them when we need it
+// e.g.: if error instanceof errors.UnparsableJSON then..
+
+var inherits = __webpack_require__(9);
+
+function AlgoliaSearchError(message, extraProperties) {
+  var forEach = __webpack_require__(7);
+
+  var error = this;
+
+  // try to get a stacktrace
+  if (typeof Error.captureStackTrace === 'function') {
+    Error.captureStackTrace(this, this.constructor);
+  } else {
+    error.stack = (new Error()).stack || 'Cannot get a stacktrace, browser is too old';
+  }
+
+  this.name = 'AlgoliaSearchError';
+  this.message = message || 'Unknown error';
+
+  if (extraProperties) {
+    forEach(extraProperties, function addToErrorObject(value, key) {
+      error[key] = value;
+    });
+  }
+}
+
+inherits(AlgoliaSearchError, Error);
+
+function createCustomError(name, message) {
+  function AlgoliaSearchCustomError() {
+    var args = Array.prototype.slice.call(arguments, 0);
+
+    // custom message not set, use default
+    if (typeof args[0] !== 'string') {
+      args.unshift(message);
+    }
+
+    AlgoliaSearchError.apply(this, args);
+    this.name = 'AlgoliaSearch' + name + 'Error';
+  }
+
+  inherits(AlgoliaSearchCustomError, AlgoliaSearchError);
+
+  return AlgoliaSearchCustomError;
+}
+
+// late exports to let various fn defs and inherits take place
+module.exports = {
+  AlgoliaSearchError: AlgoliaSearchError,
+  UnparsableJSON: createCustomError(
+    'UnparsableJSON',
+    'Could not parse the incoming response as JSON, see err.more for details'
+  ),
+  RequestTimeout: createCustomError(
+    'RequestTimeout',
+    'Request timedout before getting a response'
+  ),
+  Network: createCustomError(
+    'Network',
+    'Network issue, see err.more for details'
+  ),
+  JSONPScriptFail: createCustomError(
+    'JSONPScriptFail',
+    '<script> was loaded but did not call our provided callback'
+  ),
+  JSONPScriptError: createCustomError(
+    'JSONPScriptError',
+    '<script> unable to load due to an `error` event on it'
+  ),
+  Unknown: createCustomError(
+    'Unknown',
+    'Unknown error occured'
+  )
+};
+
+
+/***/ }),
+
+/***/ 7:
+/***/ (function(module, exports) {
+
+
+var hasOwn = Object.prototype.hasOwnProperty;
+var toString = Object.prototype.toString;
+
+module.exports = function forEach (obj, fn, ctx) {
+    if (toString.call(fn) !== '[object Function]') {
+        throw new TypeError('iterator must be a function');
+    }
+    var l = obj.length;
+    if (l === +l) {
+        for (var i = 0; i < l; i++) {
+            fn.call(ctx, obj[i], i, obj);
+        }
+    } else {
+        for (var k in obj) {
+            if (hasOwn.call(obj, k)) {
+                fn.call(ctx, obj[k], k, obj);
+            }
+        }
+    }
+};
+
+
+
+/***/ }),
+
+/***/ 9:
+/***/ (function(module, exports) {
+
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+
 /***/ })
-],[148]);
+
+},[153]);
