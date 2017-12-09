@@ -603,17 +603,6 @@ button,
   min-width: 100%;
 }
 
-.post-thumbnail {
-  height: 12rem;
-  -webkit-box-flex: 0;
-      -ms-flex: none;
-          flex: none;
-  background-size: cover;
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
-  text-align: center;
-}
-
 .post-title {
   color: #222b2f;
   font-weight: 700;

@@ -18,7 +18,6 @@ class CreatePostsTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->string('title');
             $table->string('slug');
-            $table->string('thumbnail');
             $table->text('body');
             $table->dateTime('published_at');
             $table->boolean('visible')->default(true);

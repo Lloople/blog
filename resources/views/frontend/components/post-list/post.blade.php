@@ -1,5 +1,4 @@
 <div class="post lg:flex shadow-md">
-    @include('frontend.components.post-list.thumbnail')
     <div class="w-full bg-{{ app('theme')->posts_list_background }} rounded-b p-4 flex flex-col justify-between leading-normal lg:rounded-b-none lg:rounded-r">
         <p class="post-date">{{ $post->published_at->format('d/m/Y H:i') }}</p>
         <div class="mb-4">

@@ -12,7 +12,6 @@ $factory->define(Post::class, function (Faker $faker) {
         'body' => $faker->realText(400),
         'category_id' => factory(Category::class)->create(),
         'visible' => true,
-        'thumbnail' => $faker->imageUrl(500, 500),
         'published_at' => $faker->dateTime(),
     ];
 });

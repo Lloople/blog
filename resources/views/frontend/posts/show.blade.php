@@ -5,14 +5,28 @@
 @section('title', $post->title)
 
 @section('content')
-    <h3 class="title text-{{ app('theme')->title }}">{{ $post->title }}</h3>
+    <div class="w-4/5 mx-auto">
+        <h3 class="title text-{{ app('theme')->title }}">{{ $post->title }}</h3>
+    </div>
     
-    @if ($post->thumbnail != '')
-        <img class="mr-auto ml-auto w-2/4 rounded mb-4 mt-4 flex" src="{{ $post->thumbnail }}" alt="{{ $post->title }}">
-    @endif
-    
-    <div class="p-4 text-{{ app('theme')->text }}">
-        {!! $post->body_markdown !!}
+    <div class="w-4/5 mx-auto">
+        <div class="post lg:flex shadow-md">
+            <div class="w-full bg-{{ app('theme')->posts_list_background }} rounded-b p-4 flex flex-col justify-between leading-normal lg:rounded-b-none lg:rounded-r">
+                <span class="post-date">{{ $post->published_at->format('d/m/Y H:i') }}</span>
+                
+                <div class="mb-4">
+                    {!! $post->body_markdown !!}
+                </div>
+                <span class="post-date">
+                    @foreach($post->tags as $tag)
+                        <a href="{{ $tag->url }}" class="no-underline lowercase text-sm text-{{ app('theme')->text }}">
+                            #{{ $tag->name }}
+                        </a>
+                    @endforeach
+                </span>
+            </div>
+        </div>
+
     </div>
 @endsection
 
@@ -30,6 +44,6 @@
     <meta name="twitter:description" content="{{ str_limit($post->body, 120) }}"/>
     <meta name="twitter:title" content="{{ $post->title }} | {{ config('blog.domain') }}"/>
     <meta name="twitter:site" content="{{ config('blog.twitter_username') }}"/>
-    <meta name="twitter:image" content="{{ $post->thumbnail }}"/>
+    <meta name="twitter:image" content="{{ url('img/thumbnail.jpg') }}"/>
     <meta name="twitter:creator" content="{{ config('blog.twitter_username') }}"/>
 @endsection
