@@ -625,6 +625,12 @@ button,
   padding-bottom: 1rem;
 }
 
+.post-content blockquote {
+  border-left-width: 8px;
+  border-color: #f3f7f9;
+  padding-left: 1rem;
+}
+
 .search-input {
   padding: 1rem;
   border-radius: .25rem;
