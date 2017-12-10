@@ -22,6 +22,7 @@
                         <img class="shadow-md rounded-full w-16" src="{{ url('img/thumbnail.jpg') }}" alt="{{ config('app.name') }}">
                     </a>
                 </div>
+                @auth
                 <div class="flex-1 lg:w-3/4 text-center lg:text-left m-8 uppercase text-sm no-underline">
                     <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.posts.index') ? 'bg-white shadow' : '' }}" href="{{ route('backend.posts.index') }}">
                         Posts
@@ -30,6 +31,7 @@
                         Create a post
                     </a>
                 </div>
+                @endauth
             </div>
         </div>
     </nav>
