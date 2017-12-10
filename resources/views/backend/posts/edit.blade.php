@@ -1,5 +1,7 @@
 @extends('backend.layouts.app')
 
+@section('title', config('app.name') . ' - ' . $view->title)
+
 @section('content')
     <h1>{{ $view->title }}</h1>
     
