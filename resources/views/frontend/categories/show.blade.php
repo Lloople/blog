@@ -8,7 +8,7 @@
     <h3 class="title">{{ $category->name }}</h3>
 
     <div class="flex flex-wrap posts-list">
-        @forelse($category->posts as $post)
+        @forelse($category->getVisiblePosts() as $post)
             <div class="w-4/5 ml-auto mr-auto">
                 @include('frontend.components.post-list.post', ['post' => $post, 'positionLeft' => $loop->index % 2 == 0])
             </div>

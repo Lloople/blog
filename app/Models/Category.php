@@ -19,4 +19,9 @@ class Category extends Model
     {
         return route('categories.show', $this->slug);
     }
+
+    public function getVisiblePosts()
+    {
+        return $this->posts()->published()->visible()->orderBy('published_at', 'DESC')->get();
+    }
 }
