@@ -17,3 +17,7 @@
 .post-content p {
   @apply py-4;
 }
+
+.post-content blockquote {
+  @apply border-l-8 border-grey-lighter pl-4;
+}

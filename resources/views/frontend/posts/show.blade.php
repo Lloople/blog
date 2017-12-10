@@ -31,7 +31,7 @@
 @endsection
 
 @section('extra-headers')
-    <meta property="og:title" content="{{ $post->title }} | murze.be"/>
+    <meta property="og:title" content="{{ $post->title }} | {{ config('blog.domain }}"/>
     <meta property="og:description" content="{{ str_limit($post->body, 120) }}"/>
     
     @foreach($post->tags as $tag)
