@@ -1,5 +1,6 @@
 @tailwind preflight;
 
+@import "../../css/components/font-awesome/font-awesome";
 @import "components/post";
 
 @import "components/search";
@@ -8,6 +9,14 @@
 
 .title {
     @apply mb-4 uppercase;
+}
+
+footer > div {
+    @apply text-center mx-auto py-8 text-lg;
+}
+
+footer > div > a {
+    @apply text-grey-darker px-4;
 }
 
 @tailwind utilities;
