@@ -19,9 +19,13 @@ Route::group(['prefix' => 'backend', 'middleware' => 'auth', 'as' => 'backend.']
     Route::redirect('', 'backend/posts');
 
     Route::resource('posts', 'Backend\PostsController', ['except' => 'show']);
+    Route::resource('categories', 'Backend\CategoriesController', ['except' => 'show']);
+    Route::resource('tags', 'Backend\TagsController', ['only' => ['index', 'destroy']]);
 
     Route::group(['prefix' => 'resources', 'middleware' => 'auth', 'as' => 'resources.'], function () {
         Route::get('posts', 'Backend\PostsController@resource');
+        Route::get('categories', 'Backend\CategoriesController@resource');
+        Route::get('tags', 'Backend\TagsController@resource');
     });
 });
 

@@ -76,9 +76,11 @@
             <a target="_blank" class="button text-lg bg-blue p-4 float-right mr-2" href="{{ $view->post->url }}">
                 <span class="fa fa-eye fa-fw"></span>
             </a>
-            <button class="button text-lg bg-red p-4 float-right">
-                <span class="fa fa-trash fa-fw"></span>
-            </button>
+            <button-delete></button-delete>
         </div>
     </form>
+
+    <form-delete action="{{ route('backend.posts.destroy', $view->post) }}"></form-delete>
+
 @endsection
+

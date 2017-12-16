@@ -1,22 +1,6 @@
 webpackJsonp([2],{
 
 /***/ 10:
-/***/ (function(module, exports, __webpack_require__) {
-
-var foreach = __webpack_require__(7);
-
-module.exports = function map(arr, fn) {
-  var newArr = [];
-  foreach(arr, function(item, itemIndex) {
-    newArr.push(fn(item, itemIndex, arr));
-  });
-  return newArr;
-};
-
-
-/***/ }),
-
-/***/ 12:
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -122,6 +106,52 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+
+/***/ 11:
+/***/ (function(module, exports) {
+
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+
+/***/ }),
+
+/***/ 12:
+/***/ (function(module, exports, __webpack_require__) {
+
+var foreach = __webpack_require__(7);
+
+module.exports = function map(arr, fn) {
+  var newArr = [];
+  foreach(arr, function(item, itemIndex) {
+    newArr.push(fn(item, itemIndex, arr));
+  });
+  return newArr;
+};
 
 
 /***/ }),
@@ -315,7 +345,7 @@ function localstorage() {
   } catch (e) {}
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
 
@@ -330,7 +360,7 @@ window._ = __webpack_require__(15);
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(11);
+window.axios = __webpack_require__(8);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -396,7 +426,7 @@ var app = new Vue({
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(12)
+var normalizeComponent = __webpack_require__(10)
 /* script */
 var __vue_script__ = __webpack_require__(176)
 /* template */
@@ -527,7 +557,7 @@ var Index = __webpack_require__(179);
 var deprecate = __webpack_require__(18);
 var deprecatedMessage = __webpack_require__(19);
 var AlgoliaSearchCore = __webpack_require__(185);
-var inherits = __webpack_require__(9);
+var inherits = __webpack_require__(11);
 var errors = __webpack_require__(6);
 
 function AlgoliaSearch() {
@@ -1031,11 +1061,11 @@ function notImplemented() {
 /***/ 179:
 /***/ (function(module, exports, __webpack_require__) {
 
-var inherits = __webpack_require__(9);
-var IndexCore = __webpack_require__(26);
+var inherits = __webpack_require__(11);
+var IndexCore = __webpack_require__(27);
 var deprecate = __webpack_require__(18);
 var deprecatedMessage = __webpack_require__(19);
-var exitPromise = __webpack_require__(29);
+var exitPromise = __webpack_require__(30);
 var errors = __webpack_require__(6);
 
 var deprecateForwardToSlaves = deprecate(
@@ -1284,7 +1314,7 @@ Index.prototype.deleteObject = function(objectID, callback) {
 */
 Index.prototype.deleteObjects = function(objectIDs, callback) {
   var isArray = __webpack_require__(2);
-  var map = __webpack_require__(10);
+  var map = __webpack_require__(12);
 
   var usage = 'Usage: index.deleteObjects(arrayOfObjectIDs[, callback])';
 
@@ -1325,7 +1355,7 @@ Index.prototype.deleteObjects = function(objectIDs, callback) {
 */
 Index.prototype.deleteByQuery = deprecate(function(query, params, callback) {
   var clone = __webpack_require__(5);
-  var map = __webpack_require__(10);
+  var map = __webpack_require__(12);
 
   var indexObj = this;
   var client = indexObj.as;
@@ -1459,7 +1489,7 @@ Index.prototype.browseAll = function(query, queryParameters) {
     query = undefined;
   }
 
-  var merge = __webpack_require__(28);
+  var merge = __webpack_require__(29);
 
   var IndexBrowser = __webpack_require__(183);
 
@@ -2478,7 +2508,7 @@ module.exports = function isArguments(value) {
 
 module.exports = IndexBrowser;
 
-var inherits = __webpack_require__(9);
+var inherits = __webpack_require__(11);
 var EventEmitter = __webpack_require__(184).EventEmitter;
 
 function IndexBrowser() {
@@ -2830,8 +2860,8 @@ function isUndefined(arg) {
 module.exports = AlgoliaSearchCore;
 
 var errors = __webpack_require__(6);
-var exitPromise = __webpack_require__(29);
-var IndexCore = __webpack_require__(26);
+var exitPromise = __webpack_require__(30);
+var IndexCore = __webpack_require__(27);
 var store = __webpack_require__(186);
 
 // We will always put the API KEY in the JSON body in case of too long API KEY,
@@ -2872,7 +2902,7 @@ function AlgoliaSearchCore(applicationID, apiKey, opts) {
 
   var clone = __webpack_require__(5);
   var isArray = __webpack_require__(2);
-  var map = __webpack_require__(10);
+  var map = __webpack_require__(12);
 
   var usage = 'Usage: algoliasearch(applicationID, apiKey, opts)';
 
@@ -3349,7 +3379,7 @@ AlgoliaSearchCore.prototype._computeRequestHeaders = function(additionalUA, with
  */
 AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
   var isArray = __webpack_require__(2);
-  var map = __webpack_require__(10);
+  var map = __webpack_require__(12);
 
   var usage = 'Usage: client.search(arrayOfQueries[, callback])';
 
@@ -4112,7 +4142,7 @@ var Promise = global.Promise || __webpack_require__(191).Promise;
 // Browser implementation of the Algolia Search JavaScript client,
 // using XMLHttpRequest, XDomainRequest and JSONP as fallback
 module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
-  var inherits = __webpack_require__(9);
+  var inherits = __webpack_require__(11);
   var errors = __webpack_require__(6);
   var inlineHeaders = __webpack_require__(193);
   var jsonpRequest = __webpack_require__(195);
@@ -5522,7 +5552,7 @@ return Promise$2;
 
 //# sourceMappingURL=es6-promise.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(4)))
 
 /***/ }),
 
@@ -5787,7 +5817,7 @@ function jsonpRequest(url, opts, cb) {
 
 module.exports = createPlacesClient;
 
-var buildSearchMethod = __webpack_require__(27);
+var buildSearchMethod = __webpack_require__(28);
 
 function createPlacesClient(algoliasearch) {
   return function places(appID, apiKey, opts) {
@@ -5970,10 +6000,10 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 
-/***/ 26:
+/***/ 27:
 /***/ (function(module, exports, __webpack_require__) {
 
-var buildSearchMethod = __webpack_require__(27);
+var buildSearchMethod = __webpack_require__(28);
 var deprecate = __webpack_require__(18);
 var deprecatedMessage = __webpack_require__(19);
 
@@ -6127,7 +6157,7 @@ IndexCore.prototype.similarSearch = buildSearchMethod('similarQuery');
 * @see {@link https://www.algolia.com/doc/rest_api#Browse|Algolia REST API Documentation}
 */
 IndexCore.prototype.browse = function(query, queryParameters, callback) {
-  var merge = __webpack_require__(28);
+  var merge = __webpack_require__(29);
 
   var indexObj = this;
 
@@ -6313,7 +6343,7 @@ IndexCore.prototype.getObject = function(objectID, attrs, callback) {
 */
 IndexCore.prototype.getObjects = function(objectIDs, attributesToRetrieve, callback) {
   var isArray = __webpack_require__(2);
-  var map = __webpack_require__(10);
+  var map = __webpack_require__(12);
 
   var usage = 'Usage: index.getObjects(arrayOfObjectIDs[, callback])';
 
@@ -6360,7 +6390,7 @@ IndexCore.prototype.typeAheadValueOption = null;
 
 /***/ }),
 
-/***/ 27:
+/***/ 28:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = buildSearchMethod;
@@ -6434,7 +6464,7 @@ function buildSearchMethod(queryParam, url) {
 
 /***/ }),
 
-/***/ 28:
+/***/ 29:
 /***/ (function(module, exports, __webpack_require__) {
 
 var foreach = __webpack_require__(7);
@@ -6460,7 +6490,7 @@ module.exports = function merge(destination/* , sources */) {
 
 /***/ }),
 
-/***/ 29:
+/***/ 30:
 /***/ (function(module, exports) {
 
 // Parse cloud does not supports setTimeout
@@ -6494,7 +6524,7 @@ module.exports = function clone(obj) {
 // We use custom error "types" so that we can act on them when we need it
 // e.g.: if error instanceof errors.UnparsableJSON then..
 
-var inherits = __webpack_require__(9);
+var inherits = __webpack_require__(11);
 
 function AlgoliaSearchError(message, extraProperties) {
   var forEach = __webpack_require__(7);
@@ -6595,36 +6625,6 @@ module.exports = function forEach (obj, fn, ctx) {
     }
 };
 
-
-
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports) {
-
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
 
 
 /***/ })

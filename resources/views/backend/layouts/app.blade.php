@@ -24,29 +24,35 @@
                 </div>
                 @auth
                 <div class="flex-1 lg:w-3/4 text-center lg:text-left m-8 uppercase text-sm no-underline">
-                    <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.posts.index') ? 'bg-white shadow' : '' }}" href="{{ route('backend.posts.index') }}">
+                    <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.posts*') ? 'bg-white shadow' : '' }}" href="{{ route('backend.posts.index') }}">
                         Posts
                     </a>
-                    <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.posts.create') ? 'bg-white shadow' : '' }}" href="{{ route('backend.posts.create') }}">
-                        Create a post
+                    <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.categories*') ? 'bg-white shadow' : '' }}" href="{{ route('backend.categories.index') }}">
+                        Categories
+                    </a>
+                    <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.tags.index') ? 'bg-white shadow' : '' }}" href="{{ route('backend.tags.index') }}">
+                        Tags
                     </a>
                 </div>
                 @endauth
             </div>
         </div>
     </nav>
-    
+    <blog-notifications></blog-notifications>
     <div class="flex flex-wrap">
         <div class="shadow-md mb-8 md:w-5/6 sm:w-full md:ml-auto md:mr-auto p-4 bg-{{ app('theme')->container_background }} rounded">
             <div class="flex flex-wrap">
                 <div class="w-full">
+                    
                     @yield('content')
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<script>
+    window.notifications = {!! json_encode(\Lloople\Notificator\Notificator::toArray()) !!};
+</script>
 <script src="{{ asset('js/manifest.js') }}"></script>
 <script src="{{ asset('js/vendor.js') }}"></script>
 <script src="{{ asset('js/backend.js') }}"></script>

@@ -19,8 +19,6 @@
                     uniqueId: window.location,
                 },
             });
-
-            console.log(editor.value());
         }
     }
 </script>

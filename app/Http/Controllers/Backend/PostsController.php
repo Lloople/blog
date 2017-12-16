@@ -13,7 +13,7 @@ use Lloople\Notificator\Notificator;
 class PostsController extends Controller
 {
 
-    private $pagination = 10;
+    private $pagination = 15;
 
     /**
      * Display a listing of the resource.
@@ -105,18 +105,29 @@ class PostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param \Illuminate\Http\Request $request
      * @param  Post $post
      *
      * @return array
      * @throws \Exception
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request, Post $post)
     {
         $post->tags()->sync([]);
 
         $post->delete();
 
-        return ['result' => true];
+        if ($request->ajax()) {
+
+            return [
+                'result' => true,
+                'message' => 'Post deleted successfully.'
+            ];
+        }
+
+        Notificator::success('Post deleted successfully.');
+
+        return redirect()->route('backend.posts.index');
     }
 
     public function resource(Request $request)
