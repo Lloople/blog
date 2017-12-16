@@ -1,0 +1,23 @@
+.alert-container {
+  @apply fixed pin-r pin-t;
+}
+
+.alert {
+  @apply  p-4 mx-auto mr-4 my-4 rounded shadow-md cursor-pointer;
+}
+
+.alert-success {
+  @apply bg-green-lighter;
+}
+
+.alert-info {
+  @apply bg-blue-lighter;
+}
+
+.alert-warning {
+  @apply bg-yellow-lighter;
+}
+
+.alert-error {
+  @apply bg-red-lighter;
+}
