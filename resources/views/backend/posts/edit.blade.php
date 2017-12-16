@@ -12,14 +12,24 @@
             <div class="w-full md:w-1/5">
                 <label for="title" class="form-horizontal-label">Title</label>
             </div>
-            <input id="title" name="title" class="w-full md:w-3/5 form-input" value="{{ old('title', $view->post->title) }}">
+            <div class="w-full md:w-3/5">
+                <input id="title" name="title" class="form-input" value="{{ old('title', $view->post->title) }}">
+                @if ($errors->has('title'))
+                    <p class="text-red block">{{ implode('<br>', $errors->get('title')) }}</p>
+                @endif
+            </div>
         </div>
     
         <div class="form-horizontal-field">
             <div class="w-full md:w-1/5">
                 <label for="published_at" class="form-horizontal-label">Publish Date</label>
             </div>
-            <input id="published_at" type="datetime-local" name="published_at" class="w-full md:w-3/5 form-input" value="{{ old('published_at', $view->published_at) }}">
+            <div class="w-full md:w-3/5">
+                <input id="published_at" type="datetime-local" name="published_at" class="form-input" value="{{ old('published_at', $view->published_at) }}">
+                @if ($errors->has('published_at'))
+                    <p class="text-red block">{{ implode('<br>', $errors->get('published_at')) }}</p>
+                @endif
+            </div>
         </div>
     
         <div class="form-horizontal-field">
@@ -66,6 +76,9 @@
             </div>
             <div class="w-full md:w-3/5">
                 <post-edit content="{{ old('body', $view->post->body) }}"></post-edit>
+                @if ($errors->has('body'))
+                    <p class="text-red block">{{ implode('<br>', $errors->get('body')) }}</p>
+                @endif
             </div>
         </div>
         

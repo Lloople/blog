@@ -43,7 +43,7 @@ class CategoriesController extends Controller
      *
      * @return void
      */
-    public function store(Request $request)
+    public function store(CategoryFormRequest $request)
     {
         $category = new Category();
         $category->name = $request->name;

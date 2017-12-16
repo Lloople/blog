@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Requests\PostFormRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\ViewModels\PostDetailViewModel;
@@ -43,7 +44,7 @@ class PostsController extends Controller
      *
      * @return void
      */
-    public function store(Request $request)
+    public function store(PostFormRequest $request)
     {
         $post = new Post();
         $post->title = $request->title;
@@ -83,7 +84,7 @@ class PostsController extends Controller
      *
      * @return void
      */
-    public function update(Request $request, Post $post)
+    public function update(PostFormRequest $request, Post $post)
     {
         $post->title = $request->title;
         $post->slug = str_slug($request->title);
