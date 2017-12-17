@@ -53,6 +53,7 @@
 <script>
     window.notifications = {!! json_encode(\Lloople\Notificator\Notificator::toArray()) !!};
 </script>
+@yield('resource')
 <script src="{{ asset('js/manifest.js') }}"></script>
 <script src="{{ asset('js/vendor.js') }}"></script>
 <script src="{{ asset('js/backend.js') }}"></script>

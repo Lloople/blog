@@ -3,116 +3,6 @@ webpackJsonp([2],{
 /***/ 10:
 /***/ (function(module, exports) {
 
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-
-/***/ 11:
-/***/ (function(module, exports) {
-
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -140,10 +30,10 @@ if (typeof Object.create === 'function') {
 
 /***/ }),
 
-/***/ 12:
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
-var foreach = __webpack_require__(7);
+var foreach = __webpack_require__(8);
 
 module.exports = function map(arr, fn) {
   var newArr = [];
@@ -360,7 +250,7 @@ window._ = __webpack_require__(15);
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(8);
+window.axios = __webpack_require__(12);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -426,7 +316,7 @@ var app = new Vue({
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(176)
 /* template */
@@ -557,8 +447,8 @@ var Index = __webpack_require__(179);
 var deprecate = __webpack_require__(18);
 var deprecatedMessage = __webpack_require__(19);
 var AlgoliaSearchCore = __webpack_require__(185);
-var inherits = __webpack_require__(11);
-var errors = __webpack_require__(6);
+var inherits = __webpack_require__(10);
+var errors = __webpack_require__(7);
 
 function AlgoliaSearch() {
   AlgoliaSearchCore.apply(this, arguments);
@@ -650,7 +540,7 @@ AlgoliaSearch.prototype.copyIndex = function(srcIndexName, dstIndexName, scopeOr
  *  content: the server answer that contains the task ID
  */
 AlgoliaSearch.prototype.getLogs = function(offset, length, callback) {
-  var clone = __webpack_require__(5);
+  var clone = __webpack_require__(6);
   var params = {};
   if (typeof offset === 'object') {
     // getLogs(params)
@@ -1061,12 +951,12 @@ function notImplemented() {
 /***/ 179:
 /***/ (function(module, exports, __webpack_require__) {
 
-var inherits = __webpack_require__(11);
-var IndexCore = __webpack_require__(27);
+var inherits = __webpack_require__(10);
+var IndexCore = __webpack_require__(26);
 var deprecate = __webpack_require__(18);
 var deprecatedMessage = __webpack_require__(19);
-var exitPromise = __webpack_require__(30);
-var errors = __webpack_require__(6);
+var exitPromise = __webpack_require__(29);
+var errors = __webpack_require__(7);
 
 var deprecateForwardToSlaves = deprecate(
   function() {},
@@ -1314,7 +1204,7 @@ Index.prototype.deleteObject = function(objectID, callback) {
 */
 Index.prototype.deleteObjects = function(objectIDs, callback) {
   var isArray = __webpack_require__(2);
-  var map = __webpack_require__(12);
+  var map = __webpack_require__(11);
 
   var usage = 'Usage: index.deleteObjects(arrayOfObjectIDs[, callback])';
 
@@ -1354,8 +1244,8 @@ Index.prototype.deleteObjects = function(objectIDs, callback) {
 * @deprecated see index.deleteBy
 */
 Index.prototype.deleteByQuery = deprecate(function(query, params, callback) {
-  var clone = __webpack_require__(5);
-  var map = __webpack_require__(12);
+  var clone = __webpack_require__(6);
+  var map = __webpack_require__(11);
 
   var indexObj = this;
   var client = indexObj.as;
@@ -1489,7 +1379,7 @@ Index.prototype.browseAll = function(query, queryParameters) {
     query = undefined;
   }
 
-  var merge = __webpack_require__(29);
+  var merge = __webpack_require__(28);
 
   var IndexBrowser = __webpack_require__(183);
 
@@ -2309,7 +2199,7 @@ module.exports = function deprecate(fn, message) {
 
 module.exports = function omit(obj, test) {
   var keys = __webpack_require__(181);
-  var foreach = __webpack_require__(7);
+  var foreach = __webpack_require__(8);
 
   var filtered = {};
 
@@ -2508,7 +2398,7 @@ module.exports = function isArguments(value) {
 
 module.exports = IndexBrowser;
 
-var inherits = __webpack_require__(11);
+var inherits = __webpack_require__(10);
 var EventEmitter = __webpack_require__(184).EventEmitter;
 
 function IndexBrowser() {
@@ -2859,9 +2749,9 @@ function isUndefined(arg) {
 
 module.exports = AlgoliaSearchCore;
 
-var errors = __webpack_require__(6);
-var exitPromise = __webpack_require__(30);
-var IndexCore = __webpack_require__(27);
+var errors = __webpack_require__(7);
+var exitPromise = __webpack_require__(29);
+var IndexCore = __webpack_require__(26);
 var store = __webpack_require__(186);
 
 // We will always put the API KEY in the JSON body in case of too long API KEY,
@@ -2900,9 +2790,9 @@ var RESET_APP_DATA_TIMER =
 function AlgoliaSearchCore(applicationID, apiKey, opts) {
   var debug = __webpack_require__(13)('algoliasearch');
 
-  var clone = __webpack_require__(5);
+  var clone = __webpack_require__(6);
   var isArray = __webpack_require__(2);
-  var map = __webpack_require__(12);
+  var map = __webpack_require__(11);
 
   var usage = 'Usage: algoliasearch(applicationID, apiKey, opts)';
 
@@ -3334,7 +3224,7 @@ AlgoliaSearchCore.prototype._getSearchParams = function(args, params) {
 };
 
 AlgoliaSearchCore.prototype._computeRequestHeaders = function(additionalUA, withAPIKey) {
-  var forEach = __webpack_require__(7);
+  var forEach = __webpack_require__(8);
 
   var ua = additionalUA ?
     this._ua + ';' + additionalUA :
@@ -3379,7 +3269,7 @@ AlgoliaSearchCore.prototype._computeRequestHeaders = function(additionalUA, with
  */
 AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
   var isArray = __webpack_require__(2);
-  var map = __webpack_require__(12);
+  var map = __webpack_require__(11);
 
   var usage = 'Usage: client.search(arrayOfQueries[, callback])';
 
@@ -3549,7 +3439,7 @@ AlgoliaSearchCore.prototype._cacheAppIdData = function(data) {
 };
 
 AlgoliaSearchCore.prototype._partialAppIdDataUpdate = function(newData) {
-  var foreach = __webpack_require__(7);
+  var foreach = __webpack_require__(8);
   var currentData = this._getAppIdData();
   foreach(newData, function(value, key) {
     currentData[key] = value;
@@ -3571,7 +3461,7 @@ AlgoliaSearchCore.prototype._getHostIndexByType = function(hostType) {
 };
 
 AlgoliaSearchCore.prototype._setHostIndexByType = function(hostIndex, hostType) {
-  var clone = __webpack_require__(5);
+  var clone = __webpack_require__(6);
   var newHostIndexes = clone(this._hostIndexes);
   newHostIndexes[hostType] = hostIndex;
   this._partialAppIdDataUpdate({hostIndexes: newHostIndexes});
@@ -4142,8 +4032,8 @@ var Promise = global.Promise || __webpack_require__(191).Promise;
 // Browser implementation of the Algolia Search JavaScript client,
 // using XMLHttpRequest, XDomainRequest and JSONP as fallback
 module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
-  var inherits = __webpack_require__(11);
-  var errors = __webpack_require__(6);
+  var inherits = __webpack_require__(10);
+  var errors = __webpack_require__(7);
   var inlineHeaders = __webpack_require__(193);
   var jsonpRequest = __webpack_require__(195);
   var places = __webpack_require__(196);
@@ -4154,7 +4044,7 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
   }
 
   function algoliasearch(applicationID, apiKey, opts) {
-    var cloneDeep = __webpack_require__(5);
+    var cloneDeep = __webpack_require__(6);
 
     var getDocumentProtocol = __webpack_require__(197);
 
@@ -5687,7 +5577,7 @@ var objectKeys = Object.keys || function (obj) {
 
 module.exports = jsonpRequest;
 
-var errors = __webpack_require__(6);
+var errors = __webpack_require__(7);
 
 var JSONPCounter = 0;
 
@@ -5817,11 +5707,11 @@ function jsonpRequest(url, opts, cb) {
 
 module.exports = createPlacesClient;
 
-var buildSearchMethod = __webpack_require__(28);
+var buildSearchMethod = __webpack_require__(27);
 
 function createPlacesClient(algoliasearch) {
   return function places(appID, apiKey, opts) {
-    var cloneDeep = __webpack_require__(5);
+    var cloneDeep = __webpack_require__(6);
 
     opts = opts && cloneDeep(opts) || {};
     opts.hosts = opts.hosts || [
@@ -6000,10 +5890,10 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 
-/***/ 27:
+/***/ 26:
 /***/ (function(module, exports, __webpack_require__) {
 
-var buildSearchMethod = __webpack_require__(28);
+var buildSearchMethod = __webpack_require__(27);
 var deprecate = __webpack_require__(18);
 var deprecatedMessage = __webpack_require__(19);
 
@@ -6157,7 +6047,7 @@ IndexCore.prototype.similarSearch = buildSearchMethod('similarQuery');
 * @see {@link https://www.algolia.com/doc/rest_api#Browse|Algolia REST API Documentation}
 */
 IndexCore.prototype.browse = function(query, queryParameters, callback) {
-  var merge = __webpack_require__(29);
+  var merge = __webpack_require__(28);
 
   var indexObj = this;
 
@@ -6252,7 +6142,7 @@ IndexCore.prototype.browseFrom = function(cursor, callback) {
 * @param callback (optional)
 */
 IndexCore.prototype.searchForFacetValues = function(params, callback) {
-  var clone = __webpack_require__(5);
+  var clone = __webpack_require__(6);
   var omit = __webpack_require__(180);
   var usage = 'Usage: index.searchForFacetValues({facetName, facetQuery, ...params}[, callback])';
 
@@ -6343,7 +6233,7 @@ IndexCore.prototype.getObject = function(objectID, attrs, callback) {
 */
 IndexCore.prototype.getObjects = function(objectIDs, attributesToRetrieve, callback) {
   var isArray = __webpack_require__(2);
-  var map = __webpack_require__(12);
+  var map = __webpack_require__(11);
 
   var usage = 'Usage: index.getObjects(arrayOfObjectIDs[, callback])';
 
@@ -6390,12 +6280,12 @@ IndexCore.prototype.typeAheadValueOption = null;
 
 /***/ }),
 
-/***/ 28:
+/***/ 27:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = buildSearchMethod;
 
-var errors = __webpack_require__(6);
+var errors = __webpack_require__(7);
 
 /**
  * Creates a search method to be used in clients
@@ -6464,10 +6354,10 @@ function buildSearchMethod(queryParam, url) {
 
 /***/ }),
 
-/***/ 29:
+/***/ 28:
 /***/ (function(module, exports, __webpack_require__) {
 
-var foreach = __webpack_require__(7);
+var foreach = __webpack_require__(8);
 
 module.exports = function merge(destination/* , sources */) {
   var sources = Array.prototype.slice.call(arguments);
@@ -6490,7 +6380,7 @@ module.exports = function merge(destination/* , sources */) {
 
 /***/ }),
 
-/***/ 30:
+/***/ 29:
 /***/ (function(module, exports) {
 
 // Parse cloud does not supports setTimeout
@@ -6507,6 +6397,116 @@ module.exports = function exitPromise(fn, _setTimeout) {
 /***/ 5:
 /***/ (function(module, exports) {
 
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
+/***/ 6:
+/***/ (function(module, exports) {
+
 module.exports = function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
 };
@@ -6514,7 +6514,7 @@ module.exports = function clone(obj) {
 
 /***/ }),
 
-/***/ 6:
+/***/ 7:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6524,10 +6524,10 @@ module.exports = function clone(obj) {
 // We use custom error "types" so that we can act on them when we need it
 // e.g.: if error instanceof errors.UnparsableJSON then..
 
-var inherits = __webpack_require__(11);
+var inherits = __webpack_require__(10);
 
 function AlgoliaSearchError(message, extraProperties) {
-  var forEach = __webpack_require__(7);
+  var forEach = __webpack_require__(8);
 
   var error = this;
 
@@ -6600,7 +6600,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 7:
+/***/ 8:
 /***/ (function(module, exports) {
 
 

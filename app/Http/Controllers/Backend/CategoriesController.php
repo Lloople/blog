@@ -118,7 +118,10 @@ class CategoriesController extends Controller
 
         if ($request->ajax()) {
 
-            return ['result' => true];
+            return [
+                'result' => true,
+                'message' => 'Category deleted successfully.'
+            ];
         }
 
         Notificator::success('Category deleted successfully.');

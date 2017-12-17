@@ -6,7 +6,23 @@
         table-class="table-component-table"
         ref="table"
     >
-        <slot></slot>
+        <table-column v-for="column in columns"
+            :show="column.show"
+            :label="column.label"
+            :header-class="column.headerClass"
+            :cell-class="column.cellClass"
+        ></table-column>
+
+        <table-column v-show="actions.edit || actions.delete" label="" cell-class="text-center">
+            <template slot-scope="row">
+                <a v-show="actions.edit" :href="`${row.url_edit}`" class="button text-xs bg-green">
+                    <span class="fa fa-fw fa-pencil"></span>
+                </a>
+                <a v-show="actions.delete" :href="`${row.url_delete}`" @click="confirmDelete(row, $event)" class="button text-xs bg-red">
+                    <span class="fa fa-fw fa-trash"></span>
+                </a>
+            </template>
+        </table-column>
     </table-component>
 </template>
 
@@ -15,11 +31,21 @@
 
     import axios from 'axios';
 
+    /**
+     *  <template slot-scope="row">
+     <span v-show="column.type === 'boolean'" class="fa" :class="[ row[column.show] ? 'fa-check text-green' : 'fa-remove text-red' ]"></span>
+     </template>
+     * @type {string}
+     */
     var previousFilter = '';
     
     export default {
-        props: {
-            resource: ''
+        data() {
+            return {
+                resource : window.resource.resource,
+                columns : window.resource.columns,
+                actions : window.resource.actions
+            }
         },
         methods: {
             async fetchData({ page, filter, sort }) {
@@ -43,16 +69,19 @@
             async confirmDelete(row, ev) {
                 ev.preventDefault();
                 if (confirm("Are you sure you want to delete the item? This action cannot be undone")) {
-                    await axios.delete(row.url_delete);
+                    const response = await axios.delete(row.url_delete);
 
                     if (! response.data.result) {
-                        alert(response.data.message);
+                        window.notifications.push({
+                            type: 'error',
+                            message: response.data.message
+                        });
                     } else {
                         this.$refs.table.refresh();
                         window.notifications.push({
-                            type: success,
+                            type: 'success',
                             message: response.data.message
-                        })
+                        });
                     }
                 }
             }

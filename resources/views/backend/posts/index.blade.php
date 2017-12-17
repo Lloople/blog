@@ -6,23 +6,46 @@
             Create a post
         </a>
     </div>
-    <table-resource resource="posts">
-        <table-column show="category" label="Category" header-class="text-left hidden md:table-cell" cell-class="hidden md:table-cell"></table-column>
-        <table-column show="title" label="Title" header-class="text-left"></table-column>
-        <table-column show="tags" label="Tags" header-class="text-left hidden md:table-cell" cell-class="hidden md:table-cell"></table-column>
-        <table-column show="published_at" label="Date" header-class="text-left"></table-column>
-        <table-column show="url" label="" cell-class="text-center">
-            <template slot-scope="row">
-                <a :href="`${row.url_edit}`" class="button text-xs bg-green">
-                    <span class="fa fa-fw fa-pencil"></span>
-                </a>
-                <a :href="`${row.url}`" target="_blank" class="button text-xs bg-blue">
-                    <span class="fa fa-fw fa-eye"></span>
-                </a>
-                <a :href="`${row.url_delete}`" @click="parent.confirmDelete(row, $event)" class="button text-xs bg-red">
-                    <span class="fa fa-fw fa-trash"></span>
-                </a>
-            </template>
-        </table-column>
-    </table-resource>
+    <table-resource></table-resource>
+@endsection
+
+@section('resource')
+    <script>
+        window.resource = {
+            resource: 'posts',
+            actions: {
+                edit  : true,
+                delete: true
+            },
+            columns: [
+                {
+                    show: 'id',
+                    label :'#',
+                    headerClass : 'text-left'
+                },
+                {
+                    show       : 'category',
+                    label      : 'Category',
+                    headerClass: 'text-left hidden md:table-cell',
+                    cellClass  : 'hidden md:table-cell'
+                },
+                {
+                    show       : 'title',
+                    label      : 'Title',
+                    headerClass: 'text-left'
+                },
+                {
+                    show       : 'tags',
+                    label      : 'Tags',
+                    headerClass: 'text-left hidden md:table-cell',
+                    cellClass  : 'hidden md:table-cell'
+                },
+                {
+                    show       : 'published_at',
+                    label      : 'Date',
+                    headerClass: 'text-left',
+                }
+            ]
+        };
+    </script>
 @endsection
