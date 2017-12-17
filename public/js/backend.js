@@ -21554,6 +21554,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 __webpack_require__(148);
 
@@ -21693,14 +21701,40 @@ var render = function() {
     },
     [
       _vm._l(_vm.columns, function(column) {
-        return _c("table-column", {
-          attrs: {
-            show: column.show,
-            label: column.label,
-            "header-class": column.headerClass,
-            "cell-class": column.cellClass
-          }
-        })
+        return _c(
+          "table-column",
+          {
+            attrs: {
+              show: column.show,
+              label: column.label,
+              "header-class": column.headerClass,
+              "cell-class": column.cellClass
+            }
+          },
+          [
+            column.type === "boolean"
+              ? _c("div", {
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(row) {
+                        return [
+                          _c("span", {
+                            staticClass: "fa",
+                            class: [
+                              row[column.show]
+                                ? "fa-check text-green"
+                                : "fa-remove text-red"
+                            ]
+                          })
+                        ]
+                      }
+                    }
+                  ])
+                })
+              : _vm._e()
+          ]
+        )
       }),
       _vm._v(" "),
       _c("table-column", {

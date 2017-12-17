@@ -21,7 +21,7 @@
                 {
                     show: 'id',
                     label :'#',
-                    headerClass : 'text-left'
+                    headerClass : 'text-left w-8'
                 },
                 {
                     show       : 'category',

@@ -21,7 +21,7 @@
                 {
                     show: 'id',
                     label :'#',
-                    headerClass : 'text-left'
+                    headerClass : 'text-left w-8'
                 },
                 {
                     show: 'name',
@@ -32,10 +32,12 @@
                     show: 'active',
                     label: 'Active',
                     type: 'boolean',
+                    headerClass: 'text-left'
                 },
                 {
                     show: 'created_at',
-                    label: 'Created At'
+                    label: 'Created At',
+                    headerClass: 'text-left'
                 }
             ]
         }

@@ -11,7 +11,15 @@
             :label="column.label"
             :header-class="column.headerClass"
             :cell-class="column.cellClass"
-        ></table-column>
+        >
+            <div v-if="column.type === 'boolean'">
+                <template slot-scope="row">
+                    <span class="fa" :class="[ row[column.show] ? 'fa-check text-green' : 'fa-remove text-red' ]"></span>
+                </template>
+            </div>
+
+
+        </table-column>
 
         <table-column v-show="actions.edit || actions.delete" label="" cell-class="text-center">
             <template slot-scope="row">
