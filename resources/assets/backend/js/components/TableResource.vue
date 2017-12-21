@@ -6,20 +6,24 @@
         table-class="table-component-table"
         ref="table"
     >
-        <table-column v-for="column in columns"
-            :show="column.show"
-            :label="column.label"
-            :header-class="column.headerClass"
-            :cell-class="column.cellClass"
-        >
-            <div v-if="column.type === 'boolean'">
+        <template v-for="column in columns">
+            <table-column v-if="column.dataType === 'boolean'"
+                          :show="column.show"
+                          :label="column.label"
+                          :header-class="column.headerClass"
+                          :cell-class="column.cellClass"
+            >
                 <template slot-scope="row">
                     <span class="fa" :class="[ row[column.show] ? 'fa-check text-green' : 'fa-remove text-red' ]"></span>
                 </template>
-            </div>
-
-
-        </table-column>
+            </table-column>
+            <table-column v-else
+                          :show="column.show"
+                          :label="column.label"
+                          :header-class="column.headerClass"
+                          :cell-class="column.cellClass"
+            ></table-column>
+        </template>
 
         <table-column v-show="actions.edit || actions.delete" label="" cell-class="text-center">
             <template slot-scope="row">
@@ -39,12 +43,6 @@
 
     import axios from 'axios';
 
-    /**
-     *  <template slot-scope="row">
-     <span v-show="column.type === 'boolean'" class="fa" :class="[ row[column.show] ? 'fa-check text-green' : 'fa-remove text-red' ]"></span>
-     </template>
-     * @type {string}
-     */
     var previousFilter = '';
     
     export default {

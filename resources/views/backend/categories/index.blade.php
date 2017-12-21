@@ -31,7 +31,7 @@
                 {
                     show: 'active',
                     label: 'Active',
-                    type: 'boolean',
+                    dataType: 'boolean',
                     headerClass: 'text-left'
                 },
                 {
