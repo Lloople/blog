@@ -23,7 +23,7 @@
                     </a>
                 </div>
                 @auth
-                <div class="flex-1 lg:w-3/4 text-center lg:text-left m-8 uppercase text-sm no-underline">
+                <div class="flex-1 lg:w-3/4 text-center lg:text-left m-8 uppercase text-sm">
                     <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.posts*') ? 'bg-white shadow' : '' }}" href="{{ route('backend.posts.index') }}">
                         Posts
                     </a>
@@ -34,6 +34,14 @@
                         Tags
                     </a>
                 </div>
+                    <div class="flex-1 lg:w-1/4 text-center lg:text-right m-8 uppercase text-sm">
+                        <form action="{{ route('logout') }}" method="POST">
+                            {{ csrf_field() }}
+                            <button class="no-underline rounded p-4 text-black uppercase">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
                 @endauth
             </div>
         </div>
