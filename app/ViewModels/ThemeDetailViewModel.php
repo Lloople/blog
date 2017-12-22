@@ -2,21 +2,21 @@
 
 namespace App\ViewModels;
 
-class CategoryDetailViewModel extends FormViewModel
+class ThemeDetailViewModel extends FormViewModel
 {
 
     protected function setTitle()
     {
         $this->title = $this->model->exists
-            ? "Edit Category: {$this->model->name}"
-            : "Create Category";
+            ? "Edit Theme: {$this->model->name}"
+            : "Create Theme";
     }
 
     protected function setAction()
     {
         $this->action = $this->model->exists
-            ? route('backend.categories.update', $this->model)
-            : route('backend.categories.store');
+            ? route('backend.themes.update', $this->model)
+            : route('backend.themes.store');
     }
 
     protected function setMethod()
