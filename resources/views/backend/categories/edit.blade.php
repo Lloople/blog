@@ -8,28 +8,10 @@
     <form method="POST" action="{{ $view->action }}">
         {{ method_field($view->method) }}
         {{ csrf_field() }}
-        <div class="form-horizontal-field ">
-            <div class="w-full md:w-1/5">
-                <label for="name" class="form-horizontal-label">Name</label>
-            </div>
-            <div class="w-full md:w-3/5">
-                <input id="name" name="name" class=" form-input" value="{{ old('name', $view->category->name) }}">
-                @if ($errors->has('name'))
-                    <p class="text-red block">{{ implode('<br>', $errors->get('name')) }}</p>
-                @endif
-            </div>
-            
-        </div>
-    
-    
-        <div class="form-horizontal-field">
-            <div class="w-full md:w-1/5">
-                <label for="active" class="form-horizontal-label">Active</label>
-            </div>
-            <div class="w-full md:w-3/5 form-checkbox">
-                <input type="checkbox" id="active" name="active" {{ old('active', $view->category->active) ? 'checked' : '' }}>
-            </div>
-        </div>
+        
+        {!! $view->inputText('name', 'Name') !!}
+
+        {!! $view->inputCheckbox('active', 'Active') !!}
         
         <div class="form-horizontal-field float-right">
             <button class="button text-lg bg-green p-4 float-right mr-2">
@@ -41,6 +23,6 @@
         </div>
     </form>
 
-    <form-delete action="{{ route('backend.categories.destroy', $view->category) }}"></form-delete>
+    <form-delete action="{{ route('backend.categories.destroy', $view->model) }}"></form-delete>
     
 @endsection

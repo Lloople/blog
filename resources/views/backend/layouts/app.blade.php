@@ -33,6 +33,9 @@
                     <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.tags.index') ? 'bg-white shadow' : '' }}" href="{{ route('backend.tags.index') }}">
                         Tags
                     </a>
+                    <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.themes.index') ? 'bg-white shadow' : '' }}" href="{{ route('backend.themes.index') }}">
+                        Themes
+                    </a>
                 </div>
                     <div class="flex-1 lg:w-1/4 text-center lg:text-right m-8 uppercase text-sm">
                         <form action="{{ route('logout') }}" method="POST">
