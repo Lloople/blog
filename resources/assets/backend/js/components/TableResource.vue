@@ -7,6 +7,7 @@
         ref="table"
     >
         <template v-for="column in columns">
+
             <table-column v-if="column.dataType === 'boolean'"
                           :show="column.show"
                           :label="column.label"
@@ -46,6 +47,7 @@
     var previousFilter = '';
     
     export default {
+
         data() {
             return {
                 resource : window.resource.resource,
@@ -77,18 +79,15 @@
                 if (confirm("Are you sure you want to delete the item? This action cannot be undone")) {
                     const response = await axios.delete(row.url_delete);
 
-                    if (! response.data.result) {
-                        window.notifications.push({
-                            type: 'error',
-                            message: response.data.message
-                        });
-                    } else {
+                    const notificationEvent = response.data.result
+                        ? 'addSuccessNotification'
+                        : 'addErrorNotification';
+
+                    if (response.data.result) {
                         this.$refs.table.refresh();
-                        window.notifications.push({
-                            type: 'success',
-                            message: response.data.message
-                        });
                     }
+
+                    this.$root.$emit(notificationEvent, response.data.message);
                 }
             }
         }

@@ -1,7 +1,8 @@
 <template>
     <div class="alert-container w-full md:w-1/3">
-        <div v-for="notification in this.notifications" @click="removeNotification(notification)" class="alert"
-             :class="'alert-'+notification.type">
+        <div v-for="notification in this.notifications"
+             @click="removeNotification(notification)"
+             :class="'alert alert-'+notification.type">
             <p>{{ notification.message }}</p>
         </div>
     </div>
@@ -10,15 +11,45 @@
 <script>
     export default {
         name: 'blog-notifications',
-        data() {
+        props: {
+            duration: {
+                default: 5000,
+                type: Number
+            }
+        },
+        data () {
             return {
-                notifications: window.notifications
+                notifications: []
             };
         },
         methods: {
-            removeNotification(notification) {
-                window.notifications.splice(window.notifications.indexOf(notification), 1);
+            removeNotification (notification)
+            {
+                const index = this.notifications.indexOf(notification);
+
+                if (index >= 0) {
+                    this.notifications.splice(index, 1);
+                }
+            },
+            addNotification (type, message)
+            {
+                const notification = { type, message };
+
+                this.notifications.push(notification);
+
+                setTimeout(() => {
+                    this.removeNotification(notification);
+                }, this.duration);
             }
+        },
+        mounted() {
+            this.$root.$on('addSuccessNotification', (message) => {
+                this.addNotification('success', message);
+            });
+
+            this.$root.$on('addErrorNotification', (message) => {
+                this.addNotification('error', message);
+            });
         }
     }
 </script>

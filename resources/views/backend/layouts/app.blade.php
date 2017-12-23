@@ -49,7 +49,7 @@
             </div>
         </div>
     </nav>
-    <blog-notifications></blog-notifications>
+    <blog-notifications :duration="6000"></blog-notifications>
     <div class="flex flex-wrap">
         <div class="shadow-md mb-8 md:w-5/6 sm:w-full md:ml-auto md:mr-auto p-4 bg-{{ app('theme')->container_background }} rounded">
             <div class="flex flex-wrap">
@@ -61,13 +61,25 @@
         </div>
     </div>
 </div>
-<script>
-    window.notifications = {!! json_encode(\Lloople\Notificator\Notificator::toArray()) !!};
-</script>
+
 @yield('resource')
 <script src="{{ asset('js/manifest.js') }}"></script>
 <script src="{{ asset('js/vendor.js') }}"></script>
 <script src="{{ asset('js/backend.js') }}"></script>
+
+<script>
+    const notifications = {!! json_encode(\Lloople\Notificator\Notificator::toArray()) !!};
+
+    window.onload = () => {
+        notifications.forEach((notification) => {
+            const notificationType = notification.type[0].toUpperCase() + notification.type.substring(1);
+            
+            const type = 'add' + notificationType + 'Notification';
+            
+            app.__vue__.$emit(type, notification.message);
+        });
+    };
+</script>
 
 @yield('scripts')
 </body>

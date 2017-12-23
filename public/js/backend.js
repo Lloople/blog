@@ -16188,6 +16188,7 @@ window.Vue = __webpack_require__(17);
 
 Vue.component('table-component', __WEBPACK_IMPORTED_MODULE_0_vue_table_component__["TableComponent"]);
 Vue.component('table-column', __WEBPACK_IMPORTED_MODULE_0_vue_table_component__["TableColumn"]);
+
 Vue.component('table-resource', __webpack_require__(206));
 
 Vue.component('post-edit', __webpack_require__(209));
@@ -16197,6 +16198,7 @@ Vue.component('button-delete', __webpack_require__(230));
 Vue.component('blog-notifications', __webpack_require__(233));
 
 var app = new Vue({
+    inject: ['Notifications'],
     el: '#app'
 });
 
@@ -21566,6 +21568,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 __webpack_require__(148);
 
@@ -21629,7 +21632,7 @@ var previousFilter = '';
         }(),
         confirmDelete: function () {
             var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(row, ev) {
-                var response;
+                var response, notificationEvent;
                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
@@ -21637,7 +21640,7 @@ var previousFilter = '';
                                 ev.preventDefault();
 
                                 if (!confirm("Are you sure you want to delete the item? This action cannot be undone")) {
-                                    _context2.next = 6;
+                                    _context2.next = 8;
                                     break;
                                 }
 
@@ -21646,22 +21649,16 @@ var previousFilter = '';
 
                             case 4:
                                 response = _context2.sent;
+                                notificationEvent = response.data.result ? 'addSuccessNotification' : 'addErrorNotification';
 
 
-                                if (!response.data.result) {
-                                    window.notifications.push({
-                                        type: 'error',
-                                        message: response.data.message
-                                    });
-                                } else {
+                                if (response.data.result) {
                                     this.$refs.table.refresh();
-                                    window.notifications.push({
-                                        type: 'success',
-                                        message: response.data.message
-                                    });
                                 }
 
-                            case 6:
+                                this.$root.$emit(notificationEvent, response.data.message);
+
+                            case 8:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -22000,9 +21997,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.$root.$on('deleteFormSubmit', function () {
-            if (confirm("Are you sure you want to delete this item? This action cannot be undone.")) {
-                document.deleteForm.submit();
-            }
+            document.deleteForm.submit();
         });
     }
 });
@@ -22099,13 +22094,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "button-delete",
     methods: {
         submitForm: function submitForm() {
-            this.$root.$emit('deleteFormSubmit');
+            if (confirm("Are you sure you want to delete this item? This action cannot be undone.")) {
+                this.$root.$emit('deleteFormSubmit');
+            }
         }
     }
 });
@@ -22201,19 +22199,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'blog-notifications',
+    props: {
+        duration: {
+            default: 5000,
+            type: Number
+        }
+    },
     data: function data() {
         return {
-            notifications: window.notifications
+            notifications: []
         };
     },
 
     methods: {
         removeNotification: function removeNotification(notification) {
-            window.notifications.splice(window.notifications.indexOf(notification), 1);
+            var index = this.notifications.indexOf(notification);
+
+            if (index >= 0) {
+                this.notifications.splice(index, 1);
+            }
+        },
+        addNotification: function addNotification(type, message) {
+            var _this = this;
+
+            var notification = { type: type, message: message };
+
+            this.notifications.push(notification);
+
+            setTimeout(function () {
+                _this.removeNotification(notification);
+            }, this.duration);
         }
+    },
+    mounted: function mounted() {
+        var _this2 = this;
+
+        this.$root.$on('addSuccessNotification', function (message) {
+            _this2.addNotification('success', message);
+        });
+
+        this.$root.$on('addErrorNotification', function (message) {
+            _this2.addNotification('error', message);
+        });
     }
 });
 
@@ -22232,8 +22263,7 @@ var render = function() {
       return _c(
         "div",
         {
-          staticClass: "alert",
-          class: "alert-" + notification.type,
+          class: "alert alert-" + notification.type,
           on: {
             click: function($event) {
               _vm.removeNotification(notification)

@@ -18,9 +18,7 @@
         },
         mounted() {
             this.$root.$on('deleteFormSubmit', () => {
-                if (confirm("Are you sure you want to delete this item? This action cannot be undone.")) {
-                    document.deleteForm.submit();
-                }
+                document.deleteForm.submit();
             });
         }
     }
