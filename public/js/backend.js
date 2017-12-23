@@ -4525,14 +4525,7 @@ return hooks;
 /* 2 */,
 /* 3 */,
 /* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */
+/* 5 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -4641,6 +4634,13 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
 /* 13 */,
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -4653,7 +4653,7 @@ window._ = __webpack_require__(15);
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(11);
+window.axios = __webpack_require__(12);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -16188,10 +16188,17 @@ window.Vue = __webpack_require__(17);
 
 Vue.component('table-component', __WEBPACK_IMPORTED_MODULE_0_vue_table_component__["TableComponent"]);
 Vue.component('table-column', __WEBPACK_IMPORTED_MODULE_0_vue_table_component__["TableColumn"]);
-Vue.component('posts-table', __webpack_require__(206));
+
+Vue.component('table-resource', __webpack_require__(206));
+
 Vue.component('post-edit', __webpack_require__(209));
+Vue.component('form-delete', __webpack_require__(227));
+Vue.component('button-delete', __webpack_require__(230));
+
+Vue.component('blog-notifications', __webpack_require__(233));
 
 var app = new Vue({
+    inject: ['Notifications'],
     el: '#app'
 });
 
@@ -21468,7 +21475,7 @@ webpackContext.id = 205;
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(12)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(207)
 /* template */
@@ -21489,7 +21496,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/backend/js/components/PostsTable.vue"
+Component.options.__file = "resources/assets/backend/js/components/TableResource.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -21499,9 +21506,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6d326d4d", Component.options)
+    hotAPI.createRecord("data-v-4419a84c", Component.options)
   } else {
-    hotAPI.reload("data-v-6d326d4d", Component.options)
+    hotAPI.reload("data-v-4419a84c", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -21517,10 +21524,23 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -21557,6 +21577,14 @@ __webpack_require__(148);
 var previousFilter = '';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            resource: window.resource.resource,
+            columns: window.resource.columns,
+            actions: window.resource.actions
+        };
+    },
+
     methods: {
         fetchData: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref) {
@@ -21575,7 +21603,7 @@ var previousFilter = '';
                                 previousFilter = filter;
 
                                 _context.next = 4;
-                                return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/backend/resources/posts?page=' + page + '&q=' + filter, { page: page, filter: filter });
+                                return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/backend/resources/' + this.resource + '?page=' + page + '&q=' + filter, { page: page, filter: filter });
 
                             case 4:
                                 response = _context.sent;
@@ -21604,14 +21632,15 @@ var previousFilter = '';
         }(),
         confirmDelete: function () {
             var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(row, ev) {
+                var response, notificationEvent;
                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
                                 ev.preventDefault();
 
-                                if (!confirm("Are you sure you want to delete the post '" + row.title + "'? This action cannot be undone")) {
-                                    _context2.next = 5;
+                                if (!confirm("Are you sure you want to delete the item? This action cannot be undone")) {
+                                    _context2.next = 8;
                                     break;
                                 }
 
@@ -21619,10 +21648,17 @@ var previousFilter = '';
                                 return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(row.url_delete);
 
                             case 4:
+                                response = _context2.sent;
+                                notificationEvent = response.data.result ? 'addSuccessNotification' : 'addErrorNotification';
 
-                                this.$refs.table.refresh();
 
-                            case 5:
+                                if (response.data.result) {
+                                    this.$refs.table.refresh();
+                                }
+
+                                this.$root.$emit(notificationEvent, response.data.message);
+
+                            case 8:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -21654,43 +21690,60 @@ var render = function() {
       attrs: {
         data: _vm.fetchData,
         "show-caption": false,
-        "filter-placeholder": "Search posts...",
+        "filter-placeholder": "Search...",
         "table-class": "table-component-table"
       }
     },
     [
-      _c("table-column", {
-        attrs: {
-          show: "category",
-          label: "Category",
-          "header-class": "text-left hidden md:table-cell",
-          "cell-class": "hidden md:table-cell"
-        }
+      _vm._l(_vm.columns, function(column) {
+        return [
+          column.dataType === "boolean"
+            ? _c("table-column", {
+                attrs: {
+                  show: column.show,
+                  label: column.label,
+                  "header-class": column.headerClass,
+                  "cell-class": column.cellClass
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(row) {
+                      return [
+                        _c("span", {
+                          staticClass: "fa",
+                          class: [
+                            row[column.show]
+                              ? "fa-check text-green"
+                              : "fa-remove text-red"
+                          ]
+                        })
+                      ]
+                    }
+                  }
+                ])
+              })
+            : _c("table-column", {
+                attrs: {
+                  show: column.show,
+                  label: column.label,
+                  "header-class": column.headerClass,
+                  "cell-class": column.cellClass
+                }
+              })
+        ]
       }),
       _vm._v(" "),
       _c("table-column", {
-        attrs: { show: "title", label: "Title", "header-class": "text-left" }
-      }),
-      _vm._v(" "),
-      _c("table-column", {
-        attrs: {
-          show: "tags",
-          label: "Tags",
-          "header-class": "text-left hidden md:table-cell",
-          "cell-class": "hidden md:table-cell"
-        }
-      }),
-      _vm._v(" "),
-      _c("table-column", {
-        attrs: {
-          show: "published_at",
-          label: "Date",
-          "header-class": "text-left"
-        }
-      }),
-      _vm._v(" "),
-      _c("table-column", {
-        attrs: { show: "url", label: "", "cell-class": "text-center" },
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.actions.edit || _vm.actions.delete,
+            expression: "actions.edit || actions.delete"
+          }
+        ],
+        attrs: { label: "", "cell-class": "text-center" },
         scopedSlots: _vm._u([
           {
             key: "default",
@@ -21699,6 +21752,14 @@ var render = function() {
                 _c(
                   "a",
                   {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.actions.edit,
+                        expression: "actions.edit"
+                      }
+                    ],
                     staticClass: "button text-xs bg-green",
                     attrs: { href: "" + row.url_edit }
                   },
@@ -21708,15 +21769,14 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    staticClass: "button text-xs bg-blue",
-                    attrs: { href: "" + row.url, target: "_blank" }
-                  },
-                  [_c("span", { staticClass: "fa fa-fw fa-eye" })]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.actions.delete,
+                        expression: "actions.delete"
+                      }
+                    ],
                     staticClass: "button text-xs bg-red",
                     attrs: { href: "" + row.url_delete },
                     on: {
@@ -21733,7 +21793,7 @@ var render = function() {
         ])
       })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -21742,7 +21802,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6d326d4d", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-4419a84c", module.exports)
   }
 }
 
@@ -21751,7 +21811,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(12)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(210)
 /* template */
@@ -21823,8 +21883,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 uniqueId: window.location
             }
         });
-
-        console.log(editor.value());
     }
 });
 
@@ -21862,6 +21920,368 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-8589d948", module.exports)
+  }
+}
+
+/***/ }),
+/* 227 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(5)
+/* script */
+var __vue_script__ = __webpack_require__(228)
+/* template */
+var __vue_template__ = __webpack_require__(229)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/backend/js/components/FormDelete.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-baa7f9be", Component.options)
+  } else {
+    hotAPI.reload("data-v-baa7f9be", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 228 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "form-delete",
+    props: {
+        action: ''
+    },
+    data: function data() {
+        return {
+            token: window.axios.defaults.headers.common['X-CSRF-TOKEN']
+        };
+    },
+    mounted: function mounted() {
+        this.$root.$on('deleteFormSubmit', function () {
+            document.deleteForm.submit();
+        });
+    }
+});
+
+/***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    { attrs: { name: "deleteForm", method: "POST", action: _vm.action } },
+    [
+      _c("input", {
+        attrs: { type: "hidden", name: "_method", value: "delete" }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "hidden", name: "_token" },
+        domProps: { value: _vm.token }
+      })
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-baa7f9be", module.exports)
+  }
+}
+
+/***/ }),
+/* 230 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(5)
+/* script */
+var __vue_script__ = __webpack_require__(231)
+/* template */
+var __vue_template__ = __webpack_require__(232)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/backend/js/components/ButtonDelete.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-18a7358f", Component.options)
+  } else {
+    hotAPI.reload("data-v-18a7358f", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 231 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "button-delete",
+    methods: {
+        submitForm: function submitForm() {
+            if (confirm("Are you sure you want to delete this item? This action cannot be undone.")) {
+                this.$root.$emit('deleteFormSubmit');
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 232 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "button",
+    {
+      staticClass: "button text-lg bg-red p-4 float-right js-button-delete",
+      attrs: { type: "button" },
+      on: { click: _vm.submitForm }
+    },
+    [_c("span", { staticClass: "fa fa-trash fa-fw" })]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-18a7358f", module.exports)
+  }
+}
+
+/***/ }),
+/* 233 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(5)
+/* script */
+var __vue_script__ = __webpack_require__(234)
+/* template */
+var __vue_template__ = __webpack_require__(235)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/backend/js/components/Notifications.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-80289674", Component.options)
+  } else {
+    hotAPI.reload("data-v-80289674", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 234 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'blog-notifications',
+    props: {
+        duration: {
+            default: 5000,
+            type: Number
+        }
+    },
+    data: function data() {
+        return {
+            notifications: []
+        };
+    },
+
+    methods: {
+        removeNotification: function removeNotification(notification) {
+            var index = this.notifications.indexOf(notification);
+
+            if (index >= 0) {
+                this.notifications.splice(index, 1);
+            }
+        },
+        addNotification: function addNotification(type, message) {
+            var _this = this;
+
+            var notification = { type: type, message: message };
+
+            this.notifications.push(notification);
+
+            setTimeout(function () {
+                _this.removeNotification(notification);
+            }, this.duration);
+        }
+    },
+    mounted: function mounted() {
+        var _this2 = this;
+
+        this.$root.$on('addSuccessNotification', function (message) {
+            _this2.addNotification('success', message);
+        });
+
+        this.$root.$on('addErrorNotification', function (message) {
+            _this2.addNotification('error', message);
+        });
+    }
+});
+
+/***/ }),
+/* 235 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "alert-container w-full md:w-1/3" },
+    _vm._l(this.notifications, function(notification) {
+      return _c(
+        "div",
+        {
+          class: "alert alert-" + notification.type,
+          on: {
+            click: function($event) {
+              _vm.removeNotification(notification)
+            }
+          }
+        },
+        [_c("p", [_vm._v(_vm._s(notification.message))])]
+      )
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-80289674", module.exports)
   }
 }
 

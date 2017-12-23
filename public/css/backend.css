@@ -4409,6 +4409,7 @@ ul.pagination > li.active {
 }
 
 .form-input {
+  width: 100%;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
@@ -4423,6 +4424,41 @@ ul.pagination > li.active {
 .form-checkbox {
   padding: 0.5rem;
   display: inline-block;
+}
+
+.alert-container {
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.alert {
+  padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: .25rem;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.alert-success {
+  background-color: #a2f5bf;
+}
+
+.alert-info {
+  background-color: #bcdefa;
+}
+
+.alert-warning {
+  background-color: #fff9c2;
+}
+
+.alert-error {
+  background-color: #f9acaa;
 }
 
 .container {

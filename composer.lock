@@ -802,20 +802,25 @@
         },
         {
             "name": "lloople/laravel-notificator",
-            "version": "v1.5",
+            "version": "v1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lloople/laravel-notificator.git",
-                "reference": "2dd07d82887892c65e70afed59381a6305d46e99"
+                "reference": "55d69975f9c2b817d9877a789ee480c79a9fc602"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lloople/laravel-notificator/zipball/2dd07d82887892c65e70afed59381a6305d46e99",
-                "reference": "2dd07d82887892c65e70afed59381a6305d46e99",
+                "url": "https://api.github.com/repos/Lloople/laravel-notificator/zipball/55d69975f9c2b817d9877a789ee480c79a9fc602",
+                "reference": "55d69975f9c2b817d9877a789ee480c79a9fc602",
                 "shasum": ""
             },
             "require": {
+                "laravel/framework": "5.5.*",
                 "php": ">=7.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~6.0"
             },
             "type": "library",
             "extra": {
@@ -827,7 +832,8 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Lloople\\Notificator\\": "src/"
+                    "Lloople\\Notificator\\": "src/",
+                    "Tests\\": "tests/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -841,7 +847,7 @@
                 }
             ],
             "description": "Attach objects to notification's session flashed variable",
-            "time": "2017-06-28T20:10:27+00:00"
+            "time": "2017-12-16T21:30:35+00:00"
         },
         {
             "name": "monolog/monolog",

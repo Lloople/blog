@@ -18,7 +18,9 @@ class PostsController extends Controller
 
     public function show($slug)
     {
-        if (! $post = Post::findBySlug($slug)) {
+        $post = Post::findBySlug($slug);
+
+        if (! $post || $post->published_at->isFuture()) {
             abort(404);
         }
 
