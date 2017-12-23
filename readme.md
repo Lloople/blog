@@ -1,53 +1,59 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# Simple Blog made with Laravel
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Backend
 
-## About Laravel
+### Logging in
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+- url: /backend
+- default user: admin@blog.test / admin
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+There's no interface for changing user's information yet. You can change
+user's password using tinker
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+```php
+$ php artisan tinker
+> $user = App\Models\User::find(1);
+> $user->password = bcrypt('newPassword');
+> $user->save();
+```
 
-## Learning Laravel
+### Posts Content
+The body of the posts are saved in markdown. Laravel uses [Erusev's Parsedown package](https://github.com/erusev/parsedown) to transform it into HTML.
+Backend UI uses [SimpleMDE](https://github.com/sparksuite/simplemde-markdown-editor) to show a friendly markdown editor
+### Tables
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+All list tables were made using [Spatie's Vue Table Component package](https://github.com/spatie/vue-table-component).
+Pagination and search are server-side
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+### Changing theme
 
-## Laravel Sponsors
+Main app colors are defined by [Tailwind CSS colors](https://tailwindcss.com/docs/colors).
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
+You can manage themes from the backend on `backend/themes`. Only one theme can be active at a time.
+ 
+## Frontend
 
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
+### Posts List
 
-## Contributing
+In order to see a post, it must be `visible` and `publish_date` must be in past.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+### Algolia's Search (currently untested)
 
-## Security Vulnerabilities
+There's a box on the top-right corner for searching posts that uses algolia instant search javascript component. 
+You can define your Algolia credentials in the `.env` file.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+### Featured posts
 
-## License
+A featured post is visible from anywhere on the frontend UI. It's showed on the sidebar present in any page. It must be published and visible as well.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+## Inspiration
+When I got stuck developing this project, I used [Freek Van Der Herten's blog](https://github.com/spatie/murze.be) to find a way to solve the problem or inspiration for future features. Thanks for sharing it! 👍
+## Credits
+
+- [Laravel Framework 5.5](https://laravel.com/docs/5.5)
+- [Vue 2.1](https://vuejs.org/v2/guide/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Spatie's Vue Table Component](https://github.com/spatie/vue-table-component)
+- [SimpleMDE](https://simplemde.com/)
+- [Algolia Instant Search](https://github.com/algolia/instantsearch.js/)
+- [Freek Van Der Herten's blog](https://github.com/spatie/murze.be)
