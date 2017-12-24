@@ -8,7 +8,9 @@ use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
-    use Sluggable, Searchable;
+    use Sluggable, Searchable {
+        searchable as ScoutSearchable;
+    }
 
     public $dates = ['published_at'];
 
@@ -30,6 +32,11 @@ class Post extends Model
     public function getUrlAttribute()
     {
         return route('posts.show', $this->slug);
+    }
+
+    public function isVisible()
+    {
+        return $this->attributes['visible'];
     }
 
     public function scopePublished($query)
@@ -78,6 +85,13 @@ class Post extends Model
         });
 
         $this->tags()->sync($tags->pluck('id')->toArray());
+    }
+
+    public function searchable()
+    {
+        if ($this->isVisible() && $this->published_at->isPast()) {
+            $this->scoutSearchable();
+        }
     }
 
 }
