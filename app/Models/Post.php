@@ -94,4 +94,15 @@ class Post extends Model
         }
     }
 
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'body' => $this->body,
+            'published_at' => $this->published_at
+        ];
+    }
+
 }
