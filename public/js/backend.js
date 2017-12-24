@@ -16198,7 +16198,6 @@ Vue.component('button-delete', __webpack_require__(230));
 Vue.component('blog-notifications', __webpack_require__(233));
 
 var app = new Vue({
-    inject: ['Notifications'],
     el: '#app'
 });
 
@@ -22095,7 +22094,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "button-delete",

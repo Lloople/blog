@@ -8,7 +8,7 @@ use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
-    use Sluggable;
+    use Sluggable, Searchable;
 
     public $dates = ['published_at'];
 
