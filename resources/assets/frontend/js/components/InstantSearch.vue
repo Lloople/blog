@@ -18,6 +18,9 @@
                     </li>
                 </ul>
             </div>
+            <div class="lg:mx-0 lg:pin-r p-2">
+                <img src="img/algolia_search.svg" alt="Search by Algolia">
+            </div>
         </div>
     </div>
 </template>
