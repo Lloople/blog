@@ -7,6 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <title>@yield('title', config('app.name')) </title>
+    
+    @include('frontend.components.google_analytics')
 
     @yield('extra-headers')
     <link href="{{ asset('css/frontend.css') }}" rel="stylesheet">
