@@ -5,11 +5,11 @@
 @section('title', $post->title)
 
 @section('content')
-    <div class="w-4/5 mx-auto">
+    <div class="lg:w-4/5 w-full mx-auto">
         <h3 class="title text-{{ app('theme')->title }}">{{ $post->title }}</h3>
     </div>
     
-    <div class="w-4/5 mx-auto">
+    <div class="lg:w-4/5 w-full mx-auto">
         <div class="post lg:flex">
             <div class="w-full p-4 flex flex-col justify-between leading-normal">
                 <span class="post-date">{{ $post->published_at->format('d/m/Y H:i') }}</span>
