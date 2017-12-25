@@ -306,8 +306,8 @@ Vue.component('instant-search', __webpack_require__(175));
 
 // TODO: put highlight.js somehow ¯\_(ツ)_/¯
 
-var app = new Vue({
-    el: '#app'
+var navbar = new Vue({
+    el: '#navbar'
 });
 
 /***/ }),
@@ -406,9 +406,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     created: function created() {
-        var client = __WEBPACK_IMPORTED_MODULE_0_algoliasearch___default()(window.algolia.app_id, window.algolia.search_key);
+        if (window.algolia.app_id) {
+            var client = __WEBPACK_IMPORTED_MODULE_0_algoliasearch___default()(window.algolia.app_id, window.algolia.search_key);
 
-        this.index = client.initIndex('posts');
+            this.index = client.initIndex('posts');
+        }
     },
 
 
@@ -416,11 +418,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         search: function search(e) {
             var _this = this;
 
-            this.index.search({
-                query: this.query
-            }, function (error, response) {
-                _this.results = response.hits;
-            });
+            if (this.index) {
+                this.index.search({
+                    query: this.query
+                }, function (error, response) {
+                    _this.results = response.hits;
+                });
+            } else {
+                console.log('No Algolia account was configured');
+            }
         }
     }
 });
@@ -5863,7 +5869,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "lg:mx-0 lg:pin-r p-2" }, [
       _c("img", {
-        attrs: { src: "img/algolia_search.svg", alt: "Search by Algolia" }
+        attrs: { src: "/img/algolia_search.svg", alt: "Search by Algolia" }
       })
     ])
   }
