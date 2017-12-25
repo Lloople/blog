@@ -32,7 +32,7 @@
 
 @section('extra-headers')
     <meta property="og:title" content="{{ $post->title }} | {{ config('blog.domain') }}"/>
-    <meta property="og:description" content="{{ str_limit($post->body, 120) }}"/>
+    <meta property="og:description" content="{{ str_limit($post->body_raw, 120) }}"/>
     
     @foreach($post->tags as $tag)
     <meta property="article:tag" content="{{ $tag->name }}"/>
@@ -41,7 +41,7 @@
     <meta property="og:updated_time" content="{{ $post->updated_at->toIso8601String() }}"/>
     
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:description" content="{{ str_limit($post->body, 120) }}"/>
+    <meta name="twitter:description" content="{{ str_limit($post->body_raw, 120) }}"/>
     <meta name="twitter:title" content="{{ $post->title }} | {{ config('blog.domain') }}"/>
     <meta name="twitter:site" content="{{ config('blog.twitter_username') }}"/>
     <meta name="twitter:image" content="{{ url('img/thumbnail.jpg') }}"/>
