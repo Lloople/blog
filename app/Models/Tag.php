@@ -22,7 +22,8 @@ class Tag extends Model
 
     public static function findOrCreateByName($name)
     {
-        if (($tag = self::where('name', $name)->first()) !== null) {
+        $tag = self::where('name', $name)->first();
+        if ($tag !== null) {
             return $tag;
         }
 
@@ -32,8 +33,6 @@ class Tag extends Model
         $tag->slug = str_slug($name);
 
         $tag->save();
-
-        $tag->fresh();
 
         return $tag;
     }

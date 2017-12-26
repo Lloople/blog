@@ -17,19 +17,12 @@ class TagTest extends TestCase
     /** @test */
     public function can_find_or_create_tags_by_name()
     {
-        $this->assertEquals(0, Tag::count());
+        $firstTagCreated = Tag::findOrCreateByName('First tag');
 
-        Tag::findOrCreateByName('First tag');
-
-        $this->assertEquals(1, Tag::count());
-
-        Tag::findOrCreateByName('First tag');
+        $firstTagFetched = Tag::findOrCreateByName('First tag');
 
         $this->assertEquals(1, Tag::count());
 
-        Tag::findOrCreateByName('Second tag');
-
-        $this->assertEquals(2, Tag::count());
-
+        $this->assertEquals($firstTagCreated->id, $firstTagFetched->id);
     }
 }

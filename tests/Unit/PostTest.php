@@ -62,7 +62,7 @@ class PostTest extends TestCase
     /** @test */
     public function can_filter_posts_by_content()
     {
-        $post = factory(Post::class)->create([
+        factory(Post::class)->create([
             'title' => 'Post title',
             'body' => 'Post body content',
             'published_at' => '2018-09-09 12:12:12'
@@ -91,7 +91,7 @@ class PostTest extends TestCase
     /** @test */
     public function can_filter_posts_by_categories_names()
     {
-        $post = factory(Post::class)->create([
+        factory(Post::class)->create([
             'category_id' => factory(Category::class)->create([
                 'name' => 'Category name'
             ])

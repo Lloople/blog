@@ -2,11 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Models\Category;
-use App\Models\Post;
-use App\Models\Tag;
 use App\Models\Theme;
-use Illuminate\Support\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -24,7 +20,7 @@ class ThemeTest extends TestCase
 
        $this->assertEquals(10, Theme::where('selected', true)->count());
 
-       Theme::disableExcept($theme);
+       $theme->disableOtherThemes();
 
        $this->assertEquals(1, Theme::where('selected', true)->count());
 
