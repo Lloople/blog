@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Post;
 use App\Models\Theme;
+use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -40,5 +41,35 @@ class VisitHomeTest extends TestCase
         $response->assertSee('<h3 class="title text-black">Featured Posts</h3>');
 
         $response->assertSee('Dummy Featured Post');
+    }
+
+    /** @test */
+    public function posts_list_only_show_published_and_visible_posts()
+    {
+        factory(Post::class)->create([
+            'title' => 'Published Post',
+            'visible' => true,
+            'published_at' => Carbon::yesterday()
+        ]);
+
+        factory(Post::class)->create([
+            'title' => 'Unpublished Post',
+            'visible' => true,
+            'published_at' => Carbon::tomorrow()
+        ]);
+
+        factory(Post::class)->create([
+            'title' => 'Unactive Post',
+            'visible' => false,
+            'published_at' => Carbon::yesterday()
+        ]);
+
+        $response = $this->get('/');
+
+        $response->assertSee('Published Post');
+
+        $response->assertDontSee('Unpublished Post');
+
+        $response->assertDontSee('Unactive Post');
     }
 }
