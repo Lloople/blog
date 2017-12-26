@@ -1,0 +1,11 @@
+.nav-container {
+  @apply flex-1 text-center m-8 uppercase text-sm;
+}
+
+.nav-item {
+  @apply no-underline rounded p-4 text-black;
+}
+
+.nav-item.active {
+  @apply bg-white shadow;
+}

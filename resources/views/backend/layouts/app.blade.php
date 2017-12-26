@@ -9,7 +9,7 @@
     <title>@yield('title', config('app.name')) </title>
     
     @yield('extra-headers')
-    <link href="{{ asset('css/backend.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/backend.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
 <body class="bg-{{ app('theme')->background }} h-screen">
@@ -23,28 +23,28 @@
                     </a>
                 </div>
                 @auth
-                <div class="flex-1 lg:w-3/4 text-center lg:text-left m-8 uppercase text-sm">
-                    <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.posts*') ? 'bg-white shadow' : '' }}" href="{{ route('backend.posts.index') }}">
+                <div class="nav-container lg:w-3/4 lg:text-left">
+                    <a class="nav-item {{ request()->routeIs('backend.posts*') ? 'active' : '' }}" href="{{ route('backend.posts.index') }}">
                         Posts
                     </a>
-                    <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.categories*') ? 'bg-white shadow' : '' }}" href="{{ route('backend.categories.index') }}">
+                    <a class="nav-item {{ request()->routeIs('backend.categories*') ? 'active' : '' }}" href="{{ route('backend.categories.index') }}">
                         Categories
                     </a>
-                    <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.tags.index') ? 'bg-white shadow' : '' }}" href="{{ route('backend.tags.index') }}">
+                    <a class="nav-item {{ request()->routeIs('backend.tags.index') ? 'active' : '' }}" href="{{ route('backend.tags.index') }}">
                         Tags
                     </a>
-                    <a class="no-underline rounded p-4 text-black {{ request()->routeIs('backend.themes.index') ? 'bg-white shadow' : '' }}" href="{{ route('backend.themes.index') }}">
+                    <a class="nav-item {{ request()->routeIs('backend.themes*') ? 'active' : '' }}" href="{{ route('backend.themes.index') }}">
                         Themes
                     </a>
                 </div>
-                    <div class="flex-1 lg:w-1/4 text-center lg:text-right m-8 uppercase text-sm">
-                        <form action="{{ route('logout') }}" method="POST">
-                            {{ csrf_field() }}
-                            <button class="no-underline rounded p-4 text-black uppercase">
-                                Logout
-                            </button>
-                        </form>
-                    </div>
+                <div class="nav-container lg:w-1/4 lg:text-right">
+                    <form action="{{ route('logout') }}" method="POST">
+                        {{ csrf_field() }}
+                        <button class="nav-item uppercase">
+                            Logout
+                        </button>
+                    </form>
+                </div>
                 @endauth
             </div>
         </div>
@@ -63,9 +63,9 @@
 </div>
 
 @yield('resource')
-<script src="{{ asset('js/manifest.js') }}"></script>
-<script src="{{ asset('js/vendor.js') }}"></script>
-<script src="{{ asset('js/backend.js') }}"></script>
+<script src="{{ mix('/js/manifest.js') }}"></script>
+<script src="{{ mix('/js/vendor.js') }}"></script>
+<script src="{{ mix('/js/backend.js') }}"></script>
 
 <script>
     const notifications = {!! json_encode(\Lloople\Notificator\Notificator::toArray()) !!};
