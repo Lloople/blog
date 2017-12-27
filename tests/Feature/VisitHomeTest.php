@@ -13,12 +13,6 @@ class VisitHomeTest extends TestCase
 
     use RefreshDatabase;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        factory(Theme::class)->create();
-    }
 
     /** @test */
     public function can_visit_home_page()

@@ -5,14 +5,10 @@ namespace Tests\Feature\Backend;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Models\Post;
 use App\Models\Tag;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use Tests\BackendTestCase;
 
-class TagsResourceTest extends TestCase
+class TagsResourceTest extends BackendTestCase
 {
-
-    use RefreshDatabase;
 
     /** @test */
     public function can_delete_tag()
@@ -27,9 +23,7 @@ class TagsResourceTest extends TestCase
 
         $this->assertNotEmpty($post->tags);
 
-        $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)->delete(route('backend.tags.destroy', $tag));
+        $response = $this->actingAs($this->user)->delete(route('backend.tags.destroy', $tag));
 
         $response->assertJson(['result' => true]);
 
