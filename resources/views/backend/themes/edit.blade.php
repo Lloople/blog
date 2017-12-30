@@ -38,11 +38,15 @@
                 <span class="fa fa-save fa-fw"></span>
             </button>
     
-            <button-delete></button-delete>
+            @if($view->model->exists)
+                <button-delete></button-delete>
+            @endif
             
         </div>
     </form>
 
-    <form-delete action="{{ route('backend.themes.destroy', $view->model) }}"></form-delete>
+    @if($view->model->exists)
+        <form-delete action="{{ route('backend.themes.destroy', $view->model) }}"></form-delete>
+    @endif
     
 @endsection

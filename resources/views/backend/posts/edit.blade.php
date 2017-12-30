@@ -63,14 +63,19 @@
             <button class="button text-lg bg-green p-4 float-right mr-2">
                 <span class="fa fa-save fa-fw"></span>
             </button>
-            <a target="_blank" class="button text-lg bg-blue p-4 float-right mr-2" href="{{ $view->model->url }}">
-                <span class="fa fa-eye fa-fw"></span>
-            </a>
-            <button-delete></button-delete>
+            @if($view->model->exists)
+    
+                <a target="_blank" class="button text-lg bg-blue p-4 float-right mr-2" href="{{ $view->model->url }}">
+                    <span class="fa fa-eye fa-fw"></span>
+                </a>
+                <button-delete></button-delete>
+            @endif
         </div>
     </form>
 
-    <form-delete action="{{ route('backend.posts.destroy', $view->model) }}"></form-delete>
+    @if($view->model->exists)
+        <form-delete action="{{ route('backend.posts.destroy', $view->model) }}"></form-delete>
+    @endif
 
 @endsection
 
