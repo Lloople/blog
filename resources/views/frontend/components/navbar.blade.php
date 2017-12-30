@@ -1,4 +1,4 @@
-<nav class="bg-{{ app('theme')->background }} lg:h-24 my-8 lg:my-0 md:w-5/6 md:mx-auto">
+<nav id="navbar" class="bg-{{ app('theme')->background }} lg:h-24 my-8 lg:my-0 md:w-5/6 md:mx-auto">
     <div class="mx-auto h-full">
         <div class="lg:flex items-center justify-between lg:h-24">
             <div class="lg:mr-6 block text-center">

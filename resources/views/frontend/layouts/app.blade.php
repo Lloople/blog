@@ -11,7 +11,7 @@
     @include('frontend.components.google_analytics')
 
     @yield('extra-headers')
-    <link href="{{ asset('css/frontend.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/frontend.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
 <body class="bg-{{ app('theme')->background }} h-screen">
@@ -58,9 +58,9 @@
         search_key: "{{ config('scout.algolia.secret') }}"
     }
 </script>
-<script src="{{ asset('js/manifest.js') }}"></script>
-<script src="{{ asset('js/vendor.js') }}"></script>
-<script src="{{ asset('js/frontend.js') }}"></script>
+<script src="{{ mix('/js/manifest.js') }}"></script>
+<script src="{{ mix('/js/vendor.js') }}"></script>
+<script src="{{ mix('/js/frontend.js') }}"></script>
 
 @yield('scripts')
 </body>

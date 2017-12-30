@@ -15,6 +15,8 @@ mix
         ]
     })
 
+    .version()
+
     .extract(['lodash', 'axios', 'vue', 'babel-regenerator-runtime', 'simplemde']);
 
 

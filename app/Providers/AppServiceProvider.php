@@ -14,25 +14,30 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+       //
     }
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
     public function register()
     {
         $this->app->singleton('theme', function () {
-            $selectedTheme = Theme::where('selected', true)->first();
-
-            if ($selectedTheme === null) {
-                return Theme::first();
-            }
-
-            return $selectedTheme;
+           return $this->getSelectedTheme();
         });
+    }
+
+    private function getSelectedTheme()
+    {
+        $theme = Theme::where('selected', true)->first();
+
+        if ($theme === null) {
+            $theme = Theme::first();
+        }
+
+        if ($theme === null) {
+            $theme = factory(Theme::class)->create();
+
+        }
+
+        return $theme;
     }
 
 }

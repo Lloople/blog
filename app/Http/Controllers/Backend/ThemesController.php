@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryFormRequest;
 use App\Http\Requests\ThemeFormRequest;
 use App\Http\Resources\ThemeResource;
 use App\Models\Theme;
@@ -58,7 +57,7 @@ class ThemesController extends Controller
         $theme->save();
 
         if ($theme->selected) {
-            Theme::disableExcept($theme);
+            $theme->disableOtherThemes();
         }
 
         Notificator::success('Theme created successfully');
@@ -98,7 +97,7 @@ class ThemesController extends Controller
         $theme->save();
 
         if ($theme->selected) {
-            Theme::disableExcept($theme);
+            $theme->disableOtherThemes();
         }
 
         Notificator::success('Theme edited successfully');

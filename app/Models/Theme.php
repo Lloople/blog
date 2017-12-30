@@ -26,8 +26,8 @@ class Theme extends Model
         $this->tags_list_background = $array['tags_list_background'] ?? 'black';
     }
 
-    public static function disableExcept(Theme $theme)
+    public function disableOtherThemes()
     {
-        \DB::table('themes')->where('id', '!=', $theme->id)->update(['selected' => false]);
+        \DB::table('themes')->where('id', '!=', $this->id)->update(['selected' => false]);
     }
 }

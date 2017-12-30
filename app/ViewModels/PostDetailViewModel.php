@@ -9,6 +9,16 @@ use Illuminate\Support\Carbon;
 class PostDetailViewModel extends FormViewModel
 {
 
+    public function __construct(Post $post)
+    {
+        parent::__construct($post);
+
+        $this->published_at = $this->model->exists
+            ? $this->model->published_at->format('Y-m-d\TH:i')
+            : Carbon::now()->format('Y-m-d\TH:i');
+
+        $this->categories = Category::select('id', 'name')->get();
+    }
 
     protected function setTitle()
     {
@@ -29,16 +39,5 @@ class PostDetailViewModel extends FormViewModel
         $this->method = $this->model->exists
             ? 'PUT'
             : 'POST';
-    }
-
-    public function __construct(Post $post)
-    {
-        parent::__construct($post);
-
-        $this->published_at = $this->model->exists
-            ? $this->model->published_at->format('Y-m-d\TH:i')
-            : Carbon::now()->format('Y-m-d\TH:i');
-
-        $this->categories = Category::select('id', 'name')->get();
     }
 }

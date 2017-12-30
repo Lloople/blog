@@ -29,6 +29,11 @@ class Post extends Model
         return (new \Parsedown())->text($this->body);
     }
 
+    public function getBodyRawAttribute()
+    {
+        return strip_tags($this->body_markdown);
+    }
+
     public function getUrlAttribute()
     {
         return route('posts.show', $this->slug);

@@ -101,32 +101,24 @@ class CategoriesController extends Controller
      */
     public function destroy(Request $request, Category $category)
     {
-        if ($category->posts->count()) {
-            if ($request->ajax()) {
-                return [
-                    'result'  => false,
-                    'message' => 'Cannot delete this category because it has posts.'
-                ];
-            }
-
-            Notificator::error('Cannot delete this category because it has posts.');
-
-            return back();
+        if ($canDelete = $category->posts->count() === 0) {
+            $category->delete();
         }
 
-        $category->delete();
+        $message = $canDelete
+            ? 'Category deleted successfully.'
+            : 'Cannot delete this category because it has posts.';
 
         if ($request->ajax()) {
-
-            return [
-                'result' => true,
-                'message' => 'Category deleted successfully.'
-            ];
+            return ['result' => $canDelete, 'message' => $message];
         }
 
-        Notificator::success('Category deleted successfully.');
+        $notificationType = $canDelete ? 'success' : 'error';
+
+        Notificator::$notificationType($message);
 
         return redirect()->route('backend.categories.index');
+
     }
 
     public function resource(Request $request)

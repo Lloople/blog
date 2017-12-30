@@ -9,7 +9,7 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
         'slug' => $faker->slug,
-        'body' => $faker->realText(400),
+        'body' => $faker->sentence(10),
         'category_id' => factory(Category::class)->create(),
         'visible' => true,
         'published_at' => $faker->dateTime(),

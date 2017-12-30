@@ -19,7 +19,7 @@
                 </ul>
             </div>
             <div class="lg:mx-0 lg:pin-r p-2">
-                <img src="img/algolia_search.svg" alt="Search by Algolia">
+                <img src="/img/algolia_search.svg" alt="Search by Algolia">
             </div>
         </div>
     </div>
@@ -38,18 +38,24 @@
         },
 
         created() {
-            const client = algoliasearch(window.algolia.app_id, window.algolia.search_key);
+            if (window.algolia.app_id) {
+                const client = algoliasearch(window.algolia.app_id, window.algolia.search_key);
 
-            this.index = client.initIndex('posts');
+                this.index = client.initIndex('posts');
+            }
         },
 
         methods: {
             search(e) {
-                this.index.search({
-                    query: this.query
-                }, (error, response) => {
-                    this.results = response.hits;
-                })
+                if (this.index) {
+                    this.index.search({
+                        query: this.query
+                    }, (error, response) => {
+                        this.results = response.hits;
+                    })
+                } else {
+                    console.log('No Algolia account was configured');
+                }
             }
         }
     }

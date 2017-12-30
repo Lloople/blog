@@ -19,6 +19,7 @@ class TagsController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->posts()->sync([]);
+
         $tag->delete();
 
         return [
