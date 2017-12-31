@@ -9,44 +9,38 @@
         {{ method_field($view->method) }}
         {{ csrf_field() }}
         
-        {!! $view->inputText('title', 'Title') !!}
-    
-        <div class="form-horizontal-field">
-            <div class="w-full md:w-1/5">
-                <label for="published_at" class="form-horizontal-label">Publish Date</label>
-            </div>
-            <div class="w-full md:w-3/5">
-                <input id="published_at" type="datetime-local" name="published_at" class="form-input" value="{{ old('published_at', $view->published_at) }}">
-                @if ($errors->has('published_at'))
-                    <p class="text-red block">{{ implode('<br>', $errors->get('published_at')) }}</p>
-                @endif
-            </div>
-        </div>
-    
-        <div class="form-horizontal-field">
-            <div class="w-full md:w-1/5">
-                <label for="category" class="form-horizontal-label">Category</label>
-            </div>
-            <select id="category" name="category" class="w-full md:w-3/5 form-input">
-                @foreach($view->categories as $category)
-                    <option value="{{ $category->id }}" {{ $category->id === $view->model->category_id ? 'selected' : '' }}>
-                        {{ $category->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-    
-        <div class="form-horizontal-field ">
-            <div class="w-full md:w-1/5">
-                <label for="tags" class="form-horizontal-label">Tags</label>
-            </div>
-            <input id="tags" name="tags" class="w-full md:w-3/5 form-input" value="{{ old('tags', $view->model->tags->implode('name', ', ')) }}">
-        </div>
-    
-        {!! $view->inputCheckbox('featured', 'Featured') !!}
+        @include('backend.partials.form.text', [
+            'name' => 'title',
+            'value' => old('title', $view->model->title),
+        ])
         
-        {!! $view->inputCheckbox('visible', 'Visible') !!}
+        @include('backend.partials.form.datetime', [
+            'name' => 'published_at',
+            'label' => 'Publish Date',
+            'value' => old('published_at', $view->published_at)
+        ])
+        
+        @include('backend.partials.form.select', [
+            'name' => 'category',
+            'options' => $view->categories,
+            'selected' => $view->model->category_id
+        ])
     
+        @include('backend.partials.form.text', [
+            'name' => 'tags',
+            'value' => $view->tags
+        ])
+        
+        @include('backend.partials.form.checkbox', [
+            'name' => 'featured',
+            'checked' => $view->model->featured
+        ])
+    
+        @include('backend.partials.form.checkbox', [
+            'name' => 'visible',
+            'checked' => $view->model->visible
+        ])
+        
         <div class="form-horizontal-field">
             <div class="w-full md:w-1/5">
                 <label for="body" class="form-horizontal-label">Body</label>

@@ -28,24 +28,4 @@ abstract class FormViewModel
     protected abstract function setAction();
 
     protected abstract function setMethod();
-
-    public function inputText($field, $label, $id = null)
-    {
-        return $this->inputForm('text', $field, $label, $id);
-    }
-
-    public function inputCheckbox($field, $label, $id = null)
-    {
-        return $this->inputForm('checkbox', $field, $label, $id);
-    }
-
-    private function inputForm($input, $field, $label, $id)
-    {
-        return view('backend.partials.form.'.$input, [
-            'name' => $field,
-            'label' => $label,
-            'value' => $this->model->{$field},
-            'id' => $id ?? $field
-        ])->render();
-    }
 }

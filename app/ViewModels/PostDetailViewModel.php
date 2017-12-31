@@ -17,7 +17,9 @@ class PostDetailViewModel extends FormViewModel
             ? $this->model->published_at->format('Y-m-d\TH:i')
             : Carbon::now()->format('Y-m-d\TH:i');
 
-        $this->categories = Category::select('id', 'name')->get();
+        $this->categories = Category::select('id', 'name')->pluck('name', 'id');
+
+        $this->tags = $this->model->tags->implode('name', ', ');
     }
 
     protected function setTitle()

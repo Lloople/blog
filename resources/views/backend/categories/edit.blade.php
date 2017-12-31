@@ -9,9 +9,15 @@
         {{ method_field($view->method) }}
         {{ csrf_field() }}
         
-        {!! $view->inputText('name', 'Name') !!}
-
-        {!! $view->inputCheckbox('active', 'Active') !!}
+        @include('backend.partials.form.text', [
+            'name' => 'name',
+            'value' => $view->model->name
+        ])
+        
+        @include('backend.partials.form.checkbox', [
+            'name' => 'active',
+            'checked' => $view->model->active
+        ])
         
         <div class="form-horizontal-field float-right">
             <button class="button text-lg bg-green p-4 float-right mr-2">

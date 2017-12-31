@@ -9,29 +9,91 @@
         {{ method_field($view->method) }}
         {{ csrf_field() }}
         
-        {!! $view->inputText('name', 'Name') !!}
-        {!! $view->inputCheckbox('selected', 'Active') !!}
+        @include('backend.partials.form.text', [
+            'name' => 'name',
+            'value' => $view->model->name
+        ])
         
+        @include('backend.partials.form.checkbox', [
+            'name' => 'selected',
+            'label' => 'Active',
+            'checked' => $view->model->selected
+        ])
     
         <h2>Main layout</h2>
-        {!! $view->inputText('background', 'Background color') !!}
-        {!! $view->inputText('container_background', 'Container background color') !!}
-        {!! $view->inputText('title', 'Title text color') !!}
-        {!! $view->inputText('text', 'Text color') !!}
-
+        @include('backend.partials.form.text', [
+            'name' => 'background',
+            'label' => 'Background color',
+            'value' => $view->model->background
+        ])
+    
+        @include('backend.partials.form.text', [
+            'name' => 'container_background',
+            'label' => 'Container background color',
+            'value' => $view->model->container_background
+        ])
+    
+        @include('backend.partials.form.text', [
+            'name' => 'title',
+            'label' => 'Title color',
+            'value' => $view->model->title
+        ])
+    
+        @include('backend.partials.form.text', [
+            'name' => 'text',
+            'label' => 'Text color',
+            'value' => $view->model->text
+        ])
+        
         <h2>Menu</h2>
-        {!! $view->inputText('menu_item_text', 'Item text color') !!}
-        {!! $view->inputText('menu_item_background', 'Item background color') !!}
-        {!! $view->inputText('menu_item_active_text', 'Active item text color') !!}
-        {!! $view->inputText('menu_item_active_background', 'Active item background color') !!}
+        @include('backend.partials.form.text', [
+            'name' => 'menu_item_text',
+            'label' => 'Item text color',
+            'value' => $view->model->menu_item_text
+        ])
+        
+        @include('backend.partials.form.text', [
+            'name' => 'menu_item_background',
+            'label' => 'Item background color',
+            'value' => $view->model->menu_item_background
+        ])
+    
+        @include('backend.partials.form.text', [
+            'name' => 'menu_item_active_text',
+            'label' => 'Active item text color',
+            'value' => $view->model->menu_item_active_text
+        ])
+    
+        @include('backend.partials.form.text', [
+            'name' => 'menu_item_active_background',
+            'label' => 'Active item background color',
+            'value' => $view->model->menu_item_active_background
+        ])
 
         <h2>Categories</h2>
-        {!! $view->inputText('categories_list_text', 'Text color') !!}
-        {!! $view->inputText('categories_list_background', 'Background color') !!}
+        @include('backend.partials.form.text', [
+            'name' => 'categories_list_text',
+            'label' => 'Text color',
+            'value' => $view->model->categories_list_text
+        ])
     
+        @include('backend.partials.form.text', [
+            'name' => 'categories_list_background',
+            'label' => 'Background color',
+            'value' => $view->model->categories_list_background
+        ])
+        
         <h2>Tags</h2>
-        {!! $view->inputText('tags_list_text', 'Text color') !!}
-        {!! $view->inputText('tags_list_background', 'Background color') !!}
+        @include('backend.partials.form.text', [
+            'name' => 'tags_list_text',
+            'label' => 'Text color',
+            'value' => $view->model->tags_list_text
+        ])
+        @include('backend.partials.form.text', [
+            'name' => 'tags_list_background',
+            'label' => 'Background color',
+            'value' => $view->model->tags_list_background
+        ])
     
         <div class="form-horizontal-field float-right">
             <button class="button text-lg bg-green p-4 float-right mr-2">
