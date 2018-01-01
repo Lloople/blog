@@ -21,7 +21,7 @@ class TagsController extends Controller
     {
         $data = [
             'tag' => $slug,
-            'posts' => Post::published()->visible()->whereHasTag($slug)->paginate(25),
+            'posts' => Post::published()->visible()->whereHasTag($slug)->recentsFirst()->paginate(25),
         ];
 
         return view('frontend.tags.show', $data);

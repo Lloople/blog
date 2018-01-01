@@ -59,6 +59,11 @@ class Post extends Model
         return $query->where('featured', true);
     }
 
+    public function scopeRecentsFirst($query)
+    {
+        return $query->orderBy('published_at', 'DESC');
+    }
+
     public function scopeWhereHasTag($query, ...$tags)
     {
         return $query->whereHas('tags', function ($queryTags) use ($tags) {

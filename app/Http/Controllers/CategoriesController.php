@@ -24,6 +24,7 @@ class CategoriesController extends Controller
 
         $data = [
             'category' => $category,
+            'posts' => $category->posts()->published()->visible()->recentsFirst()->get()
         ];
 
         return view('frontend.categories.show', $data);
