@@ -47,3 +47,7 @@
     <meta name="twitter:image" content="{{ url('img/thumbnail.jpg') }}"/>
     <meta name="twitter:creator" content="{{ config('blog.twitter_username') }}"/>
 @endsection
+
+@section('scripts')
+
+@endsection
