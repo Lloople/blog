@@ -18,6 +18,14 @@
   @apply py-4;
 }
 
+.post-content > pre {
+  @apply p-4 bg-grey-lighter overflow-x-scroll;
+}
+
+p > code {
+  @apply bg-grey-lighter;
+}
+
 .post-content blockquote {
   @apply border-l-8 border-grey-lighter pl-4;
 }
