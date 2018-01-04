@@ -19,7 +19,7 @@
 }
 
 .post-content > pre {
-  @apply p-4 bg-grey-lighter overflow-x-scroll;
+  @apply p-4 bg-grey-lighter overflow-x-scroll whitespace-pre-wrap;
 }
 
 p > code {
