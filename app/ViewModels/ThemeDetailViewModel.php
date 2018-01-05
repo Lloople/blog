@@ -4,12 +4,11 @@ namespace App\ViewModels;
 
 class ThemeDetailViewModel extends FormViewModel
 {
-
     protected function setTitle()
     {
         $this->title = $this->model->exists
             ? "Edit Theme: {$this->model->name}"
-            : "Create Theme";
+            : 'Create Theme';
     }
 
     protected function setAction()

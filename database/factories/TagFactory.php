@@ -10,5 +10,4 @@ $factory->define(Tag::class, function (Faker $faker) {
         'name' => $color,
         'slug' => strtolower($color),
     ];
-
 });

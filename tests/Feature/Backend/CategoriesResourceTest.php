@@ -2,13 +2,12 @@
 
 namespace Tests\Feature\Backend;
 
-use App\Http\Middleware\VerifyCsrfToken;
 use App\Models\Post;
 use Tests\BackendTestCase;
+use App\Http\Middleware\VerifyCsrfToken;
 
 class CategoriesResourceTest extends BackendTestCase
 {
-
     /** @test */
     public function cannot_delete_a_category_with_associated_posts()
     {
@@ -27,7 +26,5 @@ class CategoriesResourceTest extends BackendTestCase
         $this->actingAs($this->user)->delete(route('backend.categories.destroy', $category));
 
         $this->assertEquals('success', collect(session('notifications'))->first()->getType());
-
     }
-
 }

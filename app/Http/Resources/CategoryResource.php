@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
-use Illuminate\Support\Str;
 
 class CategoryResource extends Resource
 {
@@ -21,7 +20,7 @@ class CategoryResource extends Resource
             'url_delete' => route('backend.categories.destroy', $this),
             'name' => $this->name,
             'created_at' => $this->created_at->format('Y-m-d H:i'),
-            'active' => $this->active
+            'active' => $this->active,
         ];
     }
 }

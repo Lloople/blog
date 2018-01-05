@@ -15,7 +15,6 @@ Route::get('/tags/{slug}', 'TagsController@show')->name('tags.show');
 Auth::routes();
 
 Route::group(['prefix' => 'backend', 'middleware' => 'auth', 'as' => 'backend.'], function () {
-
     Route::redirect('', 'backend/posts');
 
     Route::resource('posts', 'Backend\PostsController', ['except' => 'show']);
@@ -30,6 +29,3 @@ Route::group(['prefix' => 'backend', 'middleware' => 'auth', 'as' => 'backend.']
         Route::get('themes', 'Backend\ThemesController@resource');
     });
 });
-
-
-

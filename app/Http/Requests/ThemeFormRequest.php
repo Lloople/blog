@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class ThemeFormRequest extends FormRequest
 {
@@ -29,8 +29,8 @@ class ThemeFormRequest extends FormRequest
                 'required',
                 $this->route('theme')
                     ? Rule::unique('themes')->ignore($this->route('theme')->id)
-                    : 'unique:themes,name'
-            ]
+                    : 'unique:themes,name',
+            ],
         ];
     }
 }

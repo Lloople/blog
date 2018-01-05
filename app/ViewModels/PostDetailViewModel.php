@@ -2,13 +2,12 @@
 
 namespace App\ViewModels;
 
-use App\Models\Category;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Carbon;
 
 class PostDetailViewModel extends FormViewModel
 {
-
     public function __construct(Post $post)
     {
         parent::__construct($post);
@@ -24,7 +23,7 @@ class PostDetailViewModel extends FormViewModel
     {
         $this->title = $this->model->exists
             ? "Edit Post: {$this->model->title}"
-            : "Create Post";
+            : 'Create Post';
     }
 
     protected function setAction()
