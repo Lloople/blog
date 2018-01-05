@@ -14,13 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       //
+        //
     }
 
     public function register()
     {
         $this->app->singleton('theme', function () {
-           return $this->getSelectedTheme();
+            return $this->getSelectedTheme();
         });
     }
 
@@ -34,10 +34,8 @@ class AppServiceProvider extends ServiceProvider
 
         if ($theme === null) {
             $theme = factory(Theme::class)->create();
-
         }
 
         return $theme;
     }
-
 }

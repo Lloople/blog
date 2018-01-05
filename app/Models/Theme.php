@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Theme extends Model
 {
-
     public function updateColors($array)
     {
         $this->background = $array['background'] ?? 'white';

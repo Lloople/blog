@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Str;
+use Illuminate\Http\Resources\Json\Resource;
 
 class PostResource extends Resource
 {
@@ -23,7 +23,7 @@ class PostResource extends Resource
             'title' => Str::words($this->title, 5),
             'category' => $this->category->name,
             'tags' => $this->tags->take(3)->implode('name', ', '),
-            'published_at' => $this->published_at->format('Y-m-d H:i')
+            'published_at' => $this->published_at->format('Y-m-d H:i'),
         ];
     }
 }

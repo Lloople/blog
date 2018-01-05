@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class FormViewModel
 {
-
     public $model;
     public $title;
     public $action;
@@ -23,11 +22,11 @@ abstract class FormViewModel
         $this->setMethod();
     }
 
-    protected abstract function setTitle();
+    abstract protected function setTitle();
 
-    protected abstract function setAction();
+    abstract protected function setAction();
 
-    protected abstract function setMethod();
+    abstract protected function setMethod();
 
     public function inputText($field, $label, $id = null)
     {
@@ -45,7 +44,7 @@ abstract class FormViewModel
             'name' => $field,
             'label' => $label,
             'value' => $this->model->{$field},
-            'id' => $id ?? $field
+            'id' => $id ?? $field,
         ])->render();
     }
 }

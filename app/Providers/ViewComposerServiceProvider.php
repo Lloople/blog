@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Http\ViewComposers\NavbarMenuViewComposer;
-use App\Http\ViewComposers\SidebarCategoriesViewComposer;
-use App\Http\ViewComposers\SidebarFeaturedPostsViewComposer;
-use App\Http\ViewComposers\SidebarTagsViewComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\Http\ViewComposers\NavbarMenuViewComposer;
+use App\Http\ViewComposers\SidebarTagsViewComposer;
+use App\Http\ViewComposers\SidebarCategoriesViewComposer;
+use App\Http\ViewComposers\SidebarFeaturedPostsViewComposer;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -32,6 +32,5 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 }

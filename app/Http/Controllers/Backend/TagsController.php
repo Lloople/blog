@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Resources\TagResource;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Resources\TagResource;
 use App\Http\Controllers\Controller;
 
 class TagsController extends Controller
@@ -24,7 +24,7 @@ class TagsController extends Controller
 
         return [
             'result' => true,
-            'message' => 'Tag deleted successfully'
+            'message' => 'Tag deleted successfully',
         ];
     }
 
@@ -38,5 +38,4 @@ class TagsController extends Controller
 
         return TagResource::collection($tags->orderBy('name')->paginate($this->pagination));
     }
-
 }

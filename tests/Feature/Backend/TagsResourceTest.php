@@ -2,14 +2,13 @@
 
 namespace Tests\Feature\Backend;
 
-use App\Http\Middleware\VerifyCsrfToken;
-use App\Models\Post;
 use App\Models\Tag;
+use App\Models\Post;
 use Tests\BackendTestCase;
+use App\Http\Middleware\VerifyCsrfToken;
 
 class TagsResourceTest extends BackendTestCase
 {
-
     /** @test */
     public function can_delete_tag()
     {

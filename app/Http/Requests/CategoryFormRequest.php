@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class CategoryFormRequest extends FormRequest
 {
@@ -29,8 +29,8 @@ class CategoryFormRequest extends FormRequest
                 'required',
                 $this->route('category')
                     ? Rule::unique('categories')->ignore($this->route('category')->id)
-                    : 'unique:categories,name'
-            ]
+                    : 'unique:categories,name',
+            ],
         ];
     }
 }
