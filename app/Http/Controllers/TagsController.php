@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\Tag;
+use App\Models\Post;
 
 class TagsController extends Controller
 {
-
     public function index()
     {
         $data = [
-            'tags' => Tag::orderBy('name')->get()
+            'tags' => Tag::orderBy('name')->get(),
         ];
 
         return view('frontend.tags.index', $data);

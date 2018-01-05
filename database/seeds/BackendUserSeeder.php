@@ -14,7 +14,7 @@ class BackendUserSeeder extends Seeder
         factory(\App\Models\User::class)->create([
             'name' => 'Administrator',
             'email' => 'admin@blog.test',
-            'password' => bcrypt('admin')
+            'password' => bcrypt('admin'),
         ]);
     }
 }

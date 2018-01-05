@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests\PostFormRequest;
-use App\Http\Resources\PostResource;
-use App\Models\Post;
-use App\ViewModels\PostDetailViewModel;
 use Carbon\Carbon;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use Lloople\Notificator\Notificator;
+use App\Http\Requests\PostFormRequest;
+use App\ViewModels\PostDetailViewModel;
 
 class PostsController extends Controller
 {
-
     private $pagination = 15;
 
     /**
@@ -34,7 +33,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('backend.posts.edit', [ 'view' => new PostDetailViewModel(new Post())]);
+        return view('backend.posts.edit', ['view' => new PostDetailViewModel(new Post())]);
     }
 
     /**
@@ -73,7 +72,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('backend.posts.edit', [ 'view' => new PostDetailViewModel($post)]);
+        return view('backend.posts.edit', ['view' => new PostDetailViewModel($post)]);
     }
 
     /**
@@ -119,10 +118,9 @@ class PostsController extends Controller
         $post->delete();
 
         if ($request->ajax()) {
-
             return [
                 'result' => true,
-                'message' => 'Post deleted successfully.'
+                'message' => 'Post deleted successfully.',
             ];
         }
 

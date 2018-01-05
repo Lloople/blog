@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests\CategoryFormRequest;
-use App\Http\Resources\CategoryResource;
 use App\Models\Category;
-use App\ViewModels\CategoryDetailViewModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Lloople\Notificator\Notificator;
+use App\Http\Resources\CategoryResource;
+use App\Http\Requests\CategoryFormRequest;
+use App\ViewModels\CategoryDetailViewModel;
 
 class CategoriesController extends Controller
 {
-
     private $pagination = 50;
 
     /**
@@ -33,7 +32,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('backend.categories.edit', [ 'view' => new CategoryDetailViewModel(new Category())]);
+        return view('backend.categories.edit', ['view' => new CategoryDetailViewModel(new Category())]);
     }
 
     /**
@@ -66,7 +65,7 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('backend.categories.edit', [ 'view' => new CategoryDetailViewModel($category)]);
+        return view('backend.categories.edit', ['view' => new CategoryDetailViewModel($category)]);
     }
 
     /**
@@ -118,7 +117,6 @@ class CategoriesController extends Controller
         Notificator::$notificationType($message);
 
         return redirect()->route('backend.categories.index');
-
     }
 
     public function resource(Request $request)

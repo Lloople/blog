@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
-use Illuminate\Support\Str;
 
 class ThemeResource extends Resource
 {
@@ -21,7 +20,7 @@ class ThemeResource extends Resource
             'url_delete' => route('backend.themes.destroy', $this),
             'name' => $this->name,
             'selected' => $this->selected,
-            'created_at' => $this->created_at->format('Y-m-d H:i')
+            'created_at' => $this->created_at->format('Y-m-d H:i'),
         ];
     }
 }

@@ -2,17 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Models\Post;
-use App\Models\Theme;
 use Carbon\Carbon;
 use Tests\TestCase;
+use App\Models\Post;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class VisitHomeTest extends TestCase
 {
-
     use RefreshDatabase;
-
 
     /** @test */
     public function can_visit_home_page()
@@ -27,7 +24,7 @@ class VisitHomeTest extends TestCase
     {
         factory(Post::class)->create([
             'featured' => true,
-            'title' => 'Dummy Featured Post'
+            'title' => 'Dummy Featured Post',
         ]);
 
         $response = $this->get('/');
@@ -43,19 +40,19 @@ class VisitHomeTest extends TestCase
         factory(Post::class)->create([
             'title' => 'Published Post',
             'visible' => true,
-            'published_at' => Carbon::yesterday()
+            'published_at' => Carbon::yesterday(),
         ]);
 
         factory(Post::class)->create([
             'title' => 'Unpublished Post',
             'visible' => true,
-            'published_at' => Carbon::tomorrow()
+            'published_at' => Carbon::tomorrow(),
         ]);
 
         factory(Post::class)->create([
             'title' => 'Unactive Post',
             'visible' => false,
-            'published_at' => Carbon::yesterday()
+            'published_at' => Carbon::yesterday(),
         ]);
 
         $response = $this->get('/');

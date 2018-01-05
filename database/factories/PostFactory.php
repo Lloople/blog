@@ -1,11 +1,10 @@
 <?php
 
-use App\Models\Category;
 use App\Models\Post;
+use App\Models\Category;
 use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
-
     return [
         'title' => $faker->sentence,
         'slug' => $faker->slug,

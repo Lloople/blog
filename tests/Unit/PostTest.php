@@ -2,18 +2,16 @@
 
 namespace Tests\Unit;
 
-use App\Models\Category;
-use App\Models\Post;
 use App\Models\Tag;
-use Illuminate\Support\Carbon;
 use Tests\TestCase;
+use App\Models\Post;
+use App\Models\Category;
+use Illuminate\Support\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PostTest extends TestCase
 {
-
     use RefreshDatabase;
-
 
     /** @test */
     public function can_filter_posts_by_published_date()
@@ -52,8 +50,8 @@ class PostTest extends TestCase
         $post->tags()->sync([
             factory(Tag::class)->create([
                 'name' => 'First Tag',
-                'slug' => 'first-tag'
-            ])->id
+                'slug' => 'first-tag',
+            ])->id,
         ]);
 
         $this->assertEquals(1, Post::whereHasTag('first-tag')->count());
@@ -65,7 +63,7 @@ class PostTest extends TestCase
         factory(Post::class)->create([
             'title' => 'Post title',
             'body' => 'Post body content',
-            'published_at' => '2018-09-09 12:12:12'
+            'published_at' => '2018-09-09 12:12:12',
         ]);
 
         $this->assertEquals(1, Post::searchLike('title')->count());
@@ -80,8 +78,8 @@ class PostTest extends TestCase
 
         $post->tags()->sync([
             factory(Tag::class)->create([
-                'name' => 'Tag name'
-            ])->id
+                'name' => 'Tag name',
+            ])->id,
         ]);
 
         $this->assertEquals(1, Post::searchLike('Tag name')->count());
@@ -93,8 +91,8 @@ class PostTest extends TestCase
     {
         factory(Post::class)->create([
             'category_id' => factory(Category::class)->create([
-                'name' => 'Category name'
-            ])
+                'name' => 'Category name',
+            ]),
         ]);
 
         $this->assertEquals(1, Post::searchLike('Category name')->count());

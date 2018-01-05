@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ThemeFormRequest;
-use App\Http\Resources\ThemeResource;
 use App\Models\Theme;
-use App\ViewModels\ThemeDetailViewModel;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Lloople\Notificator\Notificator;
+use App\Http\Resources\ThemeResource;
+use App\Http\Requests\ThemeFormRequest;
+use App\ViewModels\ThemeDetailViewModel;
 
 class ThemesController extends Controller
 {
-
     private $pagination = 50;
 
     /**
@@ -87,7 +86,6 @@ class ThemesController extends Controller
      */
     public function update(ThemeFormRequest $request, Theme $theme)
     {
-
         $theme->name = $request->name;
 
         $theme->selected = $request->has('selected');
@@ -116,12 +114,11 @@ class ThemesController extends Controller
      */
     public function destroy(Request $request, Theme $theme)
     {
-
         if ($theme->selected) {
             if ($request->ajax()) {
                 return [
                     'result' => false,
-                    'message' => 'Default theme cannot be deleted.'
+                    'message' => 'Default theme cannot be deleted.',
                 ];
             }
 
@@ -133,7 +130,6 @@ class ThemesController extends Controller
         $theme->delete();
 
         if ($request->ajax()) {
-
             return [
                 'result'  => true,
                 'message' => 'Theme deleted successfully.',

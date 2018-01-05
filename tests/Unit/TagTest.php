@@ -2,16 +2,12 @@
 
 namespace Tests\Unit;
 
-use App\Models\Category;
-use App\Models\Post;
 use App\Models\Tag;
-use Illuminate\Support\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TagTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /** @test */

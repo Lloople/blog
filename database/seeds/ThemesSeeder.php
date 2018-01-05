@@ -5,7 +5,6 @@ use Illuminate\Database\Seeder;
 
 class ThemesSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -21,7 +20,6 @@ class ThemesSeeder extends Seeder
 
         $themes->each(function ($theme) {
             factory(Theme::class)->create($theme);
-
         });
     }
 }

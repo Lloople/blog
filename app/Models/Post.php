@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Traits\Sluggable;
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
@@ -71,7 +71,8 @@ class Post extends Model
         });
     }
 
-    public function scopeSearchLike($query, $search) {
+    public function scopeSearchLike($query, $search)
+    {
         return $query->where(function ($post) use ($search) {
             return $post->where('title', 'like', "%{$search}%")
                 ->orWhere('published_at', 'like', "%{$search}%")
@@ -91,7 +92,6 @@ class Post extends Model
             $tag = Tag::findOrCreateByName(trim($rawTag));
 
             return $tag;
-
         });
 
         $this->tags()->sync($tags->pluck('id')->toArray());
@@ -111,8 +111,7 @@ class Post extends Model
             'title' => $this->title,
             'slug' => $this->slug,
             'body' => $this->body,
-            'published_at' => $this->published_at
+            'published_at' => $this->published_at,
         ];
     }
-
 }
