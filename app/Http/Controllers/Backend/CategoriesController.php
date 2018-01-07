@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryFormRequest;
-use App\Http\Resources\CategoryResource;
 use App\Models\Category;
-use App\ViewModels\CategoryDetailViewModel;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Lloople\Notificator\Notificator;
+use App\Http\Resources\CategoryResource;
+use App\Http\Requests\CategoryFormRequest;
+use App\ViewModels\CategoryDetailViewModel;
 
 class CategoriesController extends Controller
 {
