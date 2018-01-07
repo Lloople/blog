@@ -41,7 +41,7 @@ class PostsController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PostFormRequest $request)
     {
@@ -81,7 +81,7 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  Post $post
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(PostFormRequest $request, Post $post)
     {

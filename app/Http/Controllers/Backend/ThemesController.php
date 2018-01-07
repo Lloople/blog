@@ -41,7 +41,7 @@ class ThemesController extends Controller
      *
      * @param  ThemeFormRequest $request
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ThemeFormRequest $request)
     {
@@ -82,7 +82,7 @@ class ThemesController extends Controller
      * @param  \App\Http\Requests\ThemeFormRequest $request
      * @param  \App\Models\Theme $theme
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ThemeFormRequest $request, Theme $theme)
     {

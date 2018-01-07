@@ -40,7 +40,7 @@ class CategoriesController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CategoryFormRequest $request)
     {
@@ -74,7 +74,7 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  \App\Models\Category $category
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(CategoryFormRequest $request, Category $category)
     {
