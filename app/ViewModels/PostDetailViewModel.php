@@ -2,8 +2,8 @@
 
 namespace App\ViewModels;
 
-use App\Models\Post;
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Support\Carbon;
 
 class PostDetailViewModel extends FormViewModel

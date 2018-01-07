@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Carbon\Carbon;
-use App\Models\Post;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PostResource;
-use Lloople\Notificator\Notificator;
 use App\Http\Requests\PostFormRequest;
+use App\Http\Resources\PostResource;
+use App\Models\Post;
 use App\ViewModels\PostDetailViewModel;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Lloople\Notificator\Notificator;
 
 class PostsController extends Controller
 {
@@ -41,7 +41,7 @@ class PostsController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PostFormRequest $request)
     {
@@ -81,7 +81,7 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  Post $post
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(PostFormRequest $request, Post $post)
     {
