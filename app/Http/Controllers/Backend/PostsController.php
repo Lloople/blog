@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\PostFormRequest;
-use App\Http\Resources\PostResource;
-use App\Models\Post;
-use App\ViewModels\PostDetailViewModel;
 use Carbon\Carbon;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use Lloople\Notificator\Notificator;
+use App\Http\Requests\PostFormRequest;
+use App\ViewModels\PostDetailViewModel;
 
 class PostsController extends Controller
 {

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ThemeFormRequest;
-use App\Http\Resources\ThemeResource;
 use App\Models\Theme;
-use App\ViewModels\ThemeDetailViewModel;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Lloople\Notificator\Notificator;
+use App\Http\Resources\ThemeResource;
+use App\Http\Requests\ThemeFormRequest;
+use App\ViewModels\ThemeDetailViewModel;
 
 class ThemesController extends Controller
 {
