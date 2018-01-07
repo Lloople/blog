@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Theme;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Lloople\Notificator\Notificator;
-use App\Http\Resources\ThemeResource;
 use App\Http\Requests\ThemeFormRequest;
+use App\Http\Resources\ThemeResource;
+use App\Models\Theme;
 use App\ViewModels\ThemeDetailViewModel;
+use Illuminate\Http\Request;
+use Lloople\Notificator\Notificator;
 
 class ThemesController extends Controller
 {
@@ -41,7 +41,7 @@ class ThemesController extends Controller
      *
      * @param  ThemeFormRequest $request
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ThemeFormRequest $request)
     {
@@ -82,7 +82,7 @@ class ThemesController extends Controller
      * @param  \App\Http\Requests\ThemeFormRequest $request
      * @param  \App\Models\Theme $theme
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ThemeFormRequest $request, Theme $theme)
     {

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Lloople\Notificator\Notificator;
-use App\Http\Resources\CategoryResource;
 use App\Http\Requests\CategoryFormRequest;
+use App\Http\Resources\CategoryResource;
+use App\Models\Category;
 use App\ViewModels\CategoryDetailViewModel;
+use Illuminate\Http\Request;
+use Lloople\Notificator\Notificator;
 
 class CategoriesController extends Controller
 {
@@ -40,7 +40,7 @@ class CategoriesController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CategoryFormRequest $request)
     {
@@ -74,7 +74,7 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  \App\Models\Category $category
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(CategoryFormRequest $request, Category $category)
     {
