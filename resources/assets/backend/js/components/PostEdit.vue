@@ -13,11 +13,7 @@
         mounted() {
             var editor = new SimpleMDE({
                 element: document.querySelector('#body'),
-                spellChecker: true,
-                autosave: {
-                    enabled: true,
-                    uniqueId: window.location,
-                },
+                spellChecker: true
             });
         }
     }

@@ -14,6 +14,7 @@
         window.resource = {
             resource: 'posts',
             actions: {
+                preview: true,
                 edit  : true,
                 delete: true
             },

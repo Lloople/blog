@@ -26,8 +26,11 @@
             ></table-column>
         </template>
 
-        <table-column v-show="actions.edit || actions.delete" label="" cell-class="text-center">
+        <table-column v-show="actions.preview || actions.edit || actions.delete" label="" cell-class="text-center">
             <template slot-scope="row">
+                <a v-show="actions.preview" :href="`${row.url}`" target="_blank" class="button text-xs bg-blue">
+                    <span class="fa fa-fw fa-eye"></span>
+                </a>
                 <a v-show="actions.edit" :href="`${row.url_edit}`" class="button text-xs bg-green">
                     <span class="fa fa-fw fa-pencil"></span>
                 </a>
