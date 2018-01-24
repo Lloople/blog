@@ -5,8 +5,8 @@
         Recent posts
     @endcomponent
 
-    <div class="flex flex-wrap posts-list">
-        @each('frontend.components.post-list.post', $posts, 'post')
+    <div class="flex flex-wrap">
+        @each('frontend.components.post-list', $posts, 'post')
     </div>
     
     <div class="mb-8">

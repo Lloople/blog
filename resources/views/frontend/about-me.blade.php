@@ -3,7 +3,9 @@
 @section('content')
     @component('frontend.components.title')
         About me
-        @endcomponent
-    
-    {{ $information }}
+    @endcomponent
+
+    <div class="lg:w-4/5 mx-auto">
+        {{ $information }}
+    </div>
 @endsection

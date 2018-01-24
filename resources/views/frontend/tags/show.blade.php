@@ -7,11 +7,9 @@
         #{{ $tag }}
     @endcomponent
     
-    <div class="flex flex-wrap posts-list">
+    <div class="flex flex-wrap">
         @forelse($posts as $post)
-            <div class="w-4/5 ml-auto mr-auto">
-                @include('frontend.components.post-list.post', ['post' => $post, 'positionLeft' => $loop->index % 2 == 0])
-            </div>
+            @include('frontend.components.post-list')
         @empty
             <div class="w-4/5 ml-auto mr-auto">
                 <h1 class="text-center title text-grey mt-8">No posts found by this tag...</h1>

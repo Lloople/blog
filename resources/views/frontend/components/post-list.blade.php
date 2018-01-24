@@ -1,6 +1,6 @@
-<div class="w-4/5 mx-auto">
+<div class="lg:w-4/5 mx-auto">
     <div class="post lg:flex">
-        <div class="w-full p-4 flex flex-col justify-between leading-normal">
+        <div class="w-full py-4 flex flex-col justify-between leading-normal">
             <p class="post-date">{{ $post->published_at->format('d/m/Y H:i') }}</p>
             <div class="mb-4">
                 <div class="post-title">
