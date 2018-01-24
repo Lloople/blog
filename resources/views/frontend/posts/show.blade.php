@@ -5,9 +5,9 @@
 @section('title', $post->title)
 
 @section('content')
-    <div class="lg:w-4/5 w-full mx-auto">
-        <h3 class="title text-{{ app('theme')->title }}">{{ $post->title }}</h3>
-    </div>
+    @component('frontend.components.title')
+        {{ $post->title }}
+    @endcomponent
     
     <div class="lg:w-4/5 w-full mx-auto">
         <div class="post lg:flex">

@@ -3,9 +3,9 @@
 @section('title', $tag)
 
 @section('content')
-    <div class="w-4/5 ml-auto mr-auto">
-        <h3 class="title">#{{ $tag }}</h3>
-    </div>
+    @component('frontend.components.title')
+        #{{ $tag }}
+    @endcomponent
     
     <div class="flex flex-wrap posts-list">
         @forelse($posts as $post)

@@ -1,9 +1,9 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-    <div class="w-4/5 mx-auto">
-        <h3 class="title text-{{ app('theme')->title }}">Recent Posts</h3>
-    </div>
+    @component('frontend.components.title')
+        Recent posts
+    @endcomponent
 
     <div class="flex flex-wrap posts-list">
         @foreach($posts as $post)

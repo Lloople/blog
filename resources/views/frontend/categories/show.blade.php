@@ -5,7 +5,9 @@
 @section('title', $category->name)
 
 @section('content')
-    <h3 class="title">{{ $category->name }}</h3>
+    @component('frontend.components.title')
+        {{ $category->name }}
+    @endcomponent
 
     <div class="flex flex-wrap posts-list">
         @forelse($posts as $post)

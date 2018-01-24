@@ -3,9 +3,9 @@
 @section('title', 'Categories List')
 
 @section('content')
-    <div class="w-4/5 ml-auto mr-auto">
-        <h3 class="title text-{{ app('theme')->title }}">Categories List</h3>
-    </div>
+    @component('frontend.components.title')
+        Categories List
+    @endcomponent
 
     <div class="flex flex-wrap posts-list">
         <div class="md:w-4/5 ml-auto mr-auto">
