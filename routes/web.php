@@ -24,9 +24,6 @@ Route::group(['prefix' => 'backend', 'middleware' => 'auth', 'as' => 'backend.']
     Route::resource('tags', 'Backend\TagsController', ['only' => ['index', 'destroy']]);
     Route::resource('themes', 'Backend\ThemesController', ['except' => ['show']]);
 
-    Route::get('about-me', 'Backend\AboutMeController@edit')->name('about-me.edit');
-    Route::post('about-me', 'Backend\AboutMeController@update')->name('about-me.update');
-
     Route::group(['prefix' => 'resources', 'middleware' => 'auth', 'as' => 'resources.'], function () {
         Route::get('posts', 'Backend\PostsController@resource');
         Route::get('categories', 'Backend\CategoriesController@resource');

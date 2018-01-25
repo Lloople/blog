@@ -36,9 +36,6 @@
                     <a class="nav-item {{ request()->routeIs('backend.themes*') ? 'active' : '' }}" href="{{ route('backend.themes.index') }}">
                         Themes
                     </a>
-                    <a class="nav-item {{ request()->routeIs('backend.about-me*') ? 'active' : '' }}" href="{{ route('backend.about-me.edit') }}">
-                        About me
-                    </a>
                 </div>
                 <div class="nav-container lg:w-1/4 lg:text-right">
                     <form action="{{ route('logout') }}" method="POST">

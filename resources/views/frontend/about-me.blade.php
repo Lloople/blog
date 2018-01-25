@@ -6,6 +6,6 @@
     @endcomponent
 
     <div class="lg:w-4/5 mx-auto">
-        {{ $information }}
+        {!! $information !!}
     </div>
 @endsection
