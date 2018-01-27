@@ -26,9 +26,10 @@
             'selected' => $view->model->category_id
         ])
     
-        @include('backend.partials.form.text', [
+        @include('backend.partials.form.tags-input', [
             'name' => 'tags',
-            'value' => $view->tags
+            'selected' => old('tags', $view->currentTags),
+            'options' => $view->tags
         ])
         
         @include('backend.partials.form.checkbox', [

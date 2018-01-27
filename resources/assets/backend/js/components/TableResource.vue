@@ -43,14 +43,19 @@
 </template>
 
 <script>
+
     require('babel-regenerator-runtime');
 
     import axios from 'axios';
+    import { TableComponent, TableColumn } from 'vue-table-component';
 
     var previousFilter = '';
     
     export default {
-
+        components: {
+            'table-component': TableComponent,
+            'table-column'   : TableColumn
+        },
         data() {
             return {
                 resource : window.resource.resource,
