@@ -7,6 +7,11 @@
 @section('content')
     @component('frontend.components.title')
         {{ $post->title }}
+        @if(auth()->check())
+            <a target="_blank" class="float-right text-black" href="{{ route('backend.posts.edit', $post) }}">
+                <i class="fa fa-pencil"></i>
+            </a>
+        @endif
     @endcomponent
     
     <div class="lg:w-4/5 w-full mx-auto">

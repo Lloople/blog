@@ -12,9 +12,7 @@ class AboutMeService
 
     public function getText()
     {
-        return @file_get_contents(
-            resource_path('about_me.md')
-        );
+        return @file_get_contents(resource_path('about_me.md'));
     }
 
 
