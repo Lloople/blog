@@ -1,0 +1,24 @@
+@import "~vue-multiselect/dist/vue-multiselect.min.css";
+
+.multiselect__option.multiselect__option--highlight,
+.multiselect__option--selected {
+  background: none;
+  color: black;
+}
+
+.multiselect__option.multiselect__option--highlight:after,
+.multiselect__option--selected:after {
+  display: none;
+}
+
+.multiselect__tag {
+  @apply bg-grey text-white;
+}
+
+.multiselect__tag-icon:after {
+  @apply text-white;
+}
+
+.multiselect__tag-icon:focus, .multiselect__tag-icon:hover {
+  @apply bg-grey-darker;
+}

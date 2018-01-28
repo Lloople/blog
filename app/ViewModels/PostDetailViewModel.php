@@ -4,6 +4,7 @@ namespace App\ViewModels;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Support\Carbon;
 
 class PostDetailViewModel extends FormViewModel
@@ -18,7 +19,9 @@ class PostDetailViewModel extends FormViewModel
 
         $this->categories = Category::select('id', 'name')->pluck('name', 'id');
 
-        $this->tags = $this->model->tags->implode('name', ', ');
+        $this->currentTags = $this->model->tags->pluck('name');
+
+        $this->tags = Tag::orderBy('name')->pluck('name');
     }
 
     protected function setTitle()

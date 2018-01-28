@@ -24,6 +24,11 @@ class NavbarMenuViewComposer
                 'url' => route('tags.index'),
                 'active' => request()->routeIs('*tags*'),
             ],
+            [
+                'title' => 'About me',
+                'url' => route('about-me.show'),
+                'active' => request()->routeIs('about-me.show')
+            ]
         ];
 
         $view->with('navbarMenu', collect($navbarMenu)->map(function ($menuElement) {

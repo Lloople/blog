@@ -12,6 +12,8 @@ Route::get('/tags', 'TagsController@index')->name('tags.index');
 
 Route::get('/tags/{slug}', 'TagsController@show')->name('tags.show');
 
+Route::get('/about-me', 'AboutMeController@show')->name('about-me.show');
+
 Auth::routes();
 
 Route::group(['prefix' => 'backend', 'middleware' => 'auth', 'as' => 'backend.'], function () {

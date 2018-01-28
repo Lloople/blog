@@ -5,9 +5,14 @@
 @section('title', $post->title)
 
 @section('content')
-    <div class="lg:w-4/5 w-full mx-auto">
-        <h3 class="title text-{{ app('theme')->title }}">{{ $post->title }}</h3>
-    </div>
+    @component('frontend.components.title')
+        {{ $post->title }}
+        @if(auth()->check())
+            <a target="_blank" class="float-right text-black" href="{{ route('backend.posts.edit', $post) }}">
+                <i class="fa fa-pencil"></i>
+            </a>
+        @endif
+    @endcomponent
     
     <div class="lg:w-4/5 w-full mx-auto">
         <div class="post lg:flex">

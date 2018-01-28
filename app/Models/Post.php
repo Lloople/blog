@@ -88,7 +88,7 @@ class Post extends Model
 
     public function syncTags($rawTags)
     {
-        $tags = collect(array_filter(explode(', ', $rawTags)))->map(function ($rawTag) {
+        $tags = collect(array_filter($rawTags))->map(function ($rawTag) {
             $tag = Tag::findOrCreateByName(trim($rawTag));
 
             return $tag;

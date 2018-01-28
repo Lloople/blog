@@ -39,7 +39,7 @@ class PostsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\PostFormRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -78,7 +78,7 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\PostFormRequest $request
      * @param  Post $post
      *
      * @return \Illuminate\Http\RedirectResponse
