@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Interfaces\AboutMeServiceInterface;
 use App\Models\Theme;
+use App\Services\AboutMeService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->app->bind(AboutMeServiceInterface::class, AboutMeService::class);
         $this->app->singleton('theme', function () {
             return $this->getSelectedTheme();
         });

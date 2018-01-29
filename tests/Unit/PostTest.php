@@ -106,9 +106,10 @@ class PostTest extends TestCase
 
         $this->assertEquals(0, Tag::count());
 
-        $post->syncTags('first, second');
+        $post->syncTags(['first', 'second']);
 
         $this->assertDatabaseHas('tags', ['name' => 'first']);
+
         $this->assertDatabaseHas('tags', ['name' => 'second']);
 
         $this->assertEquals(2, $post->tags()->count());

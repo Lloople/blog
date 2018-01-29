@@ -2,18 +2,47 @@
 
 namespace App\Services;
 
-class AboutMeService
+use App\Interfaces\AboutMeServiceInterface;
+
+class AboutMeService implements AboutMeServiceInterface
 {
 
-    public function getHtml()
+    /** @var string  */
+    protected $content = '';
+
+    public function __construct()
     {
-        return (new \Parsedown())->text($this->getText());
+        $this->content = $this->getContent();
     }
 
-    public function getText()
+    /**
+     * Check if there's content to show.
+     *
+     * @return bool
+     */
+    public function hasContent()
+    {
+        return $this->content != '';
+    }
+
+    /**
+     * Get the content parsed into html.
+     *
+     * @return string
+     */
+    public function getHtml()
+    {
+        return (new \Parsedown())->text($this->content);
+    }
+
+    /**
+     * Get the text from the specified resource.
+     *
+     * @return bool|string
+     */
+    public function getContent()
     {
         return @file_get_contents(resource_path('about_me.md'));
     }
-
 
 }

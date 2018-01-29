@@ -2,10 +2,17 @@
 
 namespace App\Http\ViewComposers;
 
+use App\Interfaces\AboutMeServiceInterface;
 use Illuminate\View\View;
 
 class NavbarMenuViewComposer
 {
+
+    public function __construct(AboutMeServiceInterface $aboutMeService)
+    {
+        $this->aboutMeService = $aboutMeService;
+    }
+
     public function compose(View $view)
     {
         $navbarMenu = [
@@ -23,13 +30,16 @@ class NavbarMenuViewComposer
                 'title' => 'Tags',
                 'url' => route('tags.index'),
                 'active' => request()->routeIs('*tags*'),
-            ],
-            [
+            ]
+        ];
+
+        if ($this->aboutMeService->hasContent()) {
+            $navbarMenu[] = [
                 'title' => 'About me',
                 'url' => route('about-me.show'),
                 'active' => request()->routeIs('about-me.show')
-            ]
-        ];
+            ];
+        }
 
         $view->with('navbarMenu', collect($navbarMenu)->map(function ($menuElement) {
             return (object) $menuElement;
