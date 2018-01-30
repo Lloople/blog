@@ -2,12 +2,11 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Interfaces\AboutMeServiceInterface;
 use Illuminate\View\View;
+use App\Interfaces\AboutMeServiceInterface;
 
 class NavbarMenuViewComposer
 {
-
     public function __construct(AboutMeServiceInterface $aboutMeService)
     {
         $this->aboutMeService = $aboutMeService;
@@ -30,14 +29,14 @@ class NavbarMenuViewComposer
                 'title' => 'Tags',
                 'url' => route('tags.index'),
                 'active' => request()->routeIs('*tags*'),
-            ]
+            ],
         ];
 
         if ($this->aboutMeService->hasContent()) {
             $navbarMenu[] = [
                 'title' => 'About me',
                 'url' => route('about-me.show'),
-                'active' => request()->routeIs('about-me.show')
+                'active' => request()->routeIs('about-me.show'),
             ];
         }
 

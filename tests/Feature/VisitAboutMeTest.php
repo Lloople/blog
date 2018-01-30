@@ -2,14 +2,13 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
+use Tests\FakeAboutMeService;
 use App\Interfaces\AboutMeServiceInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\FakeAboutMeService;
-use Tests\TestCase;
 
 class VisitAboutMeTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /** @test */
@@ -61,5 +60,4 @@ class VisitAboutMeTest extends TestCase
 
         $response->assertSee('About me');
     }
-
 }

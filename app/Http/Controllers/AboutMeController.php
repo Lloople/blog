@@ -18,7 +18,7 @@ class AboutMeController extends Controller
         }
 
         $data = [
-            'information' => $this->aboutMe->getHtml()
+            'information' => $this->aboutMe->getHtml(),
         ];
 
         return view('frontend.about-me', $data);

@@ -6,8 +6,7 @@ use App\Interfaces\AboutMeServiceInterface;
 
 class AboutMeService implements AboutMeServiceInterface
 {
-
-    /** @var string  */
+    /** @var string */
     protected $content = '';
 
     public function __construct()
@@ -44,5 +43,4 @@ class AboutMeService implements AboutMeServiceInterface
     {
         return @file_get_contents(resource_path('about_me.md'));
     }
-
 }

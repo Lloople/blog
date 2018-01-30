@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Interfaces\AboutMeServiceInterface;
 use App\Models\Theme;
 use App\Services\AboutMeService;
 use Illuminate\Support\ServiceProvider;
+use App\Interfaces\AboutMeServiceInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
