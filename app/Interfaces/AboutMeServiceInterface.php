@@ -4,10 +4,9 @@ namespace App\Interfaces;
 
 interface AboutMeServiceInterface
 {
+    public function getHtml();
 
-    function getHtml();
+    public function hasContent();
 
-    function hasContent();
-
-    function getContent();
+    public function getContent();
 }

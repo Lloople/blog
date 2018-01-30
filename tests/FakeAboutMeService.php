@@ -6,24 +6,24 @@ use App\Interfaces\AboutMeServiceInterface;
 
 class FakeAboutMeService implements AboutMeServiceInterface
 {
-
     protected $content;
 
     public function __construct($content = null)
     {
         $this->content = $content ?? $this->getContent($content);
     }
-    function getHtml()
+
+    public function getHtml()
     {
         return $this->content;
     }
 
-    function hasContent()
+    public function hasContent()
     {
         return $this->content != '';
     }
 
-    function getContent()
+    public function getContent()
     {
         return 'Lorem Ipsum';
     }
