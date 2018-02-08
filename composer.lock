@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1aea64422aeba00d805f05c5d57e2807",
+    "content-hash": "430536c22aadc7f03a470fdb3417b728",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -504,16 +504,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.6.1",
+            "version": "v5.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "74c54c0dc8195d7b96c5c3bbb16ccf2467605ecc"
+                "reference": "7742e7b54ba48b49f43a7d6f51ff57a63b9ed108"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/74c54c0dc8195d7b96c5c3bbb16ccf2467605ecc",
-                "reference": "74c54c0dc8195d7b96c5c3bbb16ccf2467605ecc",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/7742e7b54ba48b49f43a7d6f51ff57a63b9ed108",
+                "reference": "7742e7b54ba48b49f43a7d6f51ff57a63b9ed108",
                 "shasum": ""
             },
             "require": {
@@ -635,7 +635,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2018-02-08T16:56:04+00:00"
+            "time": "2018-02-08T22:17:44+00:00"
         },
         {
             "name": "laravel/scout",
@@ -851,20 +851,25 @@
         },
         {
             "name": "lloople/laravel-notificator",
-            "version": "v1.5",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lloople/laravel-notificator.git",
-                "reference": "2dd07d82887892c65e70afed59381a6305d46e99"
+                "reference": "25efc9841c8a1f1d1fc92202a995c4449ffe83fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lloople/laravel-notificator/zipball/2dd07d82887892c65e70afed59381a6305d46e99",
-                "reference": "2dd07d82887892c65e70afed59381a6305d46e99",
+                "url": "https://api.github.com/repos/Lloople/laravel-notificator/zipball/25efc9841c8a1f1d1fc92202a995c4449ffe83fb",
+                "reference": "25efc9841c8a1f1d1fc92202a995c4449ffe83fb",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0"
+                "laravel/framework": "5.5.* || 5.6.*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~7.0"
             },
             "type": "library",
             "extra": {
@@ -876,7 +881,8 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Lloople\\Notificator\\": "src/"
+                    "Lloople\\Notificator\\": "src/",
+                    "Tests\\": "tests/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -890,7 +896,7 @@
                 }
             ],
             "description": "Attach objects to notification's session flashed variable",
-            "time": "2017-06-28T20:10:27+00:00"
+            "time": "2018-02-08T22:18:48+00:00"
         },
         {
             "name": "monolog/monolog",
