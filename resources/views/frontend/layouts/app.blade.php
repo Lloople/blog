@@ -39,13 +39,13 @@
     <footer>
         <div>
         @if(config('blog.twitter_username') !== '')
-            <a href="https://twitter.com/{{ config('blog.twitter_username') }}" target="_blank">
+            <a  class="no-underline" href="https://twitter.com/{{ config('blog.twitter_username') }}" target="_blank">
                 <span class="fa fa-twitter fa-2x"></span>
             </a>
         @endif
     
         @if(config('blog.github_username') !== '')
-            <a href="https://github.com/{{ config('blog.github_username') }}" target="_blank">
+            <a class="no-underline" href="https://github.com/{{ config('blog.github_username') }}" target="_blank">
                 <span class="fa fa-github fa-2x"></span>
             </a>
         @endif
